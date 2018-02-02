@@ -23,10 +23,11 @@
 
 
     <include
-        layout="@layout/fragment_breed_list"
+        layout="@layout/content_main"
         android:layout_width="match_parent"
         android:layout_height="553dp"
         tools:layout_editor_absoluteY="14dp" />
+
 
 
 

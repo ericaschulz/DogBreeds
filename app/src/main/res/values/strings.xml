@@ -3,4 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="dog_breeds_api_list_all">https://dog.ceo/api/breeds/list/all</string>
     <string name="dog_breeds_api_list_all_img">https://dog.ceo/api/breeds/list</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
