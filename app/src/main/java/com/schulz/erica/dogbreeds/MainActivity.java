@@ -2,28 +2,19 @@ package com.schulz.erica.dogbreeds;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private BreedRecyclerViewAdapter breedRecyclerViewAdapter;
-    private Map BreedMap;
-    private Text breedTxt;
-    private Text photoInfo;
+
 
 
     @Override
@@ -33,20 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-            }
-        });
-
-
         new BreedApiTask().execute();
-
-
 
     }
 
@@ -76,9 +54,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected JSONObject doInBackground(Void... voids) {
 
-
             JSONObject jsonObject = JSONParser.getBreedNames();
-
 
             return jsonObject;
         }
@@ -86,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-        }
+
+
     }
 }
+}
+
