@@ -13,6 +13,8 @@ import android.view.ViewGroup;
  */
 public class CardFragment extends Fragment {
 
+//    RecyclerView recyclerView = (RecyclerView)find
+
 
     public CardFragment() {
         // Required empty public constructor
