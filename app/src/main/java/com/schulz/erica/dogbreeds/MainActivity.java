@@ -1,27 +1,21 @@
 package com.schulz.erica.dogbreeds;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.json.JSONObject;
-
 
 public class MainActivity extends AppCompatActivity {
 
-    
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        new BreedApiTask().execute();
 
     }
 
@@ -44,26 +38,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
-        @Override
-        protected JSONObject doInBackground(Void... voids) {
 
-            JSONObject jsonObjectBreeds = JSONParser.getBreedNames();
-
-            return jsonObjectBreeds;
-
-        }
-
-        @Override
-        protected void onPostExecute(JSONObject jsonObjectBreeds) {
-
-
-            super.onPostExecute(jsonObjectBreeds);
-
-
-
-
-        }
 }
-}
+
 

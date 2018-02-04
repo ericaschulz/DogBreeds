@@ -8,7 +8,4 @@
     tools:context="com.schulz.erica.dogbreeds.MainActivity"
     tools:showIn="@layout/activity_main">
 
-
-
-
 </android.support.constraint.ConstraintLayout>
