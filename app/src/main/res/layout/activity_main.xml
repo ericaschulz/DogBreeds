@@ -21,14 +21,21 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/app_bar">
+
+    </android.support.v7.widget.RecyclerView>
+
 
     <include
         layout="@layout/content_main"
         android:layout_width="match_parent"
         android:layout_height="553dp"
         tools:layout_editor_absoluteY="14dp" />
-    <include
-        layout="@layout/fragment_card" />
+
 
 
 
