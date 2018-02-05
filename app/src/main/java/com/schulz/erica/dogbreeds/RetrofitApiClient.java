@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitApiClient {
 
-    private static final String BASE_URL = "https://dog.ceo/api/breeds/list";
+    private static final String BASE_URL = "https://dog.ceo/api/breeds/list/";
 
     private static Retrofit retrofit = null;
 

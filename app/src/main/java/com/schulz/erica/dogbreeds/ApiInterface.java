@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 
 public interface ApiInterface {
 
-    @GET("data.json")
+    @GET("message")
     Call<Breed> apiCall();
 
 }
