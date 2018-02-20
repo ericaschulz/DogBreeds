@@ -6,19 +6,24 @@ package com.schulz.erica.dogbreeds;
 
 public class Breed {
 
+
+
     String message;
-    String breed;
+    String breedName;
+
 
 
     public Breed() {
     }
 
-    public String getBreed() {
-        return breed;
+
+
+    public String getBreedName() {
+        return breedName;
     }
 
-    public void setBreed(String breed) {
-        this.breed = breed;
+    public void setBreedName(String breedName) {
+        this.breedName = breedName;
     }
 
     public String getMessage() {
@@ -29,6 +34,13 @@ public class Breed {
     public void setMessage(String message) {
 
         this.message = message;
+    }
+
+    public String toString() {
+        return "Breed{" +
+                "message='" + message + '\'' +
+                ", breedName='" + breedName + '\'' +
+                '}';
     }
 
 

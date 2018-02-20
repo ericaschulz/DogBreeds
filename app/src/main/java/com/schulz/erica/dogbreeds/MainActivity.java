@@ -1,37 +1,19 @@
 package com.schulz.erica.dogbreeds;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
-
-
-    RecyclerView recyclerView;
-    RecyclerViewAdapter recyclerViewAdapter;
-    ApiInterface apiInterface;
-    List<Breed> breedList;
-    ImageView breedImage1;
-    ImageView breedImage2;
-    ImageView breedImage3;
-    TextView breedTextView;
-    CardView cardView;
-
-
 
 
     @Override
@@ -41,44 +23,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerViewAdapter = new RecyclerViewAdapter(MainActivity.this, breedList);
-        recyclerView.setAdapter(recyclerViewAdapter);
-
-
-        apiInterface = RetrofitApiClient.getClient().create(ApiInterface.class);
-
-        fetchData();
+        new BreedApiTask().execute();
 
     }
-
-    private void fetchData() {
-
-        Call<Breed> call = apiInterface.apiCall();
-        call.enqueue(new Callback<Breed>() {
-
-            public void onResponse(Call<Breed> call, Response<Breed> response) {
-
-                Breed breed = response.body();
-
-//
-
-                recyclerViewAdapter = new RecyclerViewAdapter(MainActivity.this, breedList);
-                recyclerView.setAdapter(recyclerViewAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<Breed> call, Throwable t) {
-
-                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -95,56 +45,67 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
 
-//    private class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
-//
-//
-//        @Override
-//        protected JSONObject doInBackground(Void... voids) {
-//
-//            JSONObject jsonObjectBreeds = JSONParser.getBreeds();
-//
-//            return jsonObjectBreeds;
-//
-//
-//        }
-//
-//        @Override
-//
-//        protected void onPostExecute(JSONObject jsonObjectBreeds) {
-//
-//            super.onPostExecute(jsonObjectBreeds);
-//
-//
-//            //"jsonObjectBreeds.names()" does not return the breed names listed after "messages"!
-//
-//            JSONArray jsonArray = jsonObjectBreeds.names(); //<---THIS IS WRONG!!!
-//
-//            if (jsonArray != null) {
-//
-//                int length = jsonArray.length();
-//
-//                if (length > 0) {
-//
-//                    for (int i = 0; i < length; i++)
-//                        try {
-//
-//                            Message message = new Message();
-//                            listMessages.add(message);//<----SO THIS IS USELESS!
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//
-//
-//                        }
-//
-//                }
-//
-//
-//            }
-//
-//
-//        }
+
+        @Override
+        protected JSONObject doInBackground(Void... voids) {
+
+            JSONObject jsonObjectBreeds = JSONParser.getBreeds();
+
+            return jsonObjectBreeds;
+
+        }
+
+        @Override
+
+        protected void onPostExecute(JSONObject jsonObjectBreeds) {
+
+            super.onPostExecute(jsonObjectBreeds);
+
+
+            JSONArray breedArray = null;
+            try {
+                breedArray = jsonObjectBreeds.getJSONArray("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            if (breedArray != null) {
+
+                int length = breedArray.length();
+
+                if (length > 0) {
+
+                    for (int i = 0; i < length; i++) {
+                        try {
+
+                            Breed breed = new Breed();
+
+                            String breedName = breedArray.getString(i);
+
+                            breed.setBreedName(breedName);
+
+                            Log.d("", "here");
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+
+
+                        }
+
+                    }
+
+
+                }
+
+
+            }
+        }
+
     }
+}
 
 
 
