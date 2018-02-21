@@ -7,13 +7,26 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 public class MainActivity extends AppCompatActivity {
+
+
+
+    BreedApiTask breedApiTask;
+    ListView breedListView;
+    ListAdapter breedListAdapter;
+    List<Breed> breedList;
 
 
     @Override
@@ -22,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        this.breedList = new ArrayList<>();
         new BreedApiTask().execute();
 
     }
@@ -45,7 +58,22 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
+
+
+
+    public static class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
+
+        //declare interface that returns the result of the async task
+        public interface BreedNameList {
+
+            void BreedListResult(List<Breed> breedList);
+
+        }
+
+        public BreedNameList breedNameList = null;
+        //declare interface as a field in async task
+
+        List<Breed> breedList = new ArrayList<>();
 
 
         @Override
@@ -62,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(JSONObject jsonObjectBreeds) {
 
             super.onPostExecute(jsonObjectBreeds);
+
 
 
             JSONArray breedArray = null;
@@ -85,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
                             String breedName = breedArray.getString(i);
 
                             breed.setBreedName(breedName);
+                            breedList.add(breed);
+                            breedNameList.BreedListResult(breedList);
+                            setBreedNameList(breedList);
+
 
                             Log.d("", "here");
 
@@ -95,17 +128,24 @@ public class MainActivity extends AppCompatActivity {
 
                         }
 
+
                     }
 
 
                 }
 
 
+
             }
         }
 
+        private void setBreedNameList(List<Breed> breedList) {
+        }
+
+
     }
 }
+
 
 
 
