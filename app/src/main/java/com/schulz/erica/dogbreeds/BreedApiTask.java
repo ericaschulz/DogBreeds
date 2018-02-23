@@ -16,8 +16,21 @@ import java.util.List;
 
 public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
 
-
     private List<Breed> breedList = new ArrayList<>();
+
+    public interface BreedApiTaskCompleted {
+
+        void breedApiTaskCompleted(List<Breed> breedList);
+    }
+    private BreedApiTaskCompleted breedApiTaskCompleted;
+
+
+    public BreedApiTask(BreedApiTaskCompleted activityContext){
+        this.breedApiTaskCompleted = activityContext;
+
+    }
+
+
 
 
     @Override
@@ -56,10 +69,10 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
                         Breed breed = new Breed();
 
                         String breedName = breedArray.getString(i);
-
                         breed.setBreedName(breedName);
                         breedList.add(breed);
                         setBreedList(breedList);
+
 
 
 
@@ -76,9 +89,10 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
 
 
                 }
+
             }
 
-        }
+        } breedApiTaskCompleted.breedApiTaskCompleted(breedList);
     }
 
     public void setBreedList(List<Breed> breedList) {

@@ -2,16 +2,18 @@ package com.schulz.erica.dogbreeds;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ListAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ListActivity extends AppCompatActivity  {
+public class ListActivity extends AppCompatActivity implements BreedApiTask.BreedApiTaskCompleted {
 
     ListView breedListView;
-    ListAdapter breedListAdapter;
+    ArrayAdapter breedListAdapter;
     List<Breed> breedList;
+
 
 
 
@@ -19,14 +21,25 @@ public class ListActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.content_main);
 
-
-        ListView breedListView = findViewById(R.id.list);
-        breedListView.setAdapter(breedListAdapter);
+        BreedApiTask breedApiTask = new BreedApiTask(ListActivity.this);
+        breedApiTask.execute();
 
 
 
 
 
     }
+
+    @Override
+    public void breedApiTaskCompleted(List<Breed> breedList) {
+
+
+        this.breedList = new ArrayList<>();
+        breedListView = findViewById(R.id.list);
+        breedListView.setAdapter(breedListAdapter);
+
+    }
+
 }
