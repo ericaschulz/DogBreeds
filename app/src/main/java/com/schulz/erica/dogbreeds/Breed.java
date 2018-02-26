@@ -37,10 +37,7 @@ public class Breed {
     }
 
     public String toString() {
-        return "Breed{" +
-                "message='" + message + '\'' +
-                ", breedName='" + breedName + '\'' +
-                '}';
+        return breedName;
     }
 
 

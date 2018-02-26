@@ -5,5 +5,6 @@
     <string name="dog_breeds_api_list_all_img">https://dog.ceo/api/breeds/list</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="back">BACK</string>
+    <string name="see_breeds">View All Breeds</string>
 </resources>
