@@ -37,7 +37,8 @@ public class Breed {
     }
 
     public String toString() {
-        return breedName;
+
+        return breedName.toUpperCase();
     }
 
 

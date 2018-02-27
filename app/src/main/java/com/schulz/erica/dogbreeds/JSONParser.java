@@ -16,6 +16,7 @@ import okhttp3.Response;
 
 public class JSONParser {
 
+
     private static Response response;
 
     public static JSONObject getBreeds() {
@@ -33,8 +34,35 @@ public class JSONParser {
             e.printStackTrace();
         }
         return null;
+
+
     }
+
+    public static JSONObject getBreedImage() {
+
+        try {
+            OkHttpClient client = new OkHttpClient();
+            String BreedImages_url = "https://dog.ceo/api/" + "breedName" + "/images";
+            Request request = new Request.Builder()
+                    .url(BreedImages_url).build();
+            response = client.newCall(request).execute();
+            return new JSONObject(response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
 }
+
+
+
+
+
 
 
 
