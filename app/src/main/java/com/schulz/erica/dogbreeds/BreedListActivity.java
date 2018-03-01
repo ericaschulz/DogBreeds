@@ -10,22 +10,20 @@ import android.widget.ListView;
 
 import java.util.List;
 
-public class ListActivity extends AppCompatActivity implements BreedApiTask.BreedApiTaskCallBack {
+public class BreedListActivity extends AppCompatActivity implements BreedApiTask.BreedApiTaskCallBack {
 
     ListView breedListView;
     BreedListAdapter breedListAdapter;
-    List<Breed> breedList;
     BreedApiTask breedApiTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        this.setContentView(R.layout.activity_breed_list);
 
-        breedApiTask = new BreedApiTask(ListActivity.this);
-        breedApiTask.execute();
+        this.startBreedAsyncRequest();
 
-        final Intent mainIntent = new Intent(ListActivity.this, MainActivity.class);
+        final Intent mainIntent = new Intent(BreedListActivity.this, MainActivity.class);
         Button back = findViewById(R.id.back_button);
         back.setOnClickListener(new View.OnClickListener() {
 
@@ -35,6 +33,14 @@ public class ListActivity extends AppCompatActivity implements BreedApiTask.Bree
                 startActivity(mainIntent);
             }
         });
+
+
+    }
+
+    public void startBreedAsyncRequest() {
+
+        this.breedApiTask = new BreedApiTask(BreedListActivity.this);
+        this.breedApiTask.execute();
 
 
     }

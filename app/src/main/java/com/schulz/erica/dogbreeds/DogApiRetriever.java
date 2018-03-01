@@ -14,7 +14,7 @@ import okhttp3.Response;
  * Created by ericaschulz on 2/4/18.
  */
 
-public class JSONParser {
+public class DogApiRetriever {
 
 
     private static Response response;
@@ -39,10 +39,10 @@ public class JSONParser {
     }
 
     public static JSONObject getBreedImage() {
-
         try {
             OkHttpClient client = new OkHttpClient();
-            String BreedImages_url = "https://dog.ceo/api/" + "breedName" + "/images";
+//            String BreedImages_url = String.format("https://dog.ceo/api/%s/images", "");
+            String BreedImages_url = "https://dog.ceo/api/breed/hound/images";
             Request request = new Request.Builder()
                     .url(BreedImages_url).build();
             response = client.newCall(request).execute();
@@ -54,10 +54,14 @@ public class JSONParser {
         }
         return null;
     }
-
-
-
 }
+
+
+
+
+
+
+
 
 
 

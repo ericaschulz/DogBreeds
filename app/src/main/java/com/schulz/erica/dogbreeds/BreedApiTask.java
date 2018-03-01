@@ -22,7 +22,7 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
     public interface BreedApiTaskCallBack {
 
         void breedApiTaskCompleted(List<Breed> breedList);
-        //void breedImageApiTaskCompleted(List<BreedImage> breedImageList);
+
 
     }
 
@@ -38,7 +38,7 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
     protected JSONObject doInBackground(Void... voids) {
 
 
-        return JSONParser.getBreeds();
+        return DogApiRetriever.getBreeds();
 
     }
 

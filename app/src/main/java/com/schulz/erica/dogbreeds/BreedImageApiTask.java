@@ -32,21 +32,22 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
     }
     @Override
     protected JSONObject doInBackground(Void... voids) {
-
-
-        return JSONParser.getBreedImage();
+        
+        return DogApiRetriever.getBreedImage();
 
     }
+    
+    
     @Override
 
-    protected void onPostExecute(JSONObject jsonObjectBreedImages) {
+    protected void onPostExecute(JSONObject breedImages) {
 
-        super.onPostExecute(jsonObjectBreedImages);
-
+        super.onPostExecute(breedImages);
 
         JSONArray breedImageArray = null;
+
         try {
-            breedImageArray = jsonObjectBreedImages.getJSONArray("message");
+            breedImageArray = breedImages.getJSONArray("message");
         } catch (JSONException e) {
             e.printStackTrace();
         }

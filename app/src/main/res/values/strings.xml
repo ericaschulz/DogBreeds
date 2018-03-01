@@ -7,4 +7,5 @@
     <string name="back">BACK</string>
     <string name="see_breeds">View All Breeds</string>
     <string name="view_images">View Breed Images</string>
+    <string name="see_breed_images">View Breed Images</string>
 </resources>

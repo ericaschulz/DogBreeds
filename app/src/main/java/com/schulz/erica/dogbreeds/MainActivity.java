@@ -20,18 +20,32 @@ public class MainActivity extends AppCompatActivity {
                 Toolbar toolbar = findViewById(R.id.toolbar);
                 setSupportActionBar(toolbar);
 
-                final Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                final Intent intent = new Intent(MainActivity.this, BreedListActivity.class);
+                final Intent imageIntent = new Intent(MainActivity.this, BreedImageActivity.class);
 
+                Button seeBreedImage =findViewById(R.id.see_breed_images);
                 Button seeBreeds = findViewById(R.id.see_breeds);
+
+
+
                 seeBreeds.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                @Override
-                public void onClick(View view) {
+                        startActivity(intent);
+                    }
+                });
 
-                    startActivity(intent);
-                }
-            });
 
+                seeBreedImage.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+
+                        startActivity(imageIntent);
+
+                    }
+                });
 
 
         }
