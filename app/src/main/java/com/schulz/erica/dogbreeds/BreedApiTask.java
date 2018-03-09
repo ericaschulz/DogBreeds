@@ -23,7 +23,6 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
 
         void breedApiTaskCompleted(List<Breed> breedList);
 
-
     }
 
     private BreedApiTaskCallBack breedApiTaskCallBack;
@@ -49,8 +48,9 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
         super.onPostExecute(jsonObjectBreeds);
 
 
-
         JSONArray breedArray = null;
+
+
         try {
             breedArray = jsonObjectBreeds.getJSONArray("message");
         } catch (JSONException e) {
@@ -72,8 +72,6 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
                         breed.setBreedName(breedName);
                         breedList.add(breed);
                         setBreedList(breedList);
-
-
 
 
                         Log.d("", "here");

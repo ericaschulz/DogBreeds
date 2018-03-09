@@ -8,10 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import org.json.JSONException;
+
 import java.util.List;
 
-public class BreedListActivity extends AppCompatActivity implements BreedApiTask.BreedApiTaskCallBack {
+public class BreedListActivity extends AppCompatActivity implements BreedApiTask.BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack{
 
+
+
+
+    ListView breedImageListView;
+    BreedImageListAdapter breedImageListAdapter;
     ListView breedListView;
     BreedListAdapter breedListAdapter;
     BreedApiTask breedApiTask;
@@ -34,7 +41,6 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
             }
         });
 
-
     }
 
     public void startBreedAsyncRequest() {
@@ -48,12 +54,41 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     @Override
     public void breedApiTaskCompleted(List<Breed> breedList) {
 
-        breedListView = findViewById(R.id.list);
-        breedListAdapter = new BreedListAdapter(this, R.layout.text_view, breedList);
-        breedListView.setAdapter(breedListAdapter);
+//        breedListView = findViewById(R.id.list);
+//        breedListAdapter = new BreedListAdapter(this, R.layout.text_view, breedList);
+//        breedListView.setAdapter(breedListAdapter);
+
+        for (Breed breed:breedList) {
+            String breedName = breed.getBreedName();
+            Log.d("log this", breedName);
+
+
+
+
+            try {
+
+                BreedImageApiTask breedImageApiTask = new BreedImageApiTask(this);
+                breedImageApiTask.setBreedName(breedName);
+                breedImageApiTask.execute();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
 
         Log.d("log this", "");
 
     }
 
+    @Override
+    public void breedImageApiTaskCompleted(List<BreedImage> breedImageList) {
+
+        breedImageListView = findViewById(R.id.image_list);
+        breedImageListAdapter = new BreedImageListAdapter(this, R.layout.text_view_2, breedImageList);
+        breedImageListView.setAdapter(breedImageListAdapter);
+
+
+        Log.d("log this", "completed");
+
+    }
 }

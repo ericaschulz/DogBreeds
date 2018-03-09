@@ -9,12 +9,19 @@ public class BreedImage {
 
     String message;
     String imageLink;
+    String breedName;
 
 
 
     public BreedImage() {
 
     }
+
+
+    public String getBreedName() {return breedName;}
+
+    public void setBreedName(String breedName) {this.breedName = breedName;}
+
 
     public String getMessage() {
         return message;
@@ -31,6 +38,7 @@ public class BreedImage {
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
     }
+
 
     @Override
     public String toString() {

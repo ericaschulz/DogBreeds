@@ -13,6 +13,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
 
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
                 Button seeBreedImage =findViewById(R.id.see_breed_images);
                 Button seeBreeds = findViewById(R.id.see_breeds);
-
 
 
                 seeBreeds.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-
         }
 
         @Override
@@ -65,11 +64,11 @@ public class MainActivity extends AppCompatActivity {
                 if (id == R.id.action_settings) {
                         return true;
                 }
-
-
                 return super.onOptionsItemSelected(item);
 
         }
+
+
 }
 
 

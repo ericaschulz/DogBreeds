@@ -16,24 +16,38 @@ import java.util.List;
 
 public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
+    private String breedName;
+
+
+
     private List<BreedImage> breedImageList = new ArrayList<>();
+
+    public void setBreedName(String breedName) {
+
+        this.breedName = breedName;
+
+    }
+
 
     public interface BreedImageApiTaskCallBack {
 
         void breedImageApiTaskCompleted(List<BreedImage> breedImageList);
+
     }
+
 
     private BreedImageApiTaskCallBack breedImageApiTaskCallBack;
 
-    public BreedImageApiTask(BreedImageApiTaskCallBack breedImageApiTaskCallBack){
+    public BreedImageApiTask(BreedImageApiTaskCallBack breedImageApiTaskCallBack) throws JSONException {
 
         this.breedImageApiTaskCallBack = breedImageApiTaskCallBack;
 
     }
     @Override
-    protected JSONObject doInBackground(Void... voids) {
-        
-        return DogApiRetriever.getBreedImage();
+    protected JSONObject doInBackground(Void...voids) {
+
+
+        return DogApiRetriever.getBreedImage(breedName);
 
     }
     
