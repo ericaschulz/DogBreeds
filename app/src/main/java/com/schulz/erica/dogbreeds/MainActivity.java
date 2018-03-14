@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
                 setSupportActionBar(toolbar);
 
                 final Intent intent = new Intent(MainActivity.this, BreedListActivity.class);
-                final Intent imageIntent = new Intent(MainActivity.this, BreedImageActivity.class);
+//                final Intent imageIntent = new Intent(MainActivity.this, BreedImageActivity.class);
 
-                Button seeBreedImage =findViewById(R.id.see_breed_images);
+//                Button seeBreedImage =findViewById(R.id.see_breed_images);
                 Button seeBreeds = findViewById(R.id.see_breeds);
 
 
@@ -37,15 +37,15 @@ public class MainActivity extends AppCompatActivity {
                 });
 
 
-                seeBreedImage.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-
-                        startActivity(imageIntent);
-
-                    }
-                });
+//                seeBreedImage.setOnClickListener(new View.OnClickListener() {
+//
+////                    @Override
+////                    public void onClick(View view) {
+////
+////                        startActivity(imageIntent);
+////
+////                    }
+//                });
 
         }
 

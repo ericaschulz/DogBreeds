@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 
 import org.json.JSONException;
 
@@ -19,12 +18,6 @@ import java.util.List;
 public class BreedListActivity extends AppCompatActivity implements BreedApiTask.BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack{
 
 
-
-
-    ListView breedImageListView;
-    BreedImageListAdapter breedImageListAdapter;
-    ListView breedListView;
-    BreedListAdapter breedListAdapter;
     BreedApiTask breedApiTask;
     RecyclerView breedRecyclerView;
     List<Breed> breedList;
@@ -71,9 +64,9 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     @Override
     public void breedApiTaskCompleted(List<Breed> breedList) {
 
-//        breedListView = findViewById(R.id.list);
-//        breedListAdapter = new BreedListAdapter(this, R.layout.text_view, breedList);
-//        breedListView.setAdapter(breedListAdapter);
+        breedRecyclerView = findViewById(R.id.breed_recycler_view);
+        breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList);
+        breedRecyclerView.setAdapter(breedRecyclerViewAdapter);
 
         for (Breed breed:breedList) {
             String breedName = breed.getBreedName();
@@ -98,15 +91,15 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     }
 
     @Override
-    public void breedImageApiTaskCompleted(List<BreedImage> breedImageList) {
+    public void breedImageApiTaskCompleted(String breedName, List<BreedImage> breedImageList) {
+        //need to give the images to the adapter
 
-//        breedListView = findViewById(R.id.image_list);
+//        breedRecyclerView = findViewById(R.id.breed_recycler_view);
+//        breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedImageList);
+//        breedRecyclerView.setAdapter(breedRecyclerViewAdapter);
 
-        breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedImageList);
-        breedRecyclerView.setAdapter(breedRecyclerViewAdapter);
 
-
-        Log.d("log this", "completed");
+        Log.d("log this", breedName + " has " + breedImageList.size() + " images.");
 
     }
 }

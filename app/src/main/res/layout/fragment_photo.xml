@@ -34,7 +34,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/breed_name"
-                android:background="@drawable/ic_launcher_background"
                 android:padding="50dp" />
 
             <ImageView
@@ -44,7 +43,6 @@
                 android:layout_below="@+id/breed_name"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/photo1"
-                android:background="@drawable/ic_launcher_background"
                 android:padding="50dp" />
 
             <ImageView
@@ -54,7 +52,6 @@
                 android:layout_below="@+id/breed_name"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/photo2"
-                android:background="@drawable/ic_launcher_background"
                 android:padding="40dp" />
 
 

@@ -2,11 +2,13 @@ package com.schulz.erica.dogbreeds;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
- * Created by ericaschulz on 2/4/18.
+ * Created by ericaschulz on 3/12/18.
  */
 
-public class Breed {
+public class BreedApiResponse {
 
     @SerializedName("message")
 
@@ -15,42 +17,31 @@ public class Breed {
 
     @SerializedName("breed_name")
 
+    private String breedName;
 
-     private String breedName;
+
+    @SerializedName("breed_list")
+
+    private List<Breed> breedList;
 
 
-    public Breed() {
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getBreedName() {
-
         return breedName;
     }
 
     public void setBreedName(String breedName) {
         this.breedName = breedName;
     }
-
-    public String getMessage() {
-
-        return message;
-    }
-
-    public void setMessage(String message) {
-
-        this.message = message;
-    }
-
-    public String toString() {
-
-
-        return breedName;
-    }
-
-
-
-
-
-
-
 }
+
+
+

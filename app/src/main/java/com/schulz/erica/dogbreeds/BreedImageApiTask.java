@@ -31,7 +31,7 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
     public interface BreedImageApiTaskCallBack {
 
-        void breedImageApiTaskCompleted(List<BreedImage> breedImageList);
+        void breedImageApiTaskCompleted(String breedName, List<BreedImage> breedImageList);
 
     }
 
@@ -95,7 +95,7 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
             }
 
-        } breedImageApiTaskCallBack.breedImageApiTaskCompleted(breedImageList);
+        } breedImageApiTaskCallBack.breedImageApiTaskCompleted(breedName, breedImageList);
     }
 
     public void setBreedImageList(List<BreedImage> breedImageList) {

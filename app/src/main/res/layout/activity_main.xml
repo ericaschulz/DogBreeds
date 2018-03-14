@@ -13,15 +13,15 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <Button
-            android:id="@+id/see_breed_images"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/see_breed_images"
-            app:layout_anchor="@+id/include"
-            app:layout_anchorGravity="top|center"
-            tools:layout_editor_absoluteY="21dp" />
+        <!--<Button-->
+            <!--android:id="@+id/see_breed_images"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="@string/see_breed_images"-->
+            <!--app:layout_anchor="@+id/include"-->
+            <!--app:layout_anchorGravity="top|center"-->
+            <!--tools:layout_editor_absoluteY="21dp" />-->
 
         <Button
             android:id="@+id/see_breeds"

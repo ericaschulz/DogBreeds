@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ericaschulz on 3/12/18.
@@ -20,13 +19,28 @@ import java.util.List;
 public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecyclerViewAdapter.CustomViewHolder> {
 
     private Context context;
-    private List<BreedImage> breedImageList;
+    private List<Breed> breedList;
+    public Map<String, List<BreedImage>> breedImageListByBreedName;
 
-    public BreedRecyclerViewAdapter(Context context, List<BreedImage> breedImageList) {
+
+    public BreedRecyclerViewAdapter(Context context, List<Breed> breedList) {
 
         this.context = context;
-        this.breedImageList = breedImageList;
+        this.breedList = breedList;
     }
+
+    public void injectBreedImage (String breedName, List<BreedImage> breedImageList){
+
+
+        }
+
+
+
+
+
+
+
+
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,20 +52,21 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
     @Override
     public void onBindViewHolder(BreedRecyclerViewAdapter.CustomViewHolder holder, int position) {
 
-        BreedImage breedImage = breedImageList.get(position);
 
-        Picasso.with(context)
-                .load(breedImage.getBreedName())
-                .into(holder.photo1);
+                        Breed breed = breedList.get(position);
 
-        holder.breed_name.setText(breedImage.getBreedName());
+                        holder.breed_name.setText(breed.getBreedName());
+
 
 
 
     }
 
+
+
+
     public int getItemCount() {
-        return (breedImageList!=null ? breedImageList.size() : 0);
+        return (breedList !=null ? breedList.size() : 0);
     }
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
@@ -72,6 +87,9 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             photo1 = itemView.findViewById(R.id.photo1);
             photo2 = itemView.findViewById(R.id.photo2);
             photo3 = itemView.findViewById(R.id.photo3);
+
+
+
 
 
 
