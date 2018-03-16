@@ -1,6 +1,7 @@
 package com.schulz.erica.dogbreeds;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,20 +31,16 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
         this.context = context;
         this.breedList = breedList;
+        this.breedImageListByBreedName = new HashMap<>();
     }
 
-    public void injectBreedImage (String breedName, List<BreedImage> breedImageList){
+    public void injectBreedImages (String breedName, List<BreedImage> breedImageList){
+        
+        breedImageListByBreedName.put(breedName,breedImageList);
+        
+    }
 
-
-        }
-
-
-
-
-
-
-
-
+    
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -53,12 +53,27 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
     public void onBindViewHolder(BreedRecyclerViewAdapter.CustomViewHolder holder, int position) {
 
 
-                        Breed breed = breedList.get(position);
+        Breed breed = breedList.get(position);
 
-                        holder.breed_name.setText(breed.getBreedName());
+        holder.breed_name.setText(breed.getBreedName());
+
+        List<BreedImage> breedImageList = breedImageListByBreedName.get(breed.getBreedName());
+
+        if (breedImageList != null && !breedImageList.isEmpty()) {
+            BreedImage breedImage = breedImageList.get(0);
+            Uri imageUri = Uri.parse(breedImage.getImageLink());
+
+
+            Picasso.with(holder.photo1.getContext())
+                    .load(imageUri)
+                    .into(holder.photo1);
 
 
 
+//            holder.photo1.setImageURI(imageUri);
+
+
+        }
 
     }
 

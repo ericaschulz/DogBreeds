@@ -93,11 +93,11 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     @Override
     public void breedImageApiTaskCompleted(String breedName, List<BreedImage> breedImageList) {
         //need to give the images to the adapter
+        
+        this.breedRecyclerViewAdapter.injectBreedImages(breedName,breedImageList);
+        
 
-//        breedRecyclerView = findViewById(R.id.breed_recycler_view);
-//        breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedImageList);
-//        breedRecyclerView.setAdapter(breedRecyclerViewAdapter);
-
+       
 
         Log.d("log this", breedName + " has " + breedImageList.size() + " images.");
 

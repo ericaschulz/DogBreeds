@@ -26,15 +26,23 @@
                 android:id="@+id/breed_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textSize="26dp"
+                android:layout_marginTop="1dp"
+                android:textColor="@android:color/black"/>
 
             <ImageView
                 android:id="@+id/photo1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="14dp"
+                android:layout_gravity="center"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/breed_name"
-                android:padding="50dp" />
+                android:padding="50dp"
+                android:background="@android:color/holo_red_dark"/>
+
 
             <ImageView
                 android:id="@+id/photo2"
@@ -43,6 +51,7 @@
                 android:layout_below="@+id/breed_name"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/photo1"
+                android:background="@android:color/holo_blue_bright"
                 android:padding="50dp" />
 
             <ImageView
@@ -52,7 +61,8 @@
                 android:layout_below="@+id/breed_name"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/photo2"
-                android:padding="40dp" />
+                android:background="@android:color/holo_green_dark"
+                android:padding="50dp" />
 
 
         </RelativeLayout>
