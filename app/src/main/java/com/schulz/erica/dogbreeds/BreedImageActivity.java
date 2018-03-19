@@ -1,40 +1,47 @@
 package com.schulz.erica.dogbreeds;
 
-//public abstract class BreedImageActivity extends AppCompatActivity implements BreedImageApiTask.BreedImageApiTaskCallBack, BreedApiTask.BreedApiTaskCallBack {
-//
-//
-//    BreedImageApiTask breedImageApiTask;
-//    BreedApiTask breedApiTask;
-//    ListView breedImageListView;
-//    BreedImageListAdapter breedImageListAdapter;
-//
-//
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//
-//        super.onCreate(savedInstanceState);
-//        this.setContentView(R.layout.activity_image);
-//
-//
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+
+public abstract class BreedImageActivity extends AppCompatActivity implements BreedImageApiTask.BreedImageApiTaskCallBack, BreedApiTask.BreedApiTaskCallBack {
+
+
+    BreedImageApiTask breedImageApiTask;
+    BreedApiTask breedApiTask;
+    ListView breedImageListView;
+    BreedImageListAdapter breedImageListAdapter;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        this.setContentView(R.layout.activity_image);
+
+
 //        try {
-//            this.startBreedImageAsyncRequest();
+////            this.startBreedImageAsyncRequest();
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-//
-//        final Intent mainIntent2 = new Intent(BreedImageActivity.this, MainActivity.class);
-//        Button back = findViewById(R.id.back_button_2);
-//        back.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//
-//                startActivity(mainIntent2);
-//            }
-//        });
-//    }
-//
+
+        final Intent mainIntent2 = new Intent(BreedImageActivity.this, MainActivity.class);
+        Button back = findViewById(R.id.back_button_2);
+        back.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                startActivity(mainIntent2);
+            }
+        });
+    }
+}
+
 //
 //
 //    public void startBreedImageAsyncRequest() throws JSONException {

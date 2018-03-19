@@ -4,35 +4,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import static com.schulz.erica.dogbreeds.R.id.card_view;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PhotoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link PhotoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class PhotoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
 
 
-    CardView cardView;
-    TextView breedName;
-    ImageView breedImage;
-    ImageView breed2Image;
-    ImageView breed3Image;
+
+//    CardView cardView;
+//    TextView breedName;
+//    ImageView breedImage;
+//    ImageView breed2Image;
+//    ImageView breed3Image;
+
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -78,13 +67,13 @@ public class PhotoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        cardView = cardView.findViewById(card_view);
-        breedName = breedName.findViewById(R.id.breed_name);
-        breedImage = breedImage.findViewById(R.id.photo1);
-        breed2Image = breed2Image.findViewById(R.id.photo2);
-        breed3Image = breed3Image.findViewById(R.id.photo3);
+//        cardView = cardView.findViewById(card_view);
+//        breedName = breedName.findViewById(R.id.breed_name);
+//        breedImage = breedImage.findViewById(R.id.photo1);
+//        breed2Image = breed2Image.findViewById(R.id.photo2);
+//        breed3Image = breed3Image.findViewById(R.id.photo3);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_photo, container, false);
+        return inflater.inflate(R.layout.activity_image, container, false);
 
 
 

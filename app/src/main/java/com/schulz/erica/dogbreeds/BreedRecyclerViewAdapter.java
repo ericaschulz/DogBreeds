@@ -61,14 +61,34 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
         if (breedImageList != null && !breedImageList.isEmpty()) {
             BreedImage breedImage = breedImageList.get(0);
+            BreedImage breedImage2 = breedImageList.get(1);
+            BreedImage breedImage3 = breedImageList.get(2);
             Uri imageUri = Uri.parse(breedImage.getImageLink());
+            Uri imageUri2 = Uri.parse(breedImage2.getImageLink());
+            Uri imageUri3 = Uri.parse(breedImage3.getImageLink());
 
 
-            Picasso.with(holder.photo1.getContext())
+
+
+            Picasso.with(context)
                     .load(imageUri)
+                    .resize(300, 300)
+                    .centerCrop()
                     .into(holder.photo1);
 
 
+            Picasso.with(context)
+                    .load(imageUri2)
+                    .resize(300, 300)
+                    .centerCrop()
+                    .into(holder.photo2);
+
+
+            Picasso.with(context)
+                    .load(imageUri3)
+                    .resize(300, 300)
+                    .centerCrop()
+                    .into(holder.photo3);
 
 //            holder.photo1.setImageURI(imageUri);
 
@@ -76,8 +96,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         }
 
     }
-
-
 
 
     public int getItemCount() {
@@ -98,7 +116,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             super(itemView);
 
             breed_name = itemView.findViewById(R.id.breed_name);
-            card_view = itemView.findViewById(R.id.card_view);
+//            card_view = itemView.findViewById(R.id.card_view);
             photo1 = itemView.findViewById(R.id.photo1);
             photo2 = itemView.findViewById(R.id.photo2);
             photo3 = itemView.findViewById(R.id.photo3);
