@@ -10,9 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import org.json.JSONException;
-
 import java.util.List;
 
 public class BreedListActivity extends AppCompatActivity implements BreedApiTask.BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack{
@@ -26,6 +24,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     CardView card_view;
     ConstraintLayout constraintLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
@@ -33,6 +32,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
         this.startBreedAsyncRequest();
 
+        Button refresh = findViewById(R.id.refresh);
 
         constraintLayout = findViewById(R.id.constraint_layout);
 
@@ -48,6 +48,15 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
             public void onClick(View view) {
 
                 startActivity(mainIntent);
+            }
+        });
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startBreedAsyncRequest();
+
+
             }
         });
 
@@ -71,8 +80,6 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         for (Breed breed:breedList) {
             String breedName = breed.getBreedName();
             Log.d("log this", breedName);
-
-
 
 
             try {

@@ -2,7 +2,6 @@ package com.schulz.erica.dogbreeds;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +39,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         
     }
 
-    
-
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_photo, null);
@@ -53,48 +50,39 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
     public void onBindViewHolder(BreedRecyclerViewAdapter.CustomViewHolder holder, int position) {
 
 
+
         Breed breed = breedList.get(position);
 
         holder.breed_name.setText(breed.getBreedName());
 
         List<BreedImage> breedImageList = breedImageListByBreedName.get(breed.getBreedName());
+        List<ImageView> imageViewList = null;
+
+
 
         if (breedImageList != null && !breedImageList.isEmpty()) {
-            BreedImage breedImage = breedImageList.get(0);
-            BreedImage breedImage2 = breedImageList.get(1);
-            BreedImage breedImage3 = breedImageList.get(2);
-            Uri imageUri = Uri.parse(breedImage.getImageLink());
-            Uri imageUri2 = Uri.parse(breedImage2.getImageLink());
-            Uri imageUri3 = Uri.parse(breedImage3.getImageLink());
+            for (int i = 0; i < 3 && i < breedImageList.size(); i++) {
+                BreedImage breedImage = breedImageList.get(i);
+                Uri imageUri = Uri.parse(breedImage.getImageLink());
 
 
+                if (imageViewList != null && !imageViewList.isEmpty()) {
+
+                for (int j = 0; j < 3 && j < imageViewList.size(); j++) {
+
+                }
+
+                Picasso.with(context)
+                        .load(imageUri)
+                        .resize(300, 300)
+                        .centerCrop()
+                        .into(holder.photo1);
 
 
-            Picasso.with(context)
-                    .load(imageUri)
-                    .resize(300, 300)
-                    .centerCrop()
-                    .into(holder.photo1);
-
-
-            Picasso.with(context)
-                    .load(imageUri2)
-                    .resize(300, 300)
-                    .centerCrop()
-                    .into(holder.photo2);
-
-
-            Picasso.with(context)
-                    .load(imageUri3)
-                    .resize(300, 300)
-                    .centerCrop()
-                    .into(holder.photo3);
-
-//            holder.photo1.setImageURI(imageUri);
-
-
+            }
         }
 
+    }
     }
 
 
@@ -108,15 +96,16 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         ImageView photo2;
         ImageView photo3;
 
+
+
         TextView breed_name;
-        CardView card_view;
+
 
         CustomViewHolder(View itemView) {
 
             super(itemView);
 
             breed_name = itemView.findViewById(R.id.breed_name);
-//            card_view = itemView.findViewById(R.id.card_view);
             photo1 = itemView.findViewById(R.id.photo1);
             photo2 = itemView.findViewById(R.id.photo2);
             photo3 = itemView.findViewById(R.id.photo3);

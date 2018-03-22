@@ -27,7 +27,7 @@
                 android:id="@+id/breed_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="16sp"
                 android:layout_marginTop="1dp"
                 android:textColor="@android:color/black"/>
 
