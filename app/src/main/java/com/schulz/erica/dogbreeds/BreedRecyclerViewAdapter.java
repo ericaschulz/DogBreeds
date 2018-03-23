@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,18 +27,24 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
     public Map<String, List<BreedImage>> breedImageListByBreedName;
 
 
+
+
+
     public BreedRecyclerViewAdapter(Context context, List<Breed> breedList) {
 
         this.context = context;
         this.breedList = breedList;
         this.breedImageListByBreedName = new HashMap<>();
+
     }
 
     public void injectBreedImages (String breedName, List<BreedImage> breedImageList){
         
         breedImageListByBreedName.put(breedName,breedImageList);
+
         
     }
+
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -46,43 +53,36 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
         return viewHolder;
     }
+
+
     @Override
     public void onBindViewHolder(BreedRecyclerViewAdapter.CustomViewHolder holder, int position) {
 
 
-
         Breed breed = breedList.get(position);
-
-        holder.breed_name.setText(breed.getBreedName());
-
         List<BreedImage> breedImageList = breedImageListByBreedName.get(breed.getBreedName());
-        List<ImageView> imageViewList = null;
-
-
+        holder.breed_name.setText(breed.getBreedName());
+        List<ImageView> imageViewList = Arrays.asList(holder.photo1, holder.photo2, holder.photo3);
 
         if (breedImageList != null && !breedImageList.isEmpty()) {
             for (int i = 0; i < 3 && i < breedImageList.size(); i++) {
                 BreedImage breedImage = breedImageList.get(i);
                 Uri imageUri = Uri.parse(breedImage.getImageLink());
 
+        Picasso.with(context)
+                .load(imageUri)
+                .resize(300, 300)
+                .centerCrop()
+                .into(imageViewList.get(i));
 
-                if (imageViewList != null && !imageViewList.isEmpty()) {
 
-                for (int j = 0; j < 3 && j < imageViewList.size(); j++) {
+//                holder.loadImageToIndex(breedImage.getImageLink(),i);
 
-                }
-
-                Picasso.with(context)
-                        .load(imageUri)
-                        .resize(300, 300)
-                        .centerCrop()
-                        .into(holder.photo1);
 
 
             }
         }
 
-    }
     }
 
 
@@ -92,14 +92,14 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
 
+
         ImageView photo1;
         ImageView photo2;
         ImageView photo3;
 
-
-
         TextView breed_name;
 
+        List<ImageView> imageViewList;
 
         CustomViewHolder(View itemView) {
 
@@ -110,12 +110,23 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             photo2 = itemView.findViewById(R.id.photo2);
             photo3 = itemView.findViewById(R.id.photo3);
 
+            imageViewList = Arrays.asList(this.photo1, this.photo2, this.photo3);
 
 
+        }
+
+        public void loadImageToIndex(String imageURLString, int index) {
 
 
 
         }
 
-    }
-}
+
+
+        }
+
+
+        }
+
+
+

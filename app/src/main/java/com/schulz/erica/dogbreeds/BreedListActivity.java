@@ -20,6 +20,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     RecyclerView breedRecyclerView;
     List<Breed> breedList;
     List<BreedImage> breedImageList;
+    String breedName;
     BreedRecyclerViewAdapter breedRecyclerViewAdapter;
     CardView card_view;
     ConstraintLayout constraintLayout;
@@ -31,6 +32,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         this.setContentView(R.layout.activity_breed_list);
 
         this.startBreedAsyncRequest();
+
 
         Button refresh = findViewById(R.id.refresh);
 
@@ -60,6 +62,8 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
             }
         });
 
+
+
     }
 
     public void startBreedAsyncRequest() {
@@ -87,6 +91,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
                 BreedImageApiTask breedImageApiTask = new BreedImageApiTask(this);
                 breedImageApiTask.setBreedName(breedName);
                 breedImageApiTask.execute();
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
