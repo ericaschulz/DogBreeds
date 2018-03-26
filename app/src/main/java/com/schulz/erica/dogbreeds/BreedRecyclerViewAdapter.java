@@ -27,22 +27,20 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
     public Map<String, List<BreedImage>> breedImageListByBreedName;
 
 
-
-
-
     public BreedRecyclerViewAdapter(Context context, List<Breed> breedList) {
 
         this.context = context;
         this.breedList = breedList;
         this.breedImageListByBreedName = new HashMap<>();
 
+
     }
 
-    public void injectBreedImages (String breedName, List<BreedImage> breedImageList){
-        
-        breedImageListByBreedName.put(breedName,breedImageList);
+    public void injectBreedImages(String breedName, List<BreedImage> breedImageList) {
 
-        
+        breedImageListByBreedName.put(breedName, breedImageList);
+
+
     }
 
 
@@ -69,15 +67,17 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
                 BreedImage breedImage = breedImageList.get(i);
                 Uri imageUri = Uri.parse(breedImage.getImageLink());
 
-        Picasso.with(context)
-                .load(imageUri)
-                .resize(300, 300)
-                .centerCrop()
-                .into(imageViewList.get(i));
+                Picasso.with(context)
+                        .load(imageUri)
+                        .resize(300, 300)
+                        .centerCrop()
+                        .into(imageViewList.get(i));
+
+
+
 
 
 //                holder.loadImageToIndex(breedImage.getImageLink(),i);
-
 
 
             }
@@ -87,7 +87,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
 
     public int getItemCount() {
-        return (breedList !=null ? breedList.size() : 0);
+        return (breedList != null ? breedList.size() : 0);
     }
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
@@ -100,6 +100,8 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         TextView breed_name;
 
         List<ImageView> imageViewList;
+
+
 
         CustomViewHolder(View itemView) {
 
@@ -115,18 +117,21 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
         }
 
-        public void loadImageToIndex(String imageURLString, int index) {
 
-
-
-        }
-
+        public void loadImageToIndex(String imageLink, int index) {
 
 
         }
 
 
-        }
+    }
+
+}
+
+
+
+
+
 
 
 
