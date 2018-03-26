@@ -20,11 +20,12 @@ import java.util.Map;
  * Created by ericaschulz on 3/12/18.
  */
 
-public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecyclerViewAdapter.CustomViewHolder> {
+public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecyclerViewAdapter.CustomViewHolder>  {
 
     private Context context;
     private List<Breed> breedList;
     public Map<String, List<BreedImage>> breedImageListByBreedName;
+
 
 
     public BreedRecyclerViewAdapter(Context context, List<Breed> breedList) {
@@ -39,6 +40,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
     public void injectBreedImages(String breedName, List<BreedImage> breedImageList) {
 
         breedImageListByBreedName.put(breedName, breedImageList);
+
 
 
     }
@@ -113,6 +115,18 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             photo3 = itemView.findViewById(R.id.photo3);
 
             imageViewList = Arrays.asList(this.photo1, this.photo2, this.photo3);
+
+
+
+
+//        public void bind(final ContentItem item, final OnItemClickListener listener) {
+//            name.setText(item.name);
+//            Picasso.with(itemView.getContext()).load(item.imageUrl).into(imageViewList);
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override public void onClick(View v) {
+//                    listener.onItemClick(item);
+//                }
+//            });
 
 
         }

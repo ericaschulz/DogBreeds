@@ -14,9 +14,9 @@
                 android:id="@+id/breed_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:layout_marginTop="1dp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@color/text_color"/>
 
             <ImageView
                 android:id="@+id/photo1"
