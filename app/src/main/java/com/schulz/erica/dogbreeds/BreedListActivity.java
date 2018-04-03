@@ -4,16 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
 import org.json.JSONException;
+
 import java.util.List;
 
-public class BreedListActivity extends AppCompatActivity implements BreedApiTask.BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack{
+import static com.schulz.erica.dogbreeds.BreedApiTask.BreedApiTaskCallBack;
+
+public class BreedListActivity extends AppCompatActivity implements BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack{
 
 
     BreedApiTask breedApiTask;
@@ -22,15 +25,15 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     List<BreedImage> breedImageList;
     String breedName;
     BreedRecyclerViewAdapter breedRecyclerViewAdapter;
-    CardView card_view;
     ConstraintLayout constraintLayout;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_breed_list);
-
         this.startBreedAsyncRequest();
 
 
@@ -43,6 +46,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
 
         final Intent mainIntent = new Intent(BreedListActivity.this, MainActivity.class);
+
         Button back = findViewById(R.id.back_button);
         back.setOnClickListener(new View.OnClickListener() {
 
@@ -56,11 +60,13 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startBreedAsyncRequest();
 
+
+                startBreedAsyncRequest();
 
             }
         });
+
 
 
 
@@ -70,12 +76,14 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
         this.breedApiTask = new BreedApiTask(BreedListActivity.this);
         this.breedApiTask.execute();
-
-
     }
+
+
 
     @Override
     public void breedApiTaskCompleted(List<Breed> breedList) {
+// create another interface for breed selected listener & add to breedRecyclerViewAdapter constructor
+
 
         breedRecyclerView = findViewById(R.id.breed_recycler_view);
         breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList);

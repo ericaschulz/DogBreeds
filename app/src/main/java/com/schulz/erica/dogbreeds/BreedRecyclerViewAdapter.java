@@ -1,8 +1,10 @@
 package com.schulz.erica.dogbreeds;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
     private Context context;
     private List<Breed> breedList;
     public Map<String, List<BreedImage>> breedImageListByBreedName;
+    private View.OnClickListener onClickListener;
 
 
 
@@ -33,6 +36,12 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         this.context = context;
         this.breedList = breedList;
         this.breedImageListByBreedName = new HashMap<>();
+        this.onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        };
 
 
     }
@@ -62,12 +71,14 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         Breed breed = breedList.get(position);
         List<BreedImage> breedImageList = breedImageListByBreedName.get(breed.getBreedName());
         holder.breed_name.setText(breed.getBreedName());
+
         List<ImageView> imageViewList = Arrays.asList(holder.photo1, holder.photo2, holder.photo3);
 
         if (breedImageList != null && !breedImageList.isEmpty()) {
             for (int i = 0; i < 3 && i < breedImageList.size(); i++) {
                 BreedImage breedImage = breedImageList.get(i);
                 Uri imageUri = Uri.parse(breedImage.getImageLink());
+
 
                 Picasso.with(context)
                         .load(imageUri)
@@ -104,8 +115,9 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         List<ImageView> imageViewList;
 
 
-
         CustomViewHolder(View itemView) {
+
+
 
             super(itemView);
 
@@ -117,30 +129,40 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             imageViewList = Arrays.asList(this.photo1, this.photo2, this.photo3);
 
 
+            final Intent detailIntent2 = new Intent(context, BreedDetailActivity.class);
 
 
-//        public void bind(final ContentItem item, final OnItemClickListener listener) {
-//            name.setText(item.name);
-//            Picasso.with(itemView.getContext()).load(item.imageUrl).into(imageViewList);
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override public void onClick(View v) {
-//                    listener.onItemClick(item);
-//                }
-//            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    context.startActivity(detailIntent2);
+
+                    Log.d("breed detail activity", "clicked!");
+                }
+            });
+        }
+
+
+            public void loadImageToIndex(String imageURLString, int index) {
+
+        }
+
+//        public void loadImageToIndex(String imageLink, int index) {
+//
+//
+//        }
+
 
 
         }
 
 
-        public void loadImageToIndex(String imageLink, int index) {
 
-
-        }
-
-
-    }
 
 }
+
+
 
 
 
