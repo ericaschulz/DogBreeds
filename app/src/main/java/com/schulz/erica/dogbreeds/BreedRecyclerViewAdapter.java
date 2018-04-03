@@ -27,7 +27,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
     private Context context;
     private List<Breed> breedList;
     public Map<String, List<BreedImage>> breedImageListByBreedName;
-    private View.OnClickListener onClickListener;
+
 
 
 
@@ -36,24 +36,15 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         this.context = context;
         this.breedList = breedList;
         this.breedImageListByBreedName = new HashMap<>();
-        this.onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        };
 
 
-    }
+        }
 
     public void injectBreedImages(String breedName, List<BreedImage> breedImageList) {
 
         breedImageListByBreedName.put(breedName, breedImageList);
 
-
-
     }
-
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

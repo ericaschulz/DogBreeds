@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class BreedDetailActivity extends AppCompatActivity {
 
     Button back2;
+    Button home;
     TextView proof;
 
     @Override
@@ -18,18 +19,27 @@ public class BreedDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_breed_detail);
 
 
+        back2 = (findViewById(R.id.back_button_2));
+        home = (findViewById(R.id.home));
         proof = (findViewById(R.id.detail_list_proof));
 
-        back2 = (findViewById(R.id.back_button_2));
 
+        final Intent homeIntent = new Intent(this, MainActivity.class);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(homeIntent);
+
+            }
+        });
 
         final Intent backIntent = new Intent(this, BreedListActivity.class);
-        back2.setOnClickListener(new View.OnClickListener() {
+        back2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 startActivity(backIntent);
-
             }
+
         });
     }
 }
