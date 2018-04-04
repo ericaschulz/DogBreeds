@@ -1,7 +1,6 @@
 package com.schulz.erica.dogbreeds;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,9 +23,23 @@ import java.util.Map;
 
 public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecyclerViewAdapter.CustomViewHolder>  {
 
+    private BreedOnClickListener breedOnClickListener;
+
+
     private Context context;
     private List<Breed> breedList;
     public Map<String, List<BreedImage>> breedImageListByBreedName;
+
+    public interface BreedOnClickListener {
+
+        //display further dog images (4th thru last place image) by specified breed
+        //
+
+        void onClick(Breed breed);
+
+    }
+
+
 
 
 
@@ -120,14 +133,14 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             imageViewList = Arrays.asList(this.photo1, this.photo2, this.photo3);
 
 
-            final Intent detailIntent2 = new Intent(context, BreedDetailActivity.class);
+
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    context.startActivity(detailIntent2);
+                    
+                             breedOnClickListener.onClick(null);
 
                     Log.d("breed detail activity", "clicked!");
                 }

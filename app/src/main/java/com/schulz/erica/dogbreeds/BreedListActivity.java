@@ -16,7 +16,7 @@ import java.util.List;
 
 import static com.schulz.erica.dogbreeds.BreedApiTask.BreedApiTaskCallBack;
 
-public class BreedListActivity extends AppCompatActivity implements BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack{
+public class BreedListActivity extends AppCompatActivity implements BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack,  BreedRecyclerViewAdapter.BreedOnClickListener {
 
 
     BreedApiTask breedApiTask;
@@ -68,13 +68,11 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         });
 
 
-
-
     }
 
     public void startBreedAsyncRequest() {
 
-        this.breedApiTask = new BreedApiTask(BreedListActivity.this);
+        this.breedApiTask = new BreedApiTask(this);
         this.breedApiTask.execute();
     }
 
@@ -121,5 +119,13 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
         Log.d("log this", breedName + " has " + breedImageList.size() + " images.");
 
+    }
+
+    @Override
+    public void onClick(Breed breed) {
+
+        final Intent detailIntent2 = new Intent(this, BreedDetailActivity.class);
+
+        this.startActivity(detailIntent2);
     }
 }

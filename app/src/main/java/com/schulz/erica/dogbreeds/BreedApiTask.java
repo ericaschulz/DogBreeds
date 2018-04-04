@@ -89,7 +89,8 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
 
             }
 
-        } breedApiTaskCallBack.breedApiTaskCompleted(breedList);
+        }
+        breedApiTaskCallBack.breedApiTaskCompleted(breedList);
     }
 
     public void setBreedList(List<Breed> breedList) {
