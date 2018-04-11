@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
@@ -23,33 +24,24 @@ import java.util.Map;
 
 public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecyclerViewAdapter.CustomViewHolder>  {
 
-    private BreedOnClickListener breedOnClickListener;
-
 
     private Context context;
     private List<Breed> breedList;
-    public Map<String, List<BreedImage>> breedImageListByBreedName;
+    private Map<String, List<BreedImage>> breedImageListByBreedName;
+    private BreedOnClickListener breedOnClickListener;
 
     public interface BreedOnClickListener {
-
-        //display further dog images (4th thru last place image) by specified breed
-        //
 
         void onClick(Breed breed);
 
     }
 
-
-
-
-
-
-    public BreedRecyclerViewAdapter(Context context, List<Breed> breedList) {
+    public BreedRecyclerViewAdapter(Context context, List<Breed> breedList, BreedOnClickListener breedOnClickListener) {
 
         this.context = context;
         this.breedList = breedList;
         this.breedImageListByBreedName = new HashMap<>();
-
+        this.breedOnClickListener = breedOnClickListener;
 
         }
 
@@ -92,8 +84,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
 
 
-
-
 //                holder.loadImageToIndex(breedImage.getImageLink(),i);
 
 
@@ -133,9 +123,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             imageViewList = Arrays.asList(this.photo1, this.photo2, this.photo3);
 
 
-
-
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -143,6 +130,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
                              breedOnClickListener.onClick(null);
 
                     Log.d("breed detail activity", "clicked!");
+
                 }
             });
         }
