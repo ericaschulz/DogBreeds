@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import org.json.JSONException;
 
@@ -16,7 +17,7 @@ import java.util.List;
 
 import static com.schulz.erica.dogbreeds.BreedApiTask.BreedApiTaskCallBack;
 
-public class BreedListActivity extends AppCompatActivity implements BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack,  BreedRecyclerViewAdapter.BreedOnClickListener {
+public class BreedListActivity extends AppCompatActivity implements BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack {
 
 
     BreedApiTask breedApiTask;
@@ -26,6 +27,8 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     String breedName;
     BreedRecyclerViewAdapter breedRecyclerViewAdapter;
     ConstraintLayout constraintLayout;
+    LinearLayout linearLayout;
+    PreCachingLayoutManager preCachingLayoutManager;
 
 
 
@@ -36,10 +39,10 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         this.setContentView(R.layout.activity_breed_list);
         this.startBreedAsyncRequest();
 
-
         Button refresh = findViewById(R.id.refresh);
 
         constraintLayout = findViewById(R.id.constraint_layout);
+        linearLayout = findViewById(R.id.linear_layout);
 
         breedRecyclerView = findViewById(R.id.breed_recycler_view);
         breedRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
@@ -61,12 +64,9 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
             @Override
             public void onClick(View v) {
 
-
                 startBreedAsyncRequest();
-
             }
         });
-
 
     }
 
@@ -83,8 +83,21 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 // create another interface for breed selected listener & add to breedRecyclerViewAdapter constructor
 
         breedRecyclerView = findViewById(R.id.breed_recycler_view);
-        breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList, this);
-        breedRecyclerView.setAdapter(breedRecyclerViewAdapter);
+        breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList, breedImageList, new BreedRecyclerViewAdapter.BreedOnClickListener() {
+            @Override
+            public void onClick(Breed breed) {
+                final Intent detailIntent2 = new Intent(BreedListActivity.this, BreedDetailActivity.class);
+
+                startActivity(detailIntent2);
+            }
+        });
+
+
+
+
+        this.breedRecyclerView.setAdapter(breedRecyclerViewAdapter);
+
+
 
         for (Breed breed:breedList) {
             String breedName = breed.getBreedName();
@@ -93,8 +106,8 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
             try {
 
-                BreedImageApiTask breedImageApiTask = new BreedImageApiTask(this);
-                breedImageApiTask.setBreedName(breedName);
+                BreedImageApiTask breedImageApiTask = new BreedImageApiTask(breed, this);
+
                 breedImageApiTask.execute();
 
             } catch (JSONException e) {
@@ -108,10 +121,10 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     }
 
     @Override
-    public void breedImageApiTaskCompleted(String breedName, List<BreedImage> breedImageList) {
+    public void breedImageApiTaskCompleted(Breed breed, List<BreedImage> breedImageList) {
         //need to give the images to the adapter
         
-        this.breedRecyclerViewAdapter.injectBreedImages(breedName,breedImageList);
+        this.breedRecyclerViewAdapter.injectBreedImages(breed, breedImageList);
         
 
        
@@ -120,11 +133,4 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
     }
 
-    @Override
-    public void onClick(Breed breed) {
-
-        final Intent detailIntent2 = new Intent(this, BreedDetailActivity.class);
-
-        this.startActivity(detailIntent2);
-    }
 }

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
@@ -27,8 +26,10 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
     private Context context;
     private List<Breed> breedList;
+    private List<BreedImage> breedImageList;
     private Map<String, List<BreedImage>> breedImageListByBreedName;
     private BreedOnClickListener breedOnClickListener;
+
 
     public interface BreedOnClickListener {
 
@@ -36,18 +37,23 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
     }
 
-    public BreedRecyclerViewAdapter(Context context, List<Breed> breedList, BreedOnClickListener breedOnClickListener) {
+    public BreedRecyclerViewAdapter(Context context, List<Breed> breedList, List<BreedImage> breedImageList, BreedOnClickListener breedOnClickListener) {
 
         this.context = context;
         this.breedList = breedList;
+        this.breedImageList = breedImageList;
         this.breedImageListByBreedName = new HashMap<>();
         this.breedOnClickListener = breedOnClickListener;
 
         }
 
-    public void injectBreedImages(String breedName, List<BreedImage> breedImageList) {
+    public void injectBreedImages(Breed breed, List<BreedImage> breedImageList) {
 
-        breedImageListByBreedName.put(breedName, breedImageList);
+        breedImageListByBreedName.put(breed.getBreedName(), breedImageList);
+        int indexOfCurrentBreed = this.breedList.indexOf(breed);
+        this.notifyItemChanged(indexOfCurrentBreed);
+
+
 
     }
 
@@ -61,19 +67,20 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
 
     @Override
-    public void onBindViewHolder(BreedRecyclerViewAdapter.CustomViewHolder holder, int position) {
+    public void onBindViewHolder(final BreedRecyclerViewAdapter.CustomViewHolder holder, final int position) {
 
 
         Breed breed = breedList.get(position);
-        List<BreedImage> breedImageList = breedImageListByBreedName.get(breed.getBreedName());
         holder.breed_name.setText(breed.getBreedName());
-
+        List<BreedImage> breedImageList = breedImageListByBreedName.get(breed.getBreedName());
         List<ImageView> imageViewList = Arrays.asList(holder.photo1, holder.photo2, holder.photo3);
 
         if (breedImageList != null && !breedImageList.isEmpty()) {
             for (int i = 0; i < 3 && i < breedImageList.size(); i++) {
                 BreedImage breedImage = breedImageList.get(i);
                 Uri imageUri = Uri.parse(breedImage.getImageLink());
+
+
 
 
                 Picasso.with(context)
@@ -83,7 +90,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
                         .into(imageViewList.get(i));
 
 
-
 //                holder.loadImageToIndex(breedImage.getImageLink(),i);
 
 
@@ -91,7 +97,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         }
 
     }
-
 
     public int getItemCount() {
         return (breedList != null ? breedList.size() : 0);
