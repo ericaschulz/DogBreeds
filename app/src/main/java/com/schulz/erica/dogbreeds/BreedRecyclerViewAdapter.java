@@ -1,6 +1,7 @@
 package com.schulz.erica.dogbreeds;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -52,7 +53,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         breedImageListByBreedName.put(breed.getBreedName(), breedImageList);
         int indexOfCurrentBreed = this.breedList.indexOf(breed);
         this.notifyItemChanged(indexOfCurrentBreed);
-
 
 
     }
@@ -129,10 +129,15 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
+
+
                 @Override
                 public void onClick(View v) {
-                    
-                             breedOnClickListener.onClick(null);
+
+                    final Intent detailIntent2 = new Intent(context, BreedDetailActivity.class);
+
+                    context.startActivity(detailIntent2);
+
 
                     Log.d("breed detail activity", "clicked!");
 
@@ -140,15 +145,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             });
         }
 
-
-            public void loadImageToIndex(String imageURLString, int index) {
-
-        }
-
-//        public void loadImageToIndex(String imageLink, int index) {
-//
-//
-//        }
 
 
 

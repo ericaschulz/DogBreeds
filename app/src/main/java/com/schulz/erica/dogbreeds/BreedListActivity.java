@@ -28,7 +28,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     BreedRecyclerViewAdapter breedRecyclerViewAdapter;
     ConstraintLayout constraintLayout;
     LinearLayout linearLayout;
-    PreCachingLayoutManager preCachingLayoutManager;
+
 
 
 
@@ -86,9 +86,9 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList, breedImageList, new BreedRecyclerViewAdapter.BreedOnClickListener() {
             @Override
             public void onClick(Breed breed) {
-                final Intent detailIntent2 = new Intent(BreedListActivity.this, BreedDetailActivity.class);
-
-                startActivity(detailIntent2);
+//                final Intent detailIntent2 = new Intent(BreedListActivity.this, BreedDetailActivity.class);
+//
+//                startActivity(detailIntent2);
             }
         });
 
