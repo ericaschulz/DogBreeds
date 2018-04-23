@@ -31,8 +31,6 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
@@ -77,7 +75,6 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     }
 
 
-
     @Override
     public void breedApiTaskCompleted(List<Breed> breedList) {
 // create another interface for breed selected listener & add to breedRecyclerViewAdapter constructor
@@ -93,10 +90,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         });
 
 
-
-
         this.breedRecyclerView.setAdapter(breedRecyclerViewAdapter);
-
 
 
         for (Breed breed:breedList) {
@@ -125,9 +119,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         //need to give the images to the adapter
         
         this.breedRecyclerViewAdapter.injectBreedImages(breed, breedImageList);
-        
 
-       
 
         Log.d("log this", breedName + " has " + breedImageList.size() + " images.");
 

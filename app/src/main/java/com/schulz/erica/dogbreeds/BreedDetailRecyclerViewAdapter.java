@@ -1,12 +1,15 @@
 package com.schulz.erica.dogbreeds;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,10 +19,11 @@ import java.util.Map;
 public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDetailRecyclerViewAdapter.CustomViewHolder> {
 
     //May not need all of these fields
-    Context context;
-    List<Breed> breedList;
-    List<BreedImage> breedDetailImageList;
-    Map<String, List<BreedImage>> breedDetailImageListByBreedName;
+    private Context context;
+    private List<Breed> breedList;
+    private List<BreedImage> breedDetailImageList;
+    private Map<String, List<BreedImage>> breedDetailImageListByBreedName;
+
 
     public BreedDetailRecyclerViewAdapter(Context context, List<Breed> breedList, List<BreedImage> breedDetailImageList) {
 
@@ -42,7 +46,27 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
     @Override
     public void onBindViewHolder(final BreedDetailRecyclerViewAdapter.CustomViewHolder holder, final int position) {
 
+        Breed breed = breedList.get(position);
+        holder.breed_name.setText(breed.getBreedName());
+        List<BreedImage> breedDetailImageList = breedDetailImageListByBreedName.get(breed.getBreedName());
+        List<ImageView> imageViewDetailList = Arrays.asList(holder.photo_detail_1, holder.photo_detail_2, holder.photo_detail_3);
 
+
+        if (breedDetailImageList != null && !breedDetailImageList.isEmpty()) {
+            for (int i = 0; i < 3 && i < breedDetailImageList.size(); i++) {
+                BreedImage breedImage = breedDetailImageList.get(i);
+                Uri imageDetailUri = Uri.parse(breedImage.getImageLink());
+
+
+                Picasso.with(context)
+                        .load(imageDetailUri)
+                        .resize(300, 300)
+                        .centerCrop()
+                        .into(imageViewDetailList.get(i));
+
+
+            }
+        }
     }
 
 
@@ -58,8 +82,9 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
         ImageView photo_detail_3;
 
         TextView breed_name;
-
         List<ImageView> imageViewDetailList;
+
+
 
 
         CustomViewHolder(View itemDetailView) {

@@ -15,11 +15,13 @@ public class BreedDetailActivity extends AppCompatActivity  {
 
 
     RecyclerView breedDetailRecyclerView;
+    List<Breed> breedList;
     List<BreedImage> breedDetailImageList;
+    Breed breed;
     BreedDetailRecyclerViewAdapter breedDetailRecyclerViewAdapter;
 
     Button back2;
-    Button home;
+
 
 
     @Override
@@ -28,22 +30,11 @@ public class BreedDetailActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_breed_detail);
 
 
-
-
         back2 = (findViewById(R.id.back_button_2));
-        home = (findViewById(R.id.home));
 
-        final Intent homeIntent = new Intent(this, MainActivity.class);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(homeIntent);
-
-            }
-        });
 
         final Intent backIntent = new Intent(this, BreedListActivity.class);
-        back2.setOnClickListener(new View.OnClickListener(){
+        back2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(backIntent);
@@ -52,8 +43,9 @@ public class BreedDetailActivity extends AppCompatActivity  {
         });
 
         breedDetailRecyclerView = findViewById(R.id.breed_detail_recycler_view);
-//        breedDetailRecyclerViewAdapter = new BreedDetailRecyclerViewAdapter(this, List<Breed> breedList,List<BreedImage> breedDetailImageList);
-}
+        breedDetailRecyclerViewAdapter = new BreedDetailRecyclerViewAdapter(this, breedList, breedDetailImageList);
+    }
+
 
 //    public void startBreedApiImageTaskCompleted() {
 //
