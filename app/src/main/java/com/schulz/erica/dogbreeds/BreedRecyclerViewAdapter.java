@@ -88,8 +88,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
                         .resize(300, 300)
                         .centerCrop()
                         .into(imageViewList.get(i));
-                
-
 
             }
         }

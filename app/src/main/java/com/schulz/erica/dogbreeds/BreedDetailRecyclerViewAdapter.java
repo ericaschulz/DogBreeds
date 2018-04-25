@@ -35,6 +35,15 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
     }
 
+    public void injectBreedDetailImages(Breed breed, List<BreedImage> breedImageList) {
+
+        breedDetailImageListByBreedName.put(breed.getBreedName(), breedImageList);
+        int indexOfCurrentBreed = this.breedList.indexOf(breed);
+        this.notifyItemChanged(indexOfCurrentBreed);
+
+
+    }
+
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_photo_detail, null);
