@@ -1,7 +1,6 @@
 package com.schulz.erica.dogbreeds;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,7 +26,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
     private Context context;
     private List<Breed> breedList;
-    private List<BreedImage> breedImageList;
     private Map<String, List<BreedImage>> breedImageListByBreedName;
     private BreedOnClickListener breedOnClickListener;
 
@@ -38,11 +36,10 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
     }
 
-    public BreedRecyclerViewAdapter(Context context, List<Breed> breedList, List<BreedImage> breedImageList, BreedOnClickListener breedOnClickListener) {
+    public BreedRecyclerViewAdapter(Context context, List<Breed> breedList, BreedOnClickListener breedOnClickListener) {
 
         this.context = context;
         this.breedList = breedList;
-        this.breedImageList = breedImageList;
         this.breedImageListByBreedName = new HashMap<>();
         this.breedOnClickListener = breedOnClickListener;
 
@@ -72,6 +69,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
         Breed breed = breedList.get(position);
         holder.breed_name.setText(breed.getBreedName());
+
         List<BreedImage> breedImageList = breedImageListByBreedName.get(breed.getBreedName());
         List<ImageView> imageViewList = Arrays.asList(holder.photo1, holder.photo2, holder.photo3);
 
@@ -130,12 +128,11 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
                 @Override
                 public void onClick(View v) {
 
-                    final Intent detailIntent2 = new Intent(context, BreedDetailActivity.class);
-
-                    context.startActivity(detailIntent2);
-
+                    breedOnClickListener.onClick(null);
 
                     Log.d("breed detail activity", "clicked!");
+
+
 
                 }
             });

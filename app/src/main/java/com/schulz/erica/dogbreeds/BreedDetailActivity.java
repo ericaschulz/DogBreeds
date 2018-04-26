@@ -97,7 +97,7 @@ public class BreedDetailActivity extends AppCompatActivity implements BreedApiTa
     public void breedImageApiTaskCompleted(Breed breed, List<BreedImage> breedImageList) {
         //need to give the images to the adapter
 
-        this.breedDetailRecyclerViewAdapter.injectBreedDetailImages(breed, breedImageList);
+//        this.breedDetailRecyclerViewAdapter.injectBreedDetailImages(breed, breedImageList);
 
 
         Log.d("log this", breed + " has " + breedImageList.size() + " images.");

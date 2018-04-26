@@ -80,12 +80,12 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 // create another interface for breed selected listener & add to breedRecyclerViewAdapter constructor
 
         breedRecyclerView = findViewById(R.id.breed_recycler_view);
-        breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList, breedImageList, new BreedRecyclerViewAdapter.BreedOnClickListener() {
+        breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList, new BreedRecyclerViewAdapter.BreedOnClickListener() {
             @Override
             public void onClick(Breed breed) {
-//                final Intent detailIntent2 = new Intent(BreedListActivity.this, BreedDetailActivity.class);
-//
-//                startActivity(detailIntent2);
+                final Intent detailIntent2 = new Intent(BreedListActivity.this, BreedDetailActivity.class);
+
+                startActivity(detailIntent2);
             }
         });
 

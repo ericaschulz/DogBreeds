@@ -1,7 +1,6 @@
 package com.schulz.erica.dogbreeds;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,40 +8,37 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDetailRecyclerViewAdapter.CustomViewHolder> {
 
     //May not need all of these fields
     private Context context;
     private List<Breed> breedList;
-    private List<BreedImage> breedDetailImageList;
-    private Map<String, List<BreedImage>> breedDetailImageListByBreedName;
+//    private Map<String, List<BreedImage>> breedImageListByBreedName;
 
 
     public BreedDetailRecyclerViewAdapter(Context context, List<Breed> breedList, List<BreedImage> breedDetailImageList) {
 
         this.context = context;
         this.breedList = breedList;
-        this.breedDetailImageList = breedDetailImageList;
-        this.breedDetailImageListByBreedName = new HashMap<>();
+
+
 
 
     }
 
-    public void injectBreedDetailImages(Breed breed, List<BreedImage> breedImageList) {
+    //************Need to utilize the "breedImageListByBreedName" hashMap to recreate the breedImageList,
+    //************which is the SPECIFIC LIST OF IMAGES BY BREED.
+    //*************The list size changes with the breed name.
+    //*************Create an interface for the Detail Activity/Adapter to interact with?
+    //*************Incorporate it into the OnClick Listener inside the CustomView Holder in BreedListActivity
 
-        breedDetailImageListByBreedName.put(breed.getBreedName(), breedImageList);
-        int indexOfCurrentBreed = this.breedList.indexOf(breed);
-        this.notifyItemChanged(indexOfCurrentBreed);
 
 
-    }
+
+
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -55,36 +51,31 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
     @Override
     public void onBindViewHolder(final BreedDetailRecyclerViewAdapter.CustomViewHolder holder, final int position) {
 
-        Breed breed = breedList.get(position);
-        holder.breed_name.setText(breed.getBreedName());
-        List<BreedImage> breedDetailImageList = breedDetailImageListByBreedName.get(breed.getBreedName());
+
+
         List<ImageView> imageViewDetailList = Arrays.asList(holder.photo_detail_1, holder.photo_detail_2, holder.photo_detail_3);
 
 
-        if (breedDetailImageList != null && !breedDetailImageList.isEmpty()) {
-            for (int i = 0; i < 3 && i < breedDetailImageList.size(); i++) {
-                BreedImage breedImage = breedDetailImageList.get(i);
-                Uri imageDetailUri = Uri.parse(breedImage.getImageLink());
+//        if (breedDetailImageList != null && !breedDetailImageList.isEmpty()) {
+//            for (int i = 0; i < 3 && i < breedDetailImageList.size(); i++) {
+//                BreedImage breedImage = breedDetailImageList.get(i);
+//                Uri imageDetailUri = Uri.parse(breedImage.getImageLink());
 
 
-                Picasso.with(context)
-                        .load(imageDetailUri)
-                        .resize(300, 300)
-                        .centerCrop()
-                        .into(imageViewDetailList.get(i));
+
 
 
             }
-        }
-    }
+
+
 
 
     public int getItemCount() {
         return (breedList != null ? breedList.size() : 0);
+
     }
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
-
 
         ImageView photo_detail_1;
         ImageView photo_detail_2;
