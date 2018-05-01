@@ -28,9 +28,6 @@
         <activity android:name=".BreedListActivity">
 
         </activity>
-        <activity android:name=".BreedImageActivity">
-
-        </activity>
         <activity android:name=".BreedDetailActivity">
 
         </activity>

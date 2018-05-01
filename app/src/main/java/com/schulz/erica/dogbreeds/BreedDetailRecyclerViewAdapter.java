@@ -1,6 +1,7 @@
 package com.schulz.erica.dogbreeds;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,23 +9,27 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDetailRecyclerViewAdapter.CustomViewHolder> {
 
     //May not need all of these fields
     private Context context;
     private List<Breed> breedList;
-//    private Map<String, List<BreedImage>> breedImageListByBreedName;
+    private List<BreedImage> breedImageList;
+    private Breed breed;
+    private Map<String, List<BreedImage>> breedImageListByBreedName;
 
 
     public BreedDetailRecyclerViewAdapter(Context context, List<Breed> breedList, List<BreedImage> breedDetailImageList) {
 
         this.context = context;
         this.breedList = breedList;
-
-
+        this.breed = breed;
 
 
     }
@@ -34,10 +39,6 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
     //*************The list size changes with the breed name.
     //*************Create an interface for the Detail Activity/Adapter to interact with?
     //*************Incorporate it into the OnClick Listener inside the CustomView Holder in BreedListActivity
-
-
-
-
 
 
     @Override
@@ -52,22 +53,29 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
     public void onBindViewHolder(final BreedDetailRecyclerViewAdapter.CustomViewHolder holder, final int position) {
 
 
-
         List<ImageView> imageViewDetailList = Arrays.asList(holder.photo_detail_1, holder.photo_detail_2, holder.photo_detail_3);
 
 
-//        if (breedDetailImageList != null && !breedDetailImageList.isEmpty()) {
-//            for (int i = 0; i < 3 && i < breedDetailImageList.size(); i++) {
-//                BreedImage breedImage = breedDetailImageList.get(i);
-//                Uri imageDetailUri = Uri.parse(breedImage.getImageLink());
 
 
+        if (breedImageList != null && !breedImageList.isEmpty()) {
+            for (int i = 0; i < breedImageList.size(); i++) {
+                BreedImage breedImage = breedImageList.get(i);
+                Uri imageDetailUri = Uri.parse(breedImage.getImageLink());
 
 
+                Picasso.with(context)
+                        .load(imageDetailUri)
+                        .resize(300, 300)
+                        .centerCrop()
+                        .into(imageViewDetailList.get(i));
 
             }
 
 
+            }
+
+        }
 
 
     public int getItemCount() {
@@ -83,8 +91,6 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
         TextView breed_name;
         List<ImageView> imageViewDetailList;
-
-
 
 
         CustomViewHolder(View itemDetailView) {

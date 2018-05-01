@@ -8,20 +8,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import org.json.JSONException;
-
 import java.util.List;
 
 //implements BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack
 
-public class BreedDetailActivity extends AppCompatActivity implements BreedApiTask.BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack {
+public class BreedDetailActivity extends AppCompatActivity implements BreedImageApiTask.BreedImageApiTaskCallBack {
 
 
     RecyclerView breedDetailRecyclerView;
     List<Breed> breedList;
-    List<BreedImage> breedDetailImageList;
+    List<BreedImage> breedImageList;
     Breed breed;
-    BreedApiTask breedApiTask;
+//    BreedApiTask breedApiTask;
     BreedDetailRecyclerViewAdapter breedDetailRecyclerViewAdapter;
 
 
@@ -35,7 +33,7 @@ public class BreedDetailActivity extends AppCompatActivity implements BreedApiTa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breed_detail);
-        this.startBreedAsyncRequest();
+//        this.startBreedAsyncRequest();
 
 
 
@@ -53,41 +51,41 @@ public class BreedDetailActivity extends AppCompatActivity implements BreedApiTa
         });
 
         breedDetailRecyclerView = findViewById(R.id.breed_detail_recycler_view);
-        breedDetailRecyclerViewAdapter = new BreedDetailRecyclerViewAdapter(this, breedList, breedDetailImageList);
+        breedDetailRecyclerViewAdapter = new BreedDetailRecyclerViewAdapter(this, breedList, breedImageList);
     }
 
-    public void startBreedAsyncRequest() {
+//    public void startBreedAsyncRequest() {
+//
+//        this.breedApiTask = new BreedApiTask((BreedApiTask.BreedApiTaskCallBack) BreedDetailActivity.this);
+//        this.breedApiTask.execute();
+//    }
 
-        this.breedApiTask = new BreedApiTask((BreedApiTask.BreedApiTaskCallBack) BreedDetailActivity.this);
-        this.breedApiTask.execute();
-    }
-
-    @Override
-    public void breedApiTaskCompleted(List<Breed> breedList) {
-
-        this.breedDetailRecyclerView.setAdapter(breedDetailRecyclerViewAdapter);
-
-        for (Breed breed:breedList) {
-            String breedName = breed.getBreedName();
-            Log.d("log this", breedName);
-
-
-            try {
-
-                BreedImageApiTask breedImageApiTask = new BreedImageApiTask(breed, this);
-
-                breedImageApiTask.execute();
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        Log.d("log this", "");
-
-
-    }
+//    @Override
+//    public void breedApiTaskCompleted(List<Breed> breedList) {
+//
+//        this.breedDetailRecyclerView.setAdapter(breedDetailRecyclerViewAdapter);
+//
+//        for (Breed breed:breedList) {
+//            String breedName = breed.getBreedName();
+//            Log.d("log this", breedName);
+//
+//
+//            try {
+//
+//                BreedImageApiTask breedImageApiTask = new BreedImageApiTask(breed, this);
+//
+//                breedImageApiTask.execute();
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//
+//        Log.d("log this", "");
+//
+//
+//    }
 
 
 
@@ -96,9 +94,9 @@ public class BreedDetailActivity extends AppCompatActivity implements BreedApiTa
     @Override
     public void breedImageApiTaskCompleted(Breed breed, List<BreedImage> breedImageList) {
         //need to give the images to the adapter
-
-//        this.breedDetailRecyclerViewAdapter.injectBreedDetailImages(breed, breedImageList);
-
+//
+//        this.breedDetailRecyclerViewAdapter.injectBreedImages(breed, breedImageList);
+//
 
         Log.d("log this", breed + " has " + breedImageList.size() + " images.");
 

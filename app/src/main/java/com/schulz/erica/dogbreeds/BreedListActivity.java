@@ -83,9 +83,13 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList, new BreedRecyclerViewAdapter.BreedOnClickListener() {
             @Override
             public void onClick(Breed breed) {
-                final Intent detailIntent2 = new Intent(BreedListActivity.this, BreedDetailActivity.class);
 
+//                if breed != null
+
+
+                final Intent detailIntent2 = new Intent(BreedListActivity.this, BreedDetailActivity.class);
                 startActivity(detailIntent2);
+
             }
         });
 
