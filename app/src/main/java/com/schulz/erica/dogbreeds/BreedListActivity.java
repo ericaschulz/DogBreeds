@@ -88,6 +88,10 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
 
                 final Intent detailIntent2 = new Intent(BreedListActivity.this, BreedDetailActivity.class);
+
+//                detailIntent2.putExtra("breed",breed.getBreedName());
+//                detailIntent2.putExtr
+
                 startActivity(detailIntent2);
 
             }

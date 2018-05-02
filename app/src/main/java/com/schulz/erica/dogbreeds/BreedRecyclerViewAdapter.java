@@ -69,6 +69,8 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
         Breed breed = breedList.get(position);
         holder.breed_name.setText(breed.getBreedName());
+        holder.breed = breed;
+
 
         List<BreedImage> breedImageList = breedImageListByBreedName.get(breed.getBreedName());
         List<ImageView> imageViewList = Arrays.asList(holder.photo1, holder.photo2, holder.photo3);
@@ -77,8 +79,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             for (int i = 0; i < 3 && i < breedImageList.size(); i++) {
                 BreedImage breedImage = breedImageList.get(i);
                 Uri imageUri = Uri.parse(breedImage.getImageLink());
-
-
 
 
                 Picasso.with(context)
@@ -107,6 +107,8 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
         List<ImageView> imageViewList;
 
+        Breed breed;
+
 
         CustomViewHolder(View itemView) {
 
@@ -122,13 +124,19 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             imageViewList = Arrays.asList(this.photo1, this.photo2, this.photo3);
 
 
+
+
+
+
             itemView.setOnClickListener(new View.OnClickListener() {
 
 
                 @Override
                 public void onClick(View v) {
 
-                    breedOnClickListener.onClick(null);
+
+//                    breedOnClickListener.onClick(breed,breedImageListByBreedName.get(breed.getBreedName()));
+//                   this is wrong! Combine breed & breedImage classes!
 
                     Log.d("breed detail activity", "clicked!");
 

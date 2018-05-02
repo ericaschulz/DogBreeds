@@ -29,7 +29,15 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
         this.context = context;
         this.breedList = breedList;
-        this.breed = breed;
+
+
+    }
+
+    public void injectBreedImages(Breed breed, List<BreedImage> breedImageList) {
+
+        breedImageListByBreedName.put(breed.getBreedName(), breedImageList);
+        int indexOfCurrentBreed = this.breedList.indexOf(breed);
+        this.notifyItemChanged(indexOfCurrentBreed);
 
 
     }
