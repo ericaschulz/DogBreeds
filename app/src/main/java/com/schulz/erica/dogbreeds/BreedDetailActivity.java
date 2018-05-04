@@ -17,7 +17,7 @@ public class BreedDetailActivity extends AppCompatActivity implements BreedImage
 
     RecyclerView breedDetailRecyclerView;
     List<Breed> breedList;
-    List<BreedImage> breedImageList;
+    List<Breed.BreedImage> breedImageList;
     Breed breed;
     BreedDetailRecyclerViewAdapter breedDetailRecyclerViewAdapter;
 
@@ -88,10 +88,10 @@ public class BreedDetailActivity extends AppCompatActivity implements BreedImage
 
 
     @Override
-    public void breedImageApiTaskCompleted(Breed breed, List<BreedImage> breedImageList) {
+    public void breedImageApiTaskCompleted(Breed breed, List<Breed.BreedImage> breedImageList) {
 //        need to give the images to the adapter
 
-        this.breedDetailRecyclerViewAdapter.injectBreedImages(breed, breedImageList);
+//        this.breedDetailRecyclerViewAdapter.injectBreedImages(breed, breedImageList);
 
 
         Log.d("log this", breed + " has " + breedImageList.size() + " images.");

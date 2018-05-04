@@ -23,7 +23,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     BreedApiTask breedApiTask;
     RecyclerView breedRecyclerView;
     List<Breed> breedList;
-    List<BreedImage> breedImageList;
+    List<Breed.BreedImage> breedImages;
     String breedName;
     BreedRecyclerViewAdapter breedRecyclerViewAdapter;
     ConstraintLayout constraintLayout;
@@ -123,13 +123,15 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     }
 
     @Override
-    public void breedImageApiTaskCompleted(Breed breed, List<BreedImage> breedImageList) {
+    public void breedImageApiTaskCompleted(Breed breed, List<Breed.BreedImage> breedImages) {
         //need to give the images to the adapter
-        
-        this.breedRecyclerViewAdapter.injectBreedImages(breed, breedImageList);
 
 
-        Log.d("log this", breedName + " has " + breedImageList.size() + " images.");
+        breedRecyclerViewAdapter.injectBreedImages(breed, breedImages);
+
+
+
+        Log.d("log this", breedName + " has " + breedImages.size() + " images.");
 
     }
 

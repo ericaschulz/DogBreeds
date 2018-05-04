@@ -13,34 +13,30 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDetailRecyclerViewAdapter.CustomViewHolder> {
 
     //May not need all of these fields
     private Context context;
     private List<Breed> breedList;
-    private List<BreedImage> breedImageList;
+    private List<Breed.BreedImage> breedImages;
     private Breed breed;
-    private Map<String, List<BreedImage>> breedImageListByBreedName;
 
 
-    public BreedDetailRecyclerViewAdapter(Context context, List<Breed> breedList, List<BreedImage> breedDetailImageList) {
+
+    public BreedDetailRecyclerViewAdapter(Context context, List<Breed> breedList, List<Breed.BreedImage> breedImages) {
 
         this.context = context;
         this.breedList = breedList;
 
 
-    }
-
-    public void injectBreedImages(Breed breed, List<BreedImage> breedImageList) {
-
-        breedImageListByBreedName.put(breed.getBreedName(), breedImageList);
-        int indexOfCurrentBreed = this.breedList.indexOf(breed);
-        this.notifyItemChanged(indexOfCurrentBreed);
-
 
     }
+
+
+
+
+
 
     //************Need to utilize the "breedImageListByBreedName" hashMap to recreate the breedImageList,
     //************which is the SPECIFIC LIST OF IMAGES BY BREED.
@@ -66,9 +62,9 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
 
 
-        if (breedImageList != null && !breedImageList.isEmpty()) {
-            for (int i = 0; i < breedImageList.size(); i++) {
-                BreedImage breedImage = breedImageList.get(i);
+        if (breedImages != null && !breedImages.isEmpty()) {
+            for (int i = 0; i < breedImages.size(); i++) {
+                Breed.BreedImage breedImage = breedImages.get(i);
                 Uri imageDetailUri = Uri.parse(breedImage.getImageLink());
 
 

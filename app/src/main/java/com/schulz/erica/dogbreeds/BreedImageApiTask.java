@@ -20,7 +20,7 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
 
 
-    private List<BreedImage> breedImageList = new ArrayList<>();
+    private List<Breed.BreedImage> breedImages = new ArrayList<>();
 
 //    public void setBreedName(String breedName) {
 //
@@ -31,11 +31,9 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
     public interface BreedImageApiTaskCallBack {
 
-        void breedImageApiTaskCompleted(Breed breed, List<BreedImage> breedImageList);
-
+        void breedImageApiTaskCompleted(Breed breed, List<Breed.BreedImage> breedImages);
 
     }
-
 
     private BreedImageApiTaskCallBack breedImageApiTaskCallBack;
 
@@ -56,14 +54,14 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
     
     @Override
 
-    protected void onPostExecute(JSONObject breedImages) {
+    protected void onPostExecute(JSONObject breedImagesList) {
 
-        super.onPostExecute(breedImages);
+        super.onPostExecute(breedImagesList);
 
         JSONArray breedImageArray = null;
 
         try {
-            breedImageArray = breedImages.getJSONArray("message");
+            breedImageArray = breedImagesList.getJSONArray("message");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -77,12 +75,9 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
                 for (int i = 0; i < length; i++) {
                     try {
 
-                        BreedImage breedImage = new BreedImage();
-                        String imageLink = breedImageArray.getString(i);
-                        breedImage.setImageLink(imageLink);
-                        breedImageList.add(breedImage);
-                        setBreedImageList(breedImageList);
 
+                        String imageLink = breedImageArray.getString(i);
+                        breed.addImageForLink(imageLink);
 
                         Log.d("", "here");
 
@@ -97,12 +92,12 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
             }
 
-        } breedImageApiTaskCallBack.breedImageApiTaskCompleted(breed, breedImageList);
+        }
+        breedImageApiTaskCallBack.breedImageApiTaskCompleted(breed, breedImages);
     }
 
-    public void setBreedImageList(List<BreedImage> breedImageList) {
-        this.breedImageList = breedImageList;
-    }
+
+
 }
 
 

@@ -12,10 +12,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ericaschulz on 3/12/18.
@@ -26,8 +25,10 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
     private Context context;
     private List<Breed> breedList;
-    private Map<String, List<BreedImage>> breedImageListByBreedName;
+    private List<Breed.BreedImage> breedImages;
+//    private Map<String, List<Breed>> breedImageListByBreedName;
     private BreedOnClickListener breedOnClickListener;
+    private String imageLink;
 
 
     public interface BreedOnClickListener {
@@ -40,14 +41,16 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
         this.context = context;
         this.breedList = breedList;
-        this.breedImageListByBreedName = new HashMap<>();
+        this.breedImages = new ArrayList<>();
         this.breedOnClickListener = breedOnClickListener;
+
+
 
         }
 
-    public void injectBreedImages(Breed breed, List<BreedImage> breedImageList) {
+    public void injectBreedImages(Breed breed, List<Breed.BreedImage> breedImages) {
 
-        breedImageListByBreedName.put(breed.getBreedName(), breedImageList);
+        breed.addImageForLink(imageLink);
         int indexOfCurrentBreed = this.breedList.indexOf(breed);
         this.notifyItemChanged(indexOfCurrentBreed);
 
@@ -64,7 +67,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
 
     @Override
-    public void onBindViewHolder(final BreedRecyclerViewAdapter.CustomViewHolder holder, final int position) {
+    public void onBindViewHolder(final CustomViewHolder holder, final int position) {
 
 
         Breed breed = breedList.get(position);
@@ -72,12 +75,12 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         holder.breed = breed;
 
 
-        List<BreedImage> breedImageList = breedImageListByBreedName.get(breed.getBreedName());
+        List<Breed.BreedImage> breedImages = breed.getBreedImages();
         List<ImageView> imageViewList = Arrays.asList(holder.photo1, holder.photo2, holder.photo3);
 
-        if (breedImageList != null && !breedImageList.isEmpty()) {
-            for (int i = 0; i < 3 && i < breedImageList.size(); i++) {
-                BreedImage breedImage = breedImageList.get(i);
+        if (breedImages != null && !breedImages.isEmpty()) {
+            for (int i = 0; i < 3 && i < breedImages.size(); i++) {
+                Breed.BreedImage breedImage = breedImages.get(i);
                 Uri imageUri = Uri.parse(breedImage.getImageLink());
 
 
@@ -135,8 +138,8 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
                 public void onClick(View v) {
 
 
-//                    breedOnClickListener.onClick(breed,breedImageListByBreedName.get(breed.getBreedName()));
-//                   this is wrong! Combine breed & breedImage classes!
+                    breedOnClickListener.onClick(breed);
+
 
                     Log.d("breed detail activity", "clicked!");
 
