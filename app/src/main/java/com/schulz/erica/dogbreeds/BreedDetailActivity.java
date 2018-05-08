@@ -2,11 +2,14 @@ package com.schulz.erica.dogbreeds;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -20,11 +23,13 @@ public class BreedDetailActivity extends AppCompatActivity implements BreedImage
     List<Breed.BreedImage> breedImageList;
     Breed breed;
     BreedDetailRecyclerViewAdapter breedDetailRecyclerViewAdapter;
+    ConstraintLayout constraintDetailLayout;
+    LinearLayout linearDetailLayout;
+    TextView breedName;
+
 
 
     Button back2;
-
-
 
 
 
@@ -33,11 +38,14 @@ public class BreedDetailActivity extends AppCompatActivity implements BreedImage
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breed_detail);
 
+        constraintDetailLayout = findViewById(R.id.constraint_detail_layout);
+        linearDetailLayout = findViewById(R.id.linear_detail_layout);
 
-
+        breedDetailRecyclerView = findViewById(R.id.breed_detail_recycler_view);
 
 
         back2 = (findViewById(R.id.back_button_2));
+        breedName = (findViewById(R.id.breed_name));
 
 
         final Intent backIntent = new Intent(this, BreedListActivity.class);
@@ -48,9 +56,12 @@ public class BreedDetailActivity extends AppCompatActivity implements BreedImage
             }
 
         });
+        breedName.setText(R.string.test);
 
         breedDetailRecyclerView = findViewById(R.id.breed_detail_recycler_view);
         breedDetailRecyclerViewAdapter = new BreedDetailRecyclerViewAdapter(this, breedList, breedImageList);
+
+        this.breedDetailRecyclerView.setAdapter(breedDetailRecyclerViewAdapter);
     }
 
 
@@ -91,7 +102,7 @@ public class BreedDetailActivity extends AppCompatActivity implements BreedImage
     public void breedImageApiTaskCompleted(Breed breed, List<Breed.BreedImage> breedImageList) {
 //        need to give the images to the adapter
 
-//        this.breedDetailRecyclerViewAdapter.injectBreedImages(breed, breedImageList);
+        this.breedDetailRecyclerViewAdapter.injectBreedDetailImages(breed, breedImageList);
 
 
         Log.d("log this", breed + " has " + breedImageList.size() + " images.");

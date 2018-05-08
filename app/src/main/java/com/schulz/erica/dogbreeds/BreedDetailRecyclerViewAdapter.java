@@ -21,6 +21,7 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
     private List<Breed> breedList;
     private List<Breed.BreedImage> breedImages;
     private Breed breed;
+    private String imageLink;
 
 
 
@@ -28,14 +29,18 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
         this.context = context;
         this.breedList = breedList;
-
-
+        this.imageLink = imageLink;
+        this.breed = breed;
 
     }
 
+    public void injectBreedDetailImages(Breed breed, List<Breed.BreedImage> breedImages) {
 
+        breed.addImageForLink(imageLink);
+        int indexOfBreed = this.breedImages.indexOf(breedImages);
+        this.notifyItemChanged(indexOfBreed);
 
-
+    }
 
 
     //************Need to utilize the "breedImageListByBreedName" hashMap to recreate the breedImageList,
@@ -56,6 +61,12 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
     @Override
     public void onBindViewHolder(final BreedDetailRecyclerViewAdapter.CustomViewHolder holder, final int position) {
 
+        Breed breed = breedList.get(position);
+        holder.breed_name.setText(R.string.back);
+//        holder.breed = breed;
+
+
+
 
         List<ImageView> imageViewDetailList = Arrays.asList(holder.photo_detail_1, holder.photo_detail_2, holder.photo_detail_3);
 
@@ -63,7 +74,7 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
 
         if (breedImages != null && !breedImages.isEmpty()) {
-            for (int i = 0; i < breedImages.size(); i++) {
+            for (int i = 0; i < 3 && i < breedImages.size(); i++) {
                 Breed.BreedImage breedImage = breedImages.get(i);
                 Uri imageDetailUri = Uri.parse(breedImage.getImageLink());
 
@@ -95,6 +106,7 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
         TextView breed_name;
         List<ImageView> imageViewDetailList;
+
 
 
         CustomViewHolder(View itemDetailView) {

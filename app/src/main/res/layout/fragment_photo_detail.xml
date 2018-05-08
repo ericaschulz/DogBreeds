@@ -1,54 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:id="@+id/linear_detail_layout">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear_detail_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:id="@+id/item_detail_view">
+    <ImageView
 
-        <TextView
-            android:id="@+id/breed_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_marginTop="1dp"
-            android:textColor="@color/text_color"/>
-
-        <ImageView
-            android:id="@+id/photo_detail_1"
-            android:layout_marginStart="1dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/breed_name"
-            android:padding="2dp"/>
+        android:id="@+id/photo_detail_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:background="@color/colorAccent"
+        android:padding="2dp" />
 
 
-        <ImageView
-            android:id="@+id/photo_detail_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/breed_name"
-            android:layout_marginStart="2dp"
-            android:layout_toEndOf="@+id/photo1"
-            android:padding="2dp" />
+    <ImageView
 
-        <ImageView
-            android:id="@+id/photo_detail_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/breed_name"
-            android:layout_marginStart="2dp"
-            android:layout_toEndOf="@+id/photo2"
-            android:padding="2dp" />
+        android:id="@+id/photo_detail_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:background="@color/colorAccent"
+        android:padding="2dp" />
 
 
-    </RelativeLayout>
+    <ImageView
+
+        android:id="@+id/photo_detail_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:background="@color/colorAccent"
+        android:padding="2dp" />
+
+    <TextView
+        android:id="@+id/breed_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="1dp"
+        android:textColor="@color/text_color"
+        android:textSize="36sp"
+         />
 
 
 </LinearLayout>
