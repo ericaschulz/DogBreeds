@@ -7,9 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by ericaschulz on 2/27/18.
  */
@@ -20,18 +17,9 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
 
 
-    private List<Breed.BreedImage> breedImages = new ArrayList<>();
-
-//    public void setBreedName(String breedName) {
-//
-//        this.breedName = breedName;
-//
-//    }
-
-
     public interface BreedImageApiTaskCallBack {
 
-        void breedImageApiTaskCompleted(Breed breed, List<Breed.BreedImage> breedImages);
+        void breedImageApiTaskCompleted(Breed breed);
 
     }
 
@@ -93,7 +81,7 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
             }
 
         }
-        breedImageApiTaskCallBack.breedImageApiTaskCompleted(breed, breedImages);
+        breedImageApiTaskCallBack.breedImageApiTaskCompleted(breed);
     }
 
 

@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,10 +24,8 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
     private Context context;
     private List<Breed> breedList;
-    private List<Breed.BreedImage> breedImages;
-//    private Map<String, List<Breed>> breedImageListByBreedName;
     private BreedOnClickListener breedOnClickListener;
-    private String imageLink;
+
 
 
     public interface BreedOnClickListener {
@@ -41,16 +38,15 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
         this.context = context;
         this.breedList = breedList;
-        this.breedImages = new ArrayList<>();
         this.breedOnClickListener = breedOnClickListener;
 
 
 
         }
 
-    public void injectBreedImages(Breed breed, List<Breed.BreedImage> breedImages) {
+    public void breedImagesReadyForBreed(Breed breed) {
 
-        breed.addImageForLink(imageLink);
+
         int indexOfCurrentBreed = this.breedList.indexOf(breed);
         this.notifyItemChanged(indexOfCurrentBreed);
 

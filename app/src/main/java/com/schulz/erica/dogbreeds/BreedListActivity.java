@@ -89,10 +89,14 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
                 final Intent detailIntent2 = new Intent(BreedListActivity.this, BreedDetailActivity.class);
 
-//                detailIntent2.putExtra("breed",breed.getBreedName());
-//                detailIntent2.putExtr
+                detailIntent2.putExtra("String",R.string.back);
+
+                Log.d("String!!!!", "it worked");
+
 
                 startActivity(detailIntent2);
+
+
 
             }
         });
@@ -123,15 +127,15 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     }
 
     @Override
-    public void breedImageApiTaskCompleted(Breed breed, List<Breed.BreedImage> breedImages) {
+    public void breedImageApiTaskCompleted(Breed breed) {
         //need to give the images to the adapter
 
 
-        breedRecyclerViewAdapter.injectBreedImages(breed, breedImages);
+        breedRecyclerViewAdapter.breedImagesReadyForBreed(breed);
 
 
 
-        Log.d("log this", breedName + " has " + breedImages.size() + " images.");
+        Log.d("log this", breed + " has images.");
 
     }
 

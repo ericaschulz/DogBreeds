@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -15,7 +14,7 @@ import java.util.List;
 
 //implements BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack
 
-public class BreedDetailActivity extends AppCompatActivity implements BreedImageApiTask.BreedImageApiTaskCallBack {
+public class BreedDetailActivity extends AppCompatActivity {
 
 
     RecyclerView breedDetailRecyclerView;
@@ -26,7 +25,6 @@ public class BreedDetailActivity extends AppCompatActivity implements BreedImage
     ConstraintLayout constraintDetailLayout;
     LinearLayout linearDetailLayout;
     TextView breedName;
-
 
 
     Button back2;
@@ -98,16 +96,18 @@ public class BreedDetailActivity extends AppCompatActivity implements BreedImage
 
 
 
-    @Override
-    public void breedImageApiTaskCompleted(Breed breed, List<Breed.BreedImage> breedImageList) {
-//        need to give the images to the adapter
-
-        this.breedDetailRecyclerViewAdapter.injectBreedDetailImages(breed, breedImageList);
-
-
-        Log.d("log this", breed + " has " + breedImageList.size() + " images.");
-
-    }
+//    @Override
+//
+//
+//    public void breedImageApiTaskCompleted(Breed breed) {
+////        need to give the images to the adapter
+//
+//        this.breedDetailRecyclerViewAdapter.injectBreedDetailImages(breed);
+//
+//
+//        Log.d("log this", breed + " has " + breedImageList.size() + " images.");
+//
+//    }
 
 
 

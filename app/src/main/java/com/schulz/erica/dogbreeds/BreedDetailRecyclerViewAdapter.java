@@ -21,7 +21,7 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
     private List<Breed> breedList;
     private List<Breed.BreedImage> breedImages;
     private Breed breed;
-    private String imageLink;
+
 
 
 
@@ -29,14 +29,14 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
         this.context = context;
         this.breedList = breedList;
-        this.imageLink = imageLink;
+
         this.breed = breed;
 
     }
 
-    public void injectBreedDetailImages(Breed breed, List<Breed.BreedImage> breedImages) {
+    public void injectBreedDetailImages(Breed breed) {
 
-        breed.addImageForLink(imageLink);
+
         int indexOfBreed = this.breedImages.indexOf(breedImages);
         this.notifyItemChanged(indexOfBreed);
 
