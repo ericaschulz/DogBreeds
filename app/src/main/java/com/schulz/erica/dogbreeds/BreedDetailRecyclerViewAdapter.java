@@ -18,7 +18,6 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
     //May not need all of these fields
     private Context context;
-    private List<Breed> breedList;
     private List<Breed.BreedImage> breedImages;
     private Breed breed;
 
@@ -28,26 +27,11 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
     public BreedDetailRecyclerViewAdapter(Context context, List<Breed> breedList, List<Breed.BreedImage> breedImages) {
 
         this.context = context;
-        this.breedList = breedList;
-
+        this.breedImages = breedImages;
         this.breed = breed;
 
     }
 
-    public void injectBreedDetailImages(Breed breed) {
-
-
-        int indexOfBreed = this.breedImages.indexOf(breedImages);
-        this.notifyItemChanged(indexOfBreed);
-
-    }
-
-
-    //************Need to utilize the "breedImageListByBreedName" hashMap to recreate the breedImageList,
-    //************which is the SPECIFIC LIST OF IMAGES BY BREED.
-    //*************The list size changes with the breed name.
-    //*************Create an interface for the Detail Activity/Adapter to interact with?
-    //*************Incorporate it into the OnClick Listener inside the CustomView Holder in BreedListActivity
 
 
     @Override
@@ -61,21 +45,16 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
     @Override
     public void onBindViewHolder(final BreedDetailRecyclerViewAdapter.CustomViewHolder holder, final int position) {
 
-        Breed breed = breedList.get(position);
-        holder.breed_name.setText(R.string.back);
-//        holder.breed = breed;
 
+        Breed.BreedImage breedImage = breedImages.get(position);
 
-
+        holder.breedName.setText(breed.getBreedName());
 
         List<ImageView> imageViewDetailList = Arrays.asList(holder.photo_detail_1, holder.photo_detail_2, holder.photo_detail_3);
 
-
-
-
         if (breedImages != null && !breedImages.isEmpty()) {
             for (int i = 0; i < 3 && i < breedImages.size(); i++) {
-                Breed.BreedImage breedImage = breedImages.get(i);
+                breedImages.get(i);
                 Uri imageDetailUri = Uri.parse(breedImage.getImageLink());
 
 
@@ -94,7 +73,7 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
 
     public int getItemCount() {
-        return (breedList != null ? breedList.size() : 0);
+        return (breedImages != null ? breedImages.size() : 0);
 
     }
 
@@ -104,9 +83,8 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
         ImageView photo_detail_2;
         ImageView photo_detail_3;
 
-        TextView breed_name;
+        TextView breedName;
         List<ImageView> imageViewDetailList;
-
 
 
         CustomViewHolder(View itemDetailView) {
@@ -114,7 +92,7 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
             super(itemDetailView);
 
-            breed_name = itemDetailView.findViewById(R.id.breed_name);
+            breedName = itemDetailView.findViewById(R.id.breed_name);
             photo_detail_1 = itemDetailView.findViewById(R.id.photo_detail_1);
             photo_detail_2 = itemDetailView.findViewById(R.id.photo_detail_2);
             photo_detail_3 = itemDetailView.findViewById(R.id.photo_detail_3);

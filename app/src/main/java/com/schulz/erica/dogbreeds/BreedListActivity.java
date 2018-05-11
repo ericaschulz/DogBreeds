@@ -84,19 +84,11 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
             @Override
             public void onClick(Breed breed) {
 
-//                if breed != null
-
-
                 final Intent detailIntent2 = new Intent(BreedListActivity.this, BreedDetailActivity.class);
 
-                detailIntent2.putExtra("String",R.string.back);
-
-                Log.d("String!!!!", "it worked");
-
+                detailIntent2.putExtra("breedName", breed.getBreedName());
 
                 startActivity(detailIntent2);
-
-
 
             }
         });

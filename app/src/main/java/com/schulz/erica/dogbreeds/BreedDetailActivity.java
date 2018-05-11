@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,13 +20,14 @@ public class BreedDetailActivity extends AppCompatActivity {
 
 
     RecyclerView breedDetailRecyclerView;
-    List<Breed> breedList;
     List<Breed.BreedImage> breedImageList;
-    Breed breed;
+    List<Breed>breedList;
     BreedDetailRecyclerViewAdapter breedDetailRecyclerViewAdapter;
     ConstraintLayout constraintDetailLayout;
+    GridLayout gridLayout;
     LinearLayout linearDetailLayout;
     TextView breedName;
+
 
 
     Button back2;
@@ -37,13 +40,19 @@ public class BreedDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_breed_detail);
 
         constraintDetailLayout = findViewById(R.id.constraint_detail_layout);
-        linearDetailLayout = findViewById(R.id.linear_detail_layout);
+//        gridLayout = findViewById(R.id.grid_layout);
+        linearDetailLayout = findViewById(R.id.linear_detail);
+        breedName = (findViewById(R.id.breed_name));
 
         breedDetailRecyclerView = findViewById(R.id.breed_detail_recycler_view);
+        breedDetailRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+//        this.getIntent().getStringArrayExtra();
+        this.getIntent().getStringExtra(String.valueOf(breedName));
 
         back2 = (findViewById(R.id.back_button_2));
-        breedName = (findViewById(R.id.breed_name));
+//        String
+
 
 
         final Intent backIntent = new Intent(this, BreedListActivity.class);
@@ -54,62 +63,18 @@ public class BreedDetailActivity extends AppCompatActivity {
             }
 
         });
-        breedName.setText(R.string.test);
+
+
 
         breedDetailRecyclerView = findViewById(R.id.breed_detail_recycler_view);
-        breedDetailRecyclerViewAdapter = new BreedDetailRecyclerViewAdapter(this, breedList, breedImageList);
+        breedDetailRecyclerViewAdapter = new BreedDetailRecyclerViewAdapter(this, (breedList), breedImageList);
 
         this.breedDetailRecyclerView.setAdapter(breedDetailRecyclerViewAdapter);
     }
 
-
-
-
-//    @Override
-//    public void breedImageApiTaskCompleted(List<Breed> breedList) {
-//
-//        this.breedDetailRecyclerView.setAdapter(breedDetailRecyclerViewAdapter);
-//
-//        for (Breed breed:breedList) {
-//            String breedName = breed.getBreedName();
-//            Log.d("log this", breedName);
-//
-//
-//            try {
-//
-//                BreedImageApiTask breedImageApiTask = new BreedImageApiTask(breed, this);
-//
-//                breedImageApiTask.execute();
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
-//
-//        Log.d("log this", "");
-//
-//
-//    }
-
-
-
-
-
-//    @Override
-//
-//
-//    public void breedImageApiTaskCompleted(Breed breed) {
-////        need to give the images to the adapter
-//
-//        this.breedDetailRecyclerViewAdapter.injectBreedDetailImages(breed);
-//
-//
-//        Log.d("log this", breed + " has " + breedImageList.size() + " images.");
-//
-//    }
-
-
-
-
 }
+
+
+
+
+
