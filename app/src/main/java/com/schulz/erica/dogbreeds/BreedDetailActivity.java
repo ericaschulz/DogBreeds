@@ -26,7 +26,9 @@ public class BreedDetailActivity extends AppCompatActivity {
     ConstraintLayout constraintDetailLayout;
     GridLayout gridLayout;
     LinearLayout linearDetailLayout;
-    TextView breedName;
+    String breedName;
+    Breed breed;
+    TextView breedNameText;
 
 
 
@@ -40,19 +42,16 @@ public class BreedDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_breed_detail);
 
         constraintDetailLayout = findViewById(R.id.constraint_detail_layout);
-//        gridLayout = findViewById(R.id.grid_layout);
         linearDetailLayout = findViewById(R.id.linear_detail);
-        breedName = (findViewById(R.id.breed_name));
-
+        breedNameText = (findViewById(R.id.breed_name));
         breedDetailRecyclerView = findViewById(R.id.breed_detail_recycler_view);
         breedDetailRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-//        this.getIntent().getStringArrayExtra();
-        this.getIntent().getStringExtra(String.valueOf(breedName));
-
         back2 = (findViewById(R.id.back_button_2));
-//        String
 
+//        Bundle bundle = getIntent().getExtras();
+//        if(bundle !=null)
+//            breedName = bundle.getString("breedName", breed.getBreedName());
+//        breedNameText.setText(breedName);
 
 
         final Intent backIntent = new Intent(this, BreedListActivity.class);
@@ -63,7 +62,6 @@ public class BreedDetailActivity extends AppCompatActivity {
             }
 
         });
-
 
 
         breedDetailRecyclerView = findViewById(R.id.breed_detail_recycler_view);

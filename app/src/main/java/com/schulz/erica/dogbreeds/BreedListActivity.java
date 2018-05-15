@@ -31,6 +31,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
@@ -84,11 +85,11 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
             @Override
             public void onClick(Breed breed) {
 
-                final Intent detailIntent2 = new Intent(BreedListActivity.this, BreedDetailActivity.class);
+                Intent intent = new Intent(BreedListActivity.this, BreedDetailActivity.class);
 
-                detailIntent2.putExtra("breedName", breed.getBreedName());
+                intent.putExtra("breedName", breed.getBreedName());
 
-                startActivity(detailIntent2);
+                startActivity(intent);
 
             }
         });
