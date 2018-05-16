@@ -48,7 +48,7 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
         Breed.BreedImage breedImage = breedImages.get(position);
 
-        holder.breedName.setText(breed.getBreedName());
+        holder.breedNameText.setText(breed.getBreedName());
 
         List<ImageView> imageViewDetailList = Arrays.asList(holder.photo_detail_1, holder.photo_detail_2, holder.photo_detail_3);
 
@@ -83,7 +83,8 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
         ImageView photo_detail_2;
         ImageView photo_detail_3;
 
-        TextView breedName;
+        TextView breedNameText;
+        TextView test;
         List<ImageView> imageViewDetailList;
 
 
@@ -92,7 +93,9 @@ public class BreedDetailRecyclerViewAdapter extends RecyclerView.Adapter<BreedDe
 
             super(itemDetailView);
 
-            breedName = itemDetailView.findViewById(R.id.breed_name);
+
+            test = itemDetailView.findViewById(R.id.test);
+            breedNameText = itemDetailView.findViewById(R.id.breed_name);
             photo_detail_1 = itemDetailView.findViewById(R.id.photo_detail_1);
             photo_detail_2 = itemDetailView.findViewById(R.id.photo_detail_2);
             photo_detail_3 = itemDetailView.findViewById(R.id.photo_detail_3);

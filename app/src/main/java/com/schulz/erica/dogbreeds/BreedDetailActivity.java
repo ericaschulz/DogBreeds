@@ -28,7 +28,7 @@ public class BreedDetailActivity extends AppCompatActivity {
     LinearLayout linearDetailLayout;
     String breedName;
     Breed breed;
-    TextView breedNameText;
+    TextView test;
 
 
 
@@ -43,15 +43,15 @@ public class BreedDetailActivity extends AppCompatActivity {
 
         constraintDetailLayout = findViewById(R.id.constraint_detail_layout);
         linearDetailLayout = findViewById(R.id.linear_detail);
-        breedNameText = (findViewById(R.id.breed_name));
+        test = (findViewById(R.id.test));
         breedDetailRecyclerView = findViewById(R.id.breed_detail_recycler_view);
         breedDetailRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         back2 = (findViewById(R.id.back_button_2));
 
-//        Bundle bundle = getIntent().getExtras();
-//        if(bundle !=null)
-//            breedName = bundle.getString("breedName", breed.getBreedName());
-//        breedNameText.setText(breedName);
+        Bundle bundle = getIntent().getExtras();
+        if(bundle.getString("breedName") !=null)
+            breedName = bundle.getString("breedName");
+        test.setText(breedName);
 
 
         final Intent backIntent = new Intent(this, BreedListActivity.class);
