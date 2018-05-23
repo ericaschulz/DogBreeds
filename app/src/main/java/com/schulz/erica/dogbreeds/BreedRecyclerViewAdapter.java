@@ -40,8 +40,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         this.breedList = breedList;
         this.breedOnClickListener = breedOnClickListener;
 
-
-
         }
 
     public void breedImagesReadyForBreed(Breed breed) {

@@ -46,14 +46,7 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/fragment_photo"
-        android:layout_width="259dp"
-        android:layout_height="100dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="125dp"
-        tools:layout_editor_absoluteY="228dp" />
+
 
 
 </android.support.constraint.ConstraintLayout>

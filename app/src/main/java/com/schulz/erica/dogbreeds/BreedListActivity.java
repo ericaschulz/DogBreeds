@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.schulz.erica.dogbreeds.BreedApiTask.BreedApiTaskCallBack;
@@ -22,12 +23,10 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
     BreedApiTask breedApiTask;
     RecyclerView breedRecyclerView;
-    List<Breed> breedList;
-    List<Breed.BreedImage> breedImages;
-    String breedName;
     BreedRecyclerViewAdapter breedRecyclerViewAdapter;
     ConstraintLayout constraintLayout;
     LinearLayout linearLayout;
+
 
 
 
@@ -88,6 +87,16 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
                 Intent intent = new Intent(BreedListActivity.this, BreedDetailActivity.class);
 
                 intent.putExtra("breedName", breed.getBreedName());
+
+                List<Breed.BreedImage> localBreedImages = breed.getBreedImages();
+                List<String> imageLinks = new ArrayList<>();
+
+                for (Breed.BreedImage breedImage: localBreedImages) {
+                    String imageLink = breedImage.getImageLink();
+                    imageLinks.add(imageLink);
+                }
+                String[] imageLinkArray = imageLinks.toArray(new String[0]);
+                intent.putExtra("imageLinks", imageLinkArray);
 
                 startActivity(intent);
 
