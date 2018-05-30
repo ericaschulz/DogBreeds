@@ -55,6 +55,10 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
         try {
             breedArray = jsonObjectBreeds.getJSONArray("message");
         } catch (JSONException e) {
+
+
+
+
             e.printStackTrace();
         }
 

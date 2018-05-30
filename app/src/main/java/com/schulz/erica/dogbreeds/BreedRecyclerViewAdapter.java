@@ -48,7 +48,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         int indexOfCurrentBreed = this.breedList.indexOf(breed);
         this.notifyItemChanged(indexOfCurrentBreed);
 
-
     }
 
     @Override
@@ -119,10 +118,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             photo3 = itemView.findViewById(R.id.photo3);
 
             imageViewList = Arrays.asList(this.photo1, this.photo2, this.photo3);
-
-
-
-
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
