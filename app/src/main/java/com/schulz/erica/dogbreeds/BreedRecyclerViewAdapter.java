@@ -100,6 +100,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         ImageView photo3;
 
         TextView breed_name;
+        TextView details;
 
         List<ImageView> imageViewList;
 
@@ -113,6 +114,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             super(itemView);
 
             breed_name = itemView.findViewById(R.id.breed_name);
+            details = itemView.findViewById(R.id.details);
             photo1 = itemView.findViewById(R.id.photo1);
             photo2 = itemView.findViewById(R.id.photo2);
             photo3 = itemView.findViewById(R.id.photo3);

@@ -20,6 +20,17 @@
                 android:layout_marginTop="1dp"
                 android:textColor="@color/text_color"/>
 
+            <TextView
+                android:id="@+id/details"
+                android:text="@string/breed_photo_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/text_color"
+                android:layout_below="@+id/photo3"
+                android:textSize="10sp" />
+
+
             <ImageView
                 android:id="@+id/photo1"
                 android:layout_marginStart="1dp"
