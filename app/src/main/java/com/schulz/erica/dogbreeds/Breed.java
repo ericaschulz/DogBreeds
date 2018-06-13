@@ -14,15 +14,15 @@ public class Breed {
     private String breedName;
     private List<BreedImage> breedImages;
 
-
     public Breed() {
         this.breedImages =  new ArrayList<>();
     }
 
-    public void addImageForLink(String imageLink) {
+    public String addImageForLink(String imageLink) {
 
         BreedImage breedImage = new BreedImage(imageLink);
         breedImages.add(breedImage);
+        return imageLink;
     }
 
     public List<BreedImage> getBreedImages() {

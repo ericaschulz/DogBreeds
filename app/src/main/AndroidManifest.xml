@@ -25,12 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
-        <activity android:name=".BreedDetailActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".BreedDetailActivity"></activity>
+        <activity android:name=".BreedSingleImageActivity"></activity>
     </application>
 
 </manifest>

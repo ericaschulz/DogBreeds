@@ -132,9 +132,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     public void breedImageApiTaskCompleted(Breed breed) {
         //need to give the images to the adapter
 
-
         breedRecyclerViewAdapter.breedImagesReadyForBreed(breed);
-
 
 
         Log.d("log this", breed + " has images.");

@@ -3,7 +3,6 @@ package com.schulz.erica.dogbreeds;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
 import java.util.List;
+
+import timber.log.Timber;
 
 /**
  * Created by ericaschulz on 3/12/18.
@@ -114,7 +115,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
             super(itemView);
 
             breed_name = itemView.findViewById(R.id.breed_name);
-            details = itemView.findViewById(R.id.details);
             photo1 = itemView.findViewById(R.id.photo1);
             photo2 = itemView.findViewById(R.id.photo2);
             photo3 = itemView.findViewById(R.id.photo3);
@@ -132,7 +132,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
                     breedOnClickListener.onClick(breed);
 
 
-                    Log.d("breed detail activity", "clicked!");
+                    Timber.tag("breed detail activity").d("clicked!");
 
 
 

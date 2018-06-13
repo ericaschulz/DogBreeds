@@ -28,7 +28,7 @@
                 android:layout_alignParentEnd="true"
                 android:textColor="@color/text_color"
                 android:layout_below="@+id/photo3"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
 
             <ImageView
