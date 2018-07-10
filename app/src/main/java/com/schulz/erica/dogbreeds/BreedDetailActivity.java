@@ -34,6 +34,7 @@ public class BreedDetailActivity extends AppCompatActivity {
     int imageLinkPosition;
     ImageView photo_detail_1;
     Button back2;
+    TextView subBreeds;
 
 
 
@@ -64,6 +65,9 @@ public class BreedDetailActivity extends AppCompatActivity {
         breed.setBreedName(breedName);
 
 
+
+
+
         if (imageLinks.length > 0)
 
         {
@@ -74,10 +78,6 @@ public class BreedDetailActivity extends AppCompatActivity {
                 singleImageLink = breed.addImageForLink(imageLink);
 
             }
-
-
-
-
 
         }
 

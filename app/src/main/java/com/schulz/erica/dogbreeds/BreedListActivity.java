@@ -28,9 +28,6 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     LinearLayout linearLayout;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
@@ -72,6 +69,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
         this.breedApiTask = new BreedApiTask(this);
         this.breedApiTask.execute();
+
     }
 
 

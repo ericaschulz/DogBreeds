@@ -111,7 +111,6 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         CustomViewHolder(View itemView) {
 
 
-
             super(itemView);
 
             breed_name = itemView.findViewById(R.id.breed_name);

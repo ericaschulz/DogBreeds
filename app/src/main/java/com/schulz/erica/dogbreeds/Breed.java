@@ -13,9 +13,10 @@ public class Breed {
     private String message;
     private String breedName;
     private List<BreedImage> breedImages;
+    private List<Breed> subBreeds;
 
     public Breed() {
-        this.breedImages =  new ArrayList<>();
+        this.breedImages = new ArrayList<>();
     }
 
     public String addImageForLink(String imageLink) {
@@ -28,6 +29,11 @@ public class Breed {
     public List<BreedImage> getBreedImages() {
         return breedImages;
     }
+
+    public  List<Breed> getSubBreeds() {
+        return subBreeds;
+    }
+
 
     public String getBreedName() {
 
@@ -68,9 +74,14 @@ public class Breed {
 
         }
 
-        public String getBreedImageName() {return breedImageName;}
 
-        public void setBreedImageName(String breedImageName) {this.breedImageName = breedImageName;}
+        public String getBreedImageName() {
+            return breedImageName;
+        }
+
+        public void setBreedImageName(String breedImageName) {
+            this.breedImageName = breedImageName;
+        }
 
         public String getImageMessage() {
             return imageMessage;
@@ -84,6 +95,7 @@ public class Breed {
             return imageLink;
         }
 
+
         public void setImageLink(String imageLink) {
             this.imageLink = imageLink;
         }
@@ -93,11 +105,15 @@ public class Breed {
         public String toString() {
             return imageLink;
         }
-
     }
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
 

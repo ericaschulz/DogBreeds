@@ -17,5 +17,7 @@
     <string name="breed_detail_activity">This is the Breed Detail Activity</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="any_damn_dog_pic_TEST">https://images.dog.ceo/breeds/affenpinscher/n02110627_9822.jpg</string>
+    <string name="subbreeds">Click to see sub breeds</string>
+
 
 </resources>
