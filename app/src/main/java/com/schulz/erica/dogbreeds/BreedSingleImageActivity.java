@@ -29,6 +29,7 @@ public class BreedSingleImageActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
 
         final Intent subBreedIntent = new Intent(BreedSingleImageActivity.this, SubBreedActivity.class);
+        subBreedIntent.putExtra("breedName", "hound");
 
         button.setOnClickListener(new View.OnClickListener() {
 

@@ -13,9 +13,13 @@ import java.util.List;
 
 public class SubBreedsApiTask extends AsyncTask<Void, Void, JSONObject> {
 
-    private Breed breed;
+    Breed breed;
 
     private List<Breed> subBreeds = new ArrayList<>();
+
+    public SubBreedsApiTask(Breed breed) {
+        this.breed = breed;
+    }
 
     @Override
     protected JSONObject doInBackground(Void... voids) {
@@ -77,7 +81,6 @@ public class SubBreedsApiTask extends AsyncTask<Void, Void, JSONObject> {
             }
         }
     }
-
 
 
     public void setSubBreeds(List<Breed> subBreeds) {

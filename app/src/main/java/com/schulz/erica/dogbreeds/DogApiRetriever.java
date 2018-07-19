@@ -16,7 +16,6 @@ public class DogApiRetriever {
 
     private static Response response;
 
-
     public static JSONObject getBreeds() {
 
         try {
