@@ -16,10 +16,14 @@ public class SubBreedsApiTask extends AsyncTask<Void, Void, JSONObject> {
     Breed breed;
 
     private List<Breed> subBreeds = new ArrayList<>();
+    private BreedApiTaskCallBack breedApiTaskCallBack;
 
-    public SubBreedsApiTask(Breed breed) {
+    public SubBreedsApiTask(Breed breed, BreedApiTaskCallBack breedApiTaskCallBack) {
         this.breed = breed;
+        this.breedApiTaskCallBack = breedApiTaskCallBack;
     }
+
+
 
     @Override
     protected JSONObject doInBackground(Void... voids) {
@@ -78,8 +82,12 @@ public class SubBreedsApiTask extends AsyncTask<Void, Void, JSONObject> {
                 }
 
 
+
+
             }
         }
+
+        breedApiTaskCallBack.breedApiTaskCompleted(subBreeds);
     }
 
 

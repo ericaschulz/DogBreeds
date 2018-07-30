@@ -19,8 +19,6 @@ public class BreedSingleImageActivity extends AppCompatActivity {
 
     Breed subBreeds;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +39,6 @@ public class BreedSingleImageActivity extends AppCompatActivity {
                 startActivity(subBreedIntent);
             }
         });
-
-
-
-
 
         photoSingle = findViewById(R.id.photo_single);
 

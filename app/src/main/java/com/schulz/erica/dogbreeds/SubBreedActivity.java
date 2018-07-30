@@ -2,8 +2,11 @@ package com.schulz.erica.dogbreeds;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
-public class SubBreedActivity extends AppCompatActivity {
+import java.util.List;
+
+public class SubBreedActivity extends AppCompatActivity implements BreedApiTaskCallBack{
 
     SubBreedRecyclerViewAdapter subBreedRecyclerViewAdapter;
     SubBreedsApiTask subBreedsApiTask;
@@ -28,7 +31,7 @@ public class SubBreedActivity extends AppCompatActivity {
             breedName = bundle.getString("breedName");
             breed = new Breed();
             breed.setBreedName(breedName);
-            subBreedsApiTask = new SubBreedsApiTask(breed);
+            subBreedsApiTask = new SubBreedsApiTask(breed, this);
 
             subBreedsApiTask.execute();
         } else {
@@ -37,7 +40,12 @@ public class SubBreedActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public void breedApiTaskCompleted(List<Breed> breedList) {
+        Log.d("yo","here");
     }
+}
 
 
 

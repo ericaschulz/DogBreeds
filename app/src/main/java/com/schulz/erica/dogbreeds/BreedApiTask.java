@@ -19,13 +19,6 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
     private List<Breed> breedList = new ArrayList<>();
 
 
-    public interface BreedApiTaskCallBack {
-
-        void breedApiTaskCompleted(List<Breed> breedList);
-
-
-
-    }
 
     private BreedApiTaskCallBack breedApiTaskCallBack;
 

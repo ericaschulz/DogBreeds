@@ -16,8 +16,6 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.schulz.erica.dogbreeds.BreedApiTask.BreedApiTaskCallBack;
-
 public class BreedListActivity extends AppCompatActivity implements BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack {
 
 
@@ -71,6 +69,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         this.breedApiTask.execute();
 
     }
+
 
 
     @Override
