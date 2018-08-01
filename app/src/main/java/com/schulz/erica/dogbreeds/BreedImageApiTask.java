@@ -15,8 +15,6 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
     private Breed breed;
 
-
-
     public interface BreedImageApiTaskCallBack {
 
         void breedImageApiTaskCompleted(Breed breed);

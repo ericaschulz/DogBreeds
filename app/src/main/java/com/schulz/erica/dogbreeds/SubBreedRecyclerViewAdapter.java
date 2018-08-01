@@ -16,6 +16,8 @@ public class SubBreedRecyclerViewAdapter extends RecyclerView.Adapter<SubBreedRe
 
     private Context context;
     private List<Breed> subBreeds;
+    private BreedRecyclerViewAdapter.BreedOnClickListener breedOnClickListener;
+
 
 
     @Override

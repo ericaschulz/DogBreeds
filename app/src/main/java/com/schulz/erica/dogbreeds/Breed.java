@@ -13,7 +13,9 @@ public class Breed {
     private String message;
     private String breedName;
     private List<BreedImage> breedImages;
-    private List<Breed> subBreeds;
+    private String subBreedName;
+    private List<Breed> subBreedNames;
+
 
     public Breed() {
         this.breedImages = new ArrayList<>();
@@ -30,10 +32,17 @@ public class Breed {
         return breedImages;
     }
 
-    public  List<Breed> getSubBreeds() {
-        return subBreeds;
+    public  List<Breed> getSubBreedNames() {
+        return subBreedNames;
     }
 
+    public String getSubBreedName() {
+        return subBreedName;
+    }
+
+    public void setSubBreedName(String subBreedName) {
+        this.subBreedName = subBreedName;
+    }
 
     public String getBreedName() {
 

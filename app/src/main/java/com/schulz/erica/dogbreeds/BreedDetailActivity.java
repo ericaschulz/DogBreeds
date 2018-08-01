@@ -33,8 +33,8 @@ public class BreedDetailActivity extends AppCompatActivity {
     String singleImageLink;
     int imageLinkPosition;
     ImageView photo_detail_1;
-    Button back2;
-    TextView subBreeds;
+    Button subBreedButton;
+
 
 
 
@@ -46,7 +46,7 @@ public class BreedDetailActivity extends AppCompatActivity {
         constraintDetailLayout = findViewById(R.id.constraint_detail_layout);
         breedNameText = (findViewById(R.id.breed_name));
         breedDetailRecyclerView = findViewById(R.id.breed_detail_recycler_view);
-        back2 = (findViewById(R.id.back_button_2));
+        subBreedButton = (findViewById(R.id.sub_breeds_button));
 
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
@@ -65,9 +65,6 @@ public class BreedDetailActivity extends AppCompatActivity {
         breed.setBreedName(breedName);
 
 
-
-
-
         if (imageLinks.length > 0)
 
         {
@@ -76,10 +73,24 @@ public class BreedDetailActivity extends AppCompatActivity {
 
                 imageLink = imageLinks[i];
                 singleImageLink = breed.addImageForLink(imageLink);
-
             }
 
         }
+
+        final Intent subBreedIntent = new Intent(this, SubBreedActivity.class);
+        subBreedIntent.putExtra("breedName", breedName);
+
+
+        subBreedButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+
+                startActivity(subBreedIntent);
+
+            }
+        });
 
         breedNameText.setText(breedName + " has " + imageLinks.length + " images.");
 
@@ -114,19 +125,7 @@ public class BreedDetailActivity extends AppCompatActivity {
         });
 
 
-        final Intent backIntent = new Intent(this, BreedListActivity.class);
 
-
-        back2.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-
-                startActivity(backIntent);
-
-            }
-        });
 
         breedDetailRecyclerView.setAdapter(breedDetailRecyclerViewAdapter);
 

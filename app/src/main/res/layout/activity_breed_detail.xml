@@ -10,11 +10,13 @@
 
 
     <Button
-        android:id="@+id/back_button_2"
+        android:id="@+id/sub_breeds_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="@color/app_background"
-        android:text="@string/back"
+        android:text="@string/subbreeds"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +29,7 @@
         android:layout_marginTop="16dp"
         android:textColor="@color/text_color"
         android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/back_button_2"
+        app:layout_constraintEnd_toStartOf="@+id/sub_breeds_button"
         app:layout_constraintHorizontal_bias="0.195"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

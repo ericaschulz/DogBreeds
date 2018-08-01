@@ -67,6 +67,23 @@ public class DogApiRetriever {
         }
         return null;
     }
+
+    public static JSONObject getSubBreedImages(String breedName, String subBreedName) {
+
+        try {
+            OkHttpClient client = new OkHttpClient();
+            String SubBreeds_url = String.format("https://dog.ceo/api/breed/%s/%s/images", breedName, subBreedName);
+            Request request = new Request.Builder()
+                    .url(SubBreeds_url).build();
+            response = client.newCall(request).execute();
+            return new JSONObject(response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
 
 
