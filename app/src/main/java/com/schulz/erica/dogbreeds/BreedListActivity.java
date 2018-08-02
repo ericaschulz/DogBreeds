@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import org.json.JSONException;
@@ -32,7 +30,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         this.setContentView(R.layout.activity_breed_list);
         this.startBreedAsyncRequest();
 
-        Button refresh = findViewById(R.id.refresh);
+//        Button refresh = findViewById(R.id.refresh);
 
         constraintLayout = findViewById(R.id.constraint_layout);
         linearLayout = findViewById(R.id.linear_layout);
@@ -41,25 +39,25 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         breedRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
 
-        final Intent mainIntent = new Intent(BreedListActivity.this, MainActivity.class);
-
-        Button back = findViewById(R.id.back_button);
-        back.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                startActivity(mainIntent);
-            }
-        });
-
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startBreedAsyncRequest();
-            }
-        });
+//        final Intent mainIntent = new Intent(BreedListActivity.this, MainActivity.class);
+//
+//        Button back = findViewById(R.id.back_button);
+//        back.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//
+//                startActivity(mainIntent);
+//            }
+//        });
+//
+//        refresh.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                startBreedAsyncRequest();
+//            }
+//        });
 
     }
 

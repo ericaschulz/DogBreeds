@@ -22,15 +22,7 @@
             android:layout_marginTop="1dp"
             android:textColor="@color/text_color"/>
 
-        <TextView
-            android:id="@+id/details"
-            android:text="@string/breed_photo_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/text_color"
-            android:layout_below="@+id/photo3sub"
-            android:textSize="12sp" />
+
 
 
         <ImageView
@@ -43,23 +35,7 @@
             android:padding="2dp"/>
 
 
-        <ImageView
-            android:id="@+id/photo2sub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/sub_breed_name"
-            android:layout_marginStart="2dp"
-            android:layout_toEndOf="@+id/photo1sub"
-            android:padding="2dp" />
 
-        <ImageView
-            android:id="@+id/photo3sub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/sub_breed_name"
-            android:layout_marginStart="2dp"
-            android:layout_toEndOf="@+id/photo2sub"
-            android:padding="2dp" />
 
 
     </RelativeLayout>

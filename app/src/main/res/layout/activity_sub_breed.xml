@@ -7,12 +7,12 @@
     android:background="@color/app_background"
     tools:context=".SubBreedActivity">
 
-    <TextView
-        android:id="@+id/sub_breeds_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_color"
-        android:textSize="16sp"/>
+    <!--<TextView-->
+        <!--android:id="@+id/sub_breeds_text"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="@color/text_color"-->
+        <!--android:textSize="16sp"/>-->
 
 
 

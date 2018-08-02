@@ -22,18 +22,13 @@
         app:layout_constraintTop_toBottomOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/refresh"
+
+    <TextView
+        android:id="@+id/sub_breeds_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/app_background"
-        android:text="@string/refresh"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_button"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="0dp"/>
+        android:textColor="@color/text_color"
+        android:textSize="16sp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/breed_recycler_view"
