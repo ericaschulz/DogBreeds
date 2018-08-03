@@ -1,5 +1,6 @@
 package com.schulz.erica.dogbreeds;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,11 +22,9 @@ public class SubBreedActivity extends AppCompatActivity implements BreedApiTaskC
 
 
     SubBreedsApiTask subBreedsApiTask;
-    SubBreedImageApiTask subBreedImageApiTask;
     RecyclerView breedRecyclerView;
     BreedRecyclerViewAdapter breedRecyclerViewAdapter;
     Breed breed;
-    String subBreedName;
     TextView subBreedsText;
     ConstraintLayout constraintLayout;
     LinearLayout linearLayout;
@@ -52,12 +52,11 @@ public class SubBreedActivity extends AppCompatActivity implements BreedApiTaskC
             breed = new Breed();
             breed.setBreedName(breedName);
 
-
             subBreedsApiTask = new SubBreedsApiTask(breed, this);
             subBreedsApiTask.execute();
 
 
-            breed.setSubBreedName(subBreedName);
+
 
 
         } else {
@@ -65,56 +64,93 @@ public class SubBreedActivity extends AppCompatActivity implements BreedApiTaskC
 
         }
 
-
     }
 
     @Override
-    public void breedApiTaskCompleted(List<Breed> breedList) {
-        //Here, "breedList" is actually the list of subBreeds//
+    public void breedApiTaskCompleted(List<Breed> subBreedList) {
+
 
         Log.d("yo", "here");
 
-        subBreedsText.setText("The " + breed + " breed includes " + breedList.size() + " subbreeds.");
+        subBreedsText.setText("The " + breed + " breed includes " + subBreedList.size() + " subbreeds.");
 
         //Set recyclerViewAdapter to present the list of subBreedImages//
 
 
-        breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList, new BreedRecyclerViewAdapter.BreedOnClickListener() {
+        this.breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, subBreedList, new BreedRecyclerViewAdapter.BreedOnClickListener() {
+
+
             @Override
-            public void onClick(Breed breed) {
+            public void onClick(Breed subBreed) {
+
+                Intent subBreedDetailIntent = new Intent(SubBreedActivity.this, SubBreedDetailActivity.class);
+
+                subBreedDetailIntent.putExtra("subBreedName", subBreed.getBreedName());
+
+                List<Breed.BreedImage> localBreedImages = subBreed.getBreedImages();
+                List<String> imageLinks = new ArrayList<>();
+
+                for (Breed.BreedImage breedImage: localBreedImages) {
+                    String imageLink = breedImage.getImageLink();
+                    imageLinks.add(imageLink);
+                }
+                String[] imageLinkArray = imageLinks.toArray(new String[0]);
+                subBreedDetailIntent.putExtra("imageLinks", imageLinkArray);
+
+                startActivity(subBreedDetailIntent);
+
 
             }
         });
 
-        for (Breed breed : breedList) {
-            String breedName = breed.getBreedName();
-            Log.d("log this", breedName);
+        this.breedRecyclerView.setAdapter(this.breedRecyclerViewAdapter);
+
+//ITERATE OVER SUBBREEDS LIST
+
+        for (Breed subBreed : subBreedList) {
+            String subBreedName = subBreed.getBreedName();
+
 
             try {
-                subBreedImageApiTask = new SubBreedImageApiTask(breed, this);
+
+                SubBreedImageApiTask subBreedImageApiTask = new SubBreedImageApiTask(breed, subBreed, this);
+
+                subBreedImageApiTask.execute();
+
             } catch (JSONException e) {
+
                 e.printStackTrace();
+
             }
-            subBreedImageApiTask.execute();
-
-
-            this.breedRecyclerView.setAdapter(breedRecyclerViewAdapter);
+            Log.d("log this", subBreedName);
 
         }
+    }
+
+
+    @Override
+    public void subBreedImageApiTaskCompleted(Breed breed, Breed subBreed ) {
+
+
+        this.breedRecyclerViewAdapter.breedImagesReadyForBreed(subBreed);
 
 
 
-    }@Override
-    public void subBreedImageApiTaskCompleted (Breed breed){
-
-
-        breedRecyclerViewAdapter.breedImagesReadyForBreed(breed);
 
 
         Log.d("log this", breed + " has images.");
 
     }
-}
+
+
+
+    }
+
+
+
+
+
+
 
 
 
