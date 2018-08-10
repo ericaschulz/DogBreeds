@@ -72,9 +72,9 @@ public class DogApiRetriever {
 
         try {
             OkHttpClient client = new OkHttpClient();
-            String SubBreeds_url = String.format("https://dog.ceo/api/breed/%s/%s/images", breedName, subBreedName);
+            String SubBreedImages_url = String.format("https://dog.ceo/api/breed/%s/%s/images", breedName, subBreedName);
             Request request = new Request.Builder()
-                    .url(SubBreeds_url).build();
+                    .url(SubBreedImages_url).build();
             response = client.newCall(request).execute();
             return new JSONObject(response.body().string());
         } catch (IOException e) {
@@ -91,6 +91,8 @@ public class DogApiRetriever {
 
 
 
+
+//"https://dog.ceo/api/%s/%s/%s/%s"
 
 
 
