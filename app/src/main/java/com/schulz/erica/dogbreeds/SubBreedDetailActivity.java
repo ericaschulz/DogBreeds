@@ -1,6 +1,21 @@
 package com.schulz.erica.dogbreeds;
 
-public class SubBreedDetailActivity {
+import android.support.v7.app.AppCompatActivity;
+
+public class SubBreedDetailActivity extends AppCompatActivity {
+
+//    Breed breed;
+//    String breedName;
+//    String subBreedName;
+//
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_breed_detail);
+//
+//        DogApiRetriever.getEverything(breed.getBreedName(), breed.getSubBreedName());
+
 
 
 //    RecyclerView breedDetailRecyclerView;
@@ -66,4 +81,5 @@ public class SubBreedDetailActivity {
 //
 //    }
 //}
-}
+    }
+

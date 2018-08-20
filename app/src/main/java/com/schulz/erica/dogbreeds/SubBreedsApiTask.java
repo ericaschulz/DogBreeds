@@ -39,8 +39,6 @@ public class SubBreedsApiTask extends AsyncTask<Void, Void, JSONObject> {
         super.onPostExecute(jsonObjectBreeds);
 
 
-
-
         JSONArray subBreedArray = null;
 
 
@@ -82,8 +80,6 @@ public class SubBreedsApiTask extends AsyncTask<Void, Void, JSONObject> {
 
 
                 }
-
-
 
 
             }

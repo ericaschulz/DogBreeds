@@ -12,6 +12,7 @@ public class Breed {
 
     private String message;
     private String breedName;
+    private String subBreedName;
     private List<BreedImage> breedImages;
 
 
@@ -43,9 +44,18 @@ public class Breed {
 
         return breedName;
     }
+//    public String getSubBreedName {
+//
+//        return subBreedName;}
+
 
     public void setBreedName(String breedName) {
         this.breedName = breedName;
+    }
+
+    public void setSubBreedName(String subBreedName) {
+
+        this.subBreedName = subBreedName;
     }
 
     public String getMessage() {
@@ -62,6 +72,7 @@ public class Breed {
 
         return breedName;
     }
+
 
     public class BreedImage {
 
@@ -84,6 +95,7 @@ public class Breed {
         }
 
         public void setBreedImageName(String breedImageName) {
+            
             this.breedImageName = breedImageName;
         }
 
