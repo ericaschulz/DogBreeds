@@ -21,7 +21,7 @@ import java.util.List;
 public class SubBreedActivity extends AppCompatActivity implements BreedApiTaskCallBack, SubBreedImageApiTask.SubBreedImageApiTaskCallBack {
 
 
-    SubBreedsApiTask subBreedsApiTask;
+    BreedApiTask subBreedsApiTask;
     RecyclerView breedRecyclerView;
     BreedRecyclerViewAdapter breedRecyclerViewAdapter;
     Breed breed;
@@ -52,7 +52,7 @@ public class SubBreedActivity extends AppCompatActivity implements BreedApiTaskC
             breed = new Breed();
             breed.setBreedName(breedName);
 
-            subBreedsApiTask = new SubBreedsApiTask(breed, this);
+            subBreedsApiTask = new BreedApiTask(breedName, this);
             subBreedsApiTask.execute();
 
 

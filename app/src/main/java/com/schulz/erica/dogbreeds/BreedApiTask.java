@@ -17,19 +17,37 @@ import java.util.List;
 public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
 
     private List<Breed> breedList = new ArrayList<>();
+    private String breedName;
 
     private BreedApiTaskCallBack breedApiTaskCallBack;
 
-    public BreedApiTask(BreedApiTaskCallBack breedApiTaskCallBack){
+    public BreedApiTask(String breedName,BreedApiTaskCallBack breedApiTaskCallBack){
+        super();
         this.breedApiTaskCallBack = breedApiTaskCallBack;
+        this.breedName = breedName;
 
+    }
+    public BreedApiTask(BreedApiTaskCallBack breedApiTaskCallBack) {
+        this(null, breedApiTaskCallBack);
     }
 
 
     @Override
     protected JSONObject doInBackground(Void... voids) {
 
-        return DogApiRetriever.getBreeds();
+
+
+
+        if (this.breedName != null) {
+
+            return DogApiRetriever.getSubBreeds(this.breedName);
+
+        } else {
+
+            return DogApiRetriever.getBreeds();
+
+        }
+
 
     }
 
@@ -47,7 +65,6 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
         try {
             breedArray = jsonObjectBreeds.getJSONArray("message");
         } catch (JSONException e) {
-
 
 
 
