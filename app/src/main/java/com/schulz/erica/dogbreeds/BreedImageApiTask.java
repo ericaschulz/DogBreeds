@@ -14,29 +14,42 @@ import org.json.JSONObject;
 public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
     private Breed breed;
+    private Breed subBreed;
+
 
     public interface BreedImageApiTaskCallBack {
 
-        void breedImageApiTaskCompleted(Breed breed);
+        void breedImageApiTaskCompleted(Breed breed, Breed subBreed);
 
     }
 
     private BreedImageApiTaskCallBack breedImageApiTaskCallBack;
 
-    public BreedImageApiTask(Breed breed, BreedImageApiTaskCallBack breedImageApiTaskCallBack) throws JSONException {
+    public BreedImageApiTask(Breed breed, Breed subBreed, BreedImageApiTaskCallBack breedImageApiTaskCallBack) throws JSONException {
 
+        super();
         this.breed = breed;
+        this.subBreed = subBreed;
         this.breedImageApiTaskCallBack = breedImageApiTaskCallBack;
 
     }
+
+
+
+
     @Override
-    protected JSONObject doInBackground(Void...voids) {
+    protected JSONObject doInBackground(Void... voids) {
 
 
-        return DogApiRetriever.getBreedImage(breed.getBreedName());
+        if (subBreed != null) {
 
+            return DogApiRetriever.getSubBreedImages(breed.getBreedName(), subBreed.getBreedName());
+
+        } else {
+
+            return DogApiRetriever.getBreedImage(breed.getBreedName());
+        }
     }
-    
     
     @Override
 
@@ -63,12 +76,23 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
 
                         String imageLink = breedImageArray.getString(i);
-                        breed.addImageForLink(imageLink);
 
-                        Log.d("", "here");
+                      if (subBreed != null) {
 
 
-                    } catch (Exception e) {
+                          this.subBreed.addImageForLink(imageLink);
+
+
+                          Log.d("", "here");
+
+                      } else {
+
+                          this.breed.addImageForLink(imageLink);
+                      }
+
+                          }
+
+                     catch (Exception e) {
                         e.printStackTrace();
 
 
@@ -79,7 +103,7 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
             }
 
         }
-        breedImageApiTaskCallBack.breedImageApiTaskCompleted(breed);
+        breedImageApiTaskCallBack.breedImageApiTaskCompleted(breed, subBreed);
     }
 
 

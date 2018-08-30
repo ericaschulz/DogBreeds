@@ -27,6 +27,7 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
         this.breedName = breedName;
 
     }
+
     public BreedApiTask(BreedApiTaskCallBack breedApiTaskCallBack) {
         this(null, breedApiTaskCallBack);
     }
@@ -34,9 +35,6 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
 
     @Override
     protected JSONObject doInBackground(Void... voids) {
-
-
-
 
         if (this.breedName != null) {
 
@@ -47,7 +45,6 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
             return DogApiRetriever.getBreeds();
 
         }
-
 
     }
 
@@ -61,12 +58,10 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
 
         JSONArray breedArray = null;
 
-
         try {
             breedArray = jsonObjectBreeds.getJSONArray("message");
+
         } catch (JSONException e) {
-
-
 
             e.printStackTrace();
         }
@@ -109,8 +104,6 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
     public void setBreedList(List<Breed> breedList) {
         this.breedList = breedList;
     }
-
-
 
 
 }

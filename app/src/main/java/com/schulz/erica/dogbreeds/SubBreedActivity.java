@@ -18,10 +18,11 @@ import java.util.List;
 
 
 
-public class SubBreedActivity extends AppCompatActivity implements BreedApiTaskCallBack, SubBreedImageApiTask.SubBreedImageApiTaskCallBack {
+public class SubBreedActivity extends AppCompatActivity implements BreedApiTaskCallBack, BreedImageApiTask.BreedImageApiTaskCallBack {
 
 
     BreedApiTask subBreedsApiTask;
+    BreedImageApiTask subBreedImageApiTask;
     RecyclerView breedRecyclerView;
     BreedRecyclerViewAdapter breedRecyclerViewAdapter;
     Breed breed;
@@ -81,7 +82,7 @@ public class SubBreedActivity extends AppCompatActivity implements BreedApiTaskC
 
 
             @Override
-            public void onClick(Breed subBreed) {
+            public void onClick(Breed breed, Breed subBreed ) {
 
                 Intent subBreedDetailIntent = new Intent(SubBreedActivity.this, SubBreedDetailActivity.class);
 
@@ -90,7 +91,7 @@ public class SubBreedActivity extends AppCompatActivity implements BreedApiTaskC
                 List<Breed.BreedImage> localBreedImages = subBreed.getBreedImages();
                 List<String> imageLinks = new ArrayList<>();
 
-                for (Breed.BreedImage breedImage: localBreedImages) {
+                for (Breed.BreedImage breedImage : localBreedImages) {
                     String imageLink = breedImage.getImageLink();
                     imageLinks.add(imageLink);
                 }
@@ -113,7 +114,7 @@ public class SubBreedActivity extends AppCompatActivity implements BreedApiTaskC
 
             try {
 
-                SubBreedImageApiTask subBreedImageApiTask = new SubBreedImageApiTask(breed, subBreed, this);
+                BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(breed, subBreed, this);
 
                 subBreedImageApiTask.execute();
 
@@ -129,7 +130,7 @@ public class SubBreedActivity extends AppCompatActivity implements BreedApiTaskC
 
 
     @Override
-    public void subBreedImageApiTaskCompleted(Breed breed, Breed subBreed ) {
+    public void breedImageApiTaskCompleted(Breed breed, Breed subBreed ) {
 
 
         this.breedRecyclerViewAdapter.breedImagesReadyForBreed(subBreed);

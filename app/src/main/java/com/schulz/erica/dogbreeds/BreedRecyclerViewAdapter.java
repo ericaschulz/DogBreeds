@@ -31,7 +31,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
     public interface BreedOnClickListener {
 
-        void onClick(Breed breed);
+        void onClick(Breed breed, Breed subBreed);
 
     }
 
@@ -106,6 +106,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
         List<ImageView> imageViewList;
 
         Breed breed;
+        Breed subBreed;
 
 
         CustomViewHolder(View itemView) {
@@ -128,7 +129,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
                 public void onClick(View v) {
 
 
-                    breedOnClickListener.onClick(breed);
+                    breedOnClickListener.onClick(breed, subBreed);
 
 
                     Timber.tag("breed detail activity").d("clicked!");

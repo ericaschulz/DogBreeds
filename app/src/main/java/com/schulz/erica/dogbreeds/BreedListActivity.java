@@ -55,8 +55,9 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
         breedRecyclerView = findViewById(R.id.breed_recycler_view);
         breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList, new BreedRecyclerViewAdapter.BreedOnClickListener() {
+
             @Override
-            public void onClick(Breed breed) {
+            public void onClick(Breed breed, Breed subBreed) {
 
                 Intent intent = new Intent(BreedListActivity.this, BreedDetailActivity.class);
 
@@ -88,7 +89,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
             try {
 
-                BreedImageApiTask breedImageApiTask = new BreedImageApiTask(breed, this);
+                BreedImageApiTask breedImageApiTask = new BreedImageApiTask(breed, null,this);
 
                 breedImageApiTask.execute();
 
@@ -103,7 +104,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     }
 
     @Override
-    public void breedImageApiTaskCompleted(Breed breed) {
+    public void breedImageApiTaskCompleted(Breed breed, Breed subBreed) {
         //need to give the images to the adapter
 
         breedRecyclerViewAdapter.breedImagesReadyForBreed(breed);
