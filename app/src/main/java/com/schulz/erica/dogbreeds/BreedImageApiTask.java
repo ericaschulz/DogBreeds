@@ -17,12 +17,6 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
     private Breed subBreed;
 
 
-    public interface BreedImageApiTaskCallBack {
-
-        void breedImageApiTaskCompleted(Breed breed, Breed subBreed);
-
-    }
-
     private BreedImageApiTaskCallBack breedImageApiTaskCallBack;
 
     public BreedImageApiTask(Breed breed, Breed subBreed, BreedImageApiTaskCallBack breedImageApiTaskCallBack) throws JSONException {
@@ -33,8 +27,6 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
         this.breedImageApiTaskCallBack = breedImageApiTaskCallBack;
 
     }
-
-
 
 
     @Override

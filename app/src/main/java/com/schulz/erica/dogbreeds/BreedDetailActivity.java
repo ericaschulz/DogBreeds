@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import timber.log.Timber;
 
 
@@ -20,8 +18,6 @@ public class BreedDetailActivity extends AppCompatActivity {
 
 
     RecyclerView breedDetailRecyclerView;
-    Breed.BreedImage breedImage;
-    List<Breed.BreedImage> breedImages;
     BreedDetailRecyclerViewAdapter breedDetailRecyclerViewAdapter;
     ConstraintLayout constraintDetailLayout;
     GridLayoutManager gridLayoutManager;
@@ -31,7 +27,6 @@ public class BreedDetailActivity extends AppCompatActivity {
     TextView breedNameText;
     String imageLink;
     String singleImageLink;
-    int imageLinkPosition;
     ImageView photo_detail_1;
     Button subBreedButton;
 
@@ -77,12 +72,13 @@ public class BreedDetailActivity extends AppCompatActivity {
 
         }
 
-        final Intent subBreedIntent = new Intent(this, SubBreedActivity.class);
+
+
+        final Intent subBreedIntent = new Intent(this, BreedListActivity.class);
         subBreedIntent.putExtra("breedName", breedName);
 
-
-
         subBreedButton.setOnClickListener(new View.OnClickListener() {
+
 
             @Override
             public void onClick(View view) {
@@ -107,23 +103,24 @@ public class BreedDetailActivity extends AppCompatActivity {
 
                  Breed.BreedImage breedImage = breed.getBreedImages().get(position);
 
+
                  singleImageLink = breedImage.getImageLink();
 
-                final Intent singleImageIntent = new Intent(BreedDetailActivity.this, BreedSingleImageActivity.class);
 
-                singleImageIntent.putExtra("singleImageLink", singleImageLink);
+                 final Intent singleImageIntent = new Intent(BreedDetailActivity.this, BreedSingleImageActivity.class);
 
-
-                startActivity(singleImageIntent);
+                 singleImageIntent.putExtra("singleImageLink", singleImageLink);
 
 
+                 startActivity(singleImageIntent);
 
 
-                Timber.tag("singleImage activity").d("clicked!");
+
+
+                 Timber.tag("singleImage activity").d("clicked!");
 
 
             }
-
         });
 
 
