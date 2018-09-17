@@ -31,7 +31,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
     public interface BreedOnClickListener {
 
-        void onClick(Breed breed, Breed subBreed);
+        void onClick(Breed parentBreed, Breed subBreed);
 
     }
 
@@ -43,10 +43,10 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
         }
 
-    public void breedImagesReadyForBreed(Breed breed) {
+    public void breedImagesReadyForBreed(Breed currentBreed) {
 
 
-        int indexOfCurrentBreed = this.breedList.indexOf(breed);
+        int indexOfCurrentBreed = this.breedList.indexOf(currentBreed);
         this.notifyItemChanged(indexOfCurrentBreed);
 
     }
@@ -64,12 +64,12 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
     public void onBindViewHolder(final CustomViewHolder holder, final int position) {
 
 
-        Breed breed = breedList.get(position);
-        holder.breed_name.setText(breed.getBreedName());
-        holder.breed = breed;
+        Breed parentBreed = breedList.get(position);
+        holder.breed_name.setText(parentBreed.getBreedName());
+        holder.parentBreed = parentBreed;
 
 
-        List<Breed.BreedImage> breedImages = breed.getBreedImages();
+        List<Breed.BreedImage> breedImages = parentBreed.getBreedImages();
         List<ImageView> imageViewList = Arrays.asList(holder.photo1, holder.photo2, holder.photo3);
 
         if (breedImages != null && !breedImages.isEmpty()) {
@@ -105,7 +105,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
 
         List<ImageView> imageViewList;
 
-        Breed breed;
+        Breed parentBreed;
         Breed subBreed;
 
 
@@ -129,7 +129,7 @@ public class BreedRecyclerViewAdapter extends RecyclerView.Adapter<BreedRecycler
                 public void onClick(View v) {
 
 
-                    breedOnClickListener.onClick(breed, subBreed);
+                    breedOnClickListener.onClick(parentBreed, subBreed);
 
 
                     Timber.tag("breed detail activity").d("clicked!");

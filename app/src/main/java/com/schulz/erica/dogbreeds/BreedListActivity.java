@@ -21,8 +21,10 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
 
     BreedApiTask breedApiTask;
-    BreedApiTask subBreedApiTask;
-    Breed breed;
+    String[] imageLinks;
+    String imageLink;
+    Breed subBreed;
+    Breed parentBreed;
     String breedName;
     RecyclerView breedRecyclerView;
     BreedRecyclerViewAdapter breedRecyclerViewAdapter;
@@ -44,7 +46,23 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
         breedRecyclerView = findViewById(R.id.breed_recycler_view);
         breedRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
+        Bundle bundle = getIntent().getExtras();
 
+        if (bundle != null && bundle.getString("breedName") != null) {
+            breedName = bundle.getString("breedName");
+            parentBreed = new Breed();
+            parentBreed.setBreedName(breedName);
+
+            if (bundle.getStringArray("imageLinks") != null)
+
+            {
+                imageLinks = bundle.getStringArray("imageLinks");
+            }
+
+
+
+
+        }
 
         this.startBreedAsyncRequest();
 
@@ -54,9 +72,9 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
     public void startBreedAsyncRequest() {
 
 
-        if (this.breedName != null) {
+        if (this.parentBreed != null) {
 
-            this.breedApiTask = new BreedApiTask(breedName, this);
+            this.breedApiTask = new BreedApiTask(this.parentBreed.getBreedName(), this);
 
         } else {
 
@@ -66,116 +84,117 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
     }
 
-    //where to put th bundle info!!!
-
-
-
 
     @Override
     public void breedApiTaskCompleted(List<Breed> breedList) {
 
-        Bundle bundle = getIntent().getExtras();
-        assert bundle != null;
-        if (bundle.getString("breedName") != null)
 
-        {
-            breedName = bundle.getString("breedName");
-            breed = new Breed();
-            breed.setBreedName(breedName);
+        Log.d("yo", "here");
 
+        subBreedsText.setText("The " + parentBreed + " breed includes " + breedList.size() + " subbreed(s).");
+
+        breedRecyclerView = findViewById(R.id.breed_recycler_view);
+        breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList, new BreedRecyclerViewAdapter.BreedOnClickListener() {
 
 
-            Log.d("yo", "here");
+            //OnClick with Intent to display BreedDetailActivity
+            @Override
+            public void onClick(Breed breed, Breed subBreed) {
 
-            subBreedsText.setText("The " + breed + " breed includes " + breedList.size() + " subbreed(s).");
+                Intent intent = new Intent(BreedListActivity.this, BreedDetailActivity.class);
 
-            breedRecyclerView = findViewById(R.id.breed_recycler_view);
-            breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList, new BreedRecyclerViewAdapter.BreedOnClickListener() {
+                intent.putExtra("breedName", breed.getBreedName());
 
+                List<Breed.BreedImage> localBreedImages = breed.getBreedImages();
+                List<String> imageLinks = new ArrayList<>();
 
-//            @Override
-//            public void onClick(Breed breed, Breed subBreed ) {
-//
-//                Intent subBreedDetailIntent = new Intent(SubBreedActivity.this, SubBreedDetailActivity.class);
-//
-//                subBreedDetailIntent.putExtra("subBreedName", subBreed.getBreedName());
-//
-//                List<Breed.BreedImage> localBreedImages = subBreed.getBreedImages();
-//                List<String> imageLinks = new ArrayList<>();
-//
-//                for (Breed.BreedImage breedImage : localBreedImages) {
-//                    String imageLink = breedImage.getImageLink();
-//                    imageLinks.add(imageLink);
-//                }
-//                String[] imageLinkArray = imageLinks.toArray(new String[0]);
-//                subBreedDetailIntent.putExtra("imageLinks", imageLinkArray);
-//
-//                startActivity(subBreedDetailIntent);
-//
-//
-//            }
-//        });
-
-
-                //OnClick with Intent to display BreedDetailActivity
-                @Override
-                public void onClick(Breed breed, Breed subBreed) {
-
-                    Intent intent = new Intent(BreedListActivity.this, BreedDetailActivity.class);
-
-                    intent.putExtra("breedName", breed.getBreedName());
-
-                    List<Breed.BreedImage> localBreedImages = breed.getBreedImages();
-                    List<String> imageLinks = new ArrayList<>();
-
-                    for (Breed.BreedImage breedImage : localBreedImages) {
-                        String imageLink = breedImage.getImageLink();
-                        imageLinks.add(imageLink);
-                    }
-                    String[] imageLinkArray = imageLinks.toArray(new String[0]);
-                    intent.putExtra("imageLinks", imageLinkArray);
-
-                    startActivity(intent);
-
+                for (Breed.BreedImage breedImage : localBreedImages) {
+                    String imageLink = breedImage.getImageLink();
+                    imageLinks.add(imageLink);
                 }
-            });
+                String[] imageLinkArray = imageLinks.toArray(new String[0]);
+                intent.putExtra("imageLinks", imageLinkArray);
+
+                startActivity(intent);
+
+            }
+        });
 
 
-            this.breedRecyclerView.setAdapter(breedRecyclerViewAdapter);
+        this.breedRecyclerView.setAdapter(breedRecyclerViewAdapter);
 
 
-            for (Breed breed : breedList) {
-                String breedName = breed.getBreedName();
-                Timber.tag("log this").d(breedName);
+//this iterates over the main breedList and returns those images
+
+        for (Breed currentBreed : breedList) {
+            String breedName = currentBreed.getBreedName();
+            Timber.tag("log this").d(breedName);
 
 
-                try {
+            try {
 
-                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(breed, null, this);
+                if (this.parentBreed != null) {
+
+                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
+
+                    subBreedImageApiTask.execute();
+
+
+                } else {
+
+                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(currentBreed, null, this);
 
                     breedImageApiTask.execute();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
 
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
-            Timber.tag("log this").d("");
+        }
+
+//this iterates over the subBreedList and returns THOSE images. I DON'T KNOW HOW/WHERE TO INSERT THIS!!
+
+//
+//        for (Breed subBreed : subBreedList) {
+//            String subBreedName = subBreed.getBreedName();
+//
+//
+//            try {
+//
+//                BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(parentBreed, subBreed, this);
+//
+//                subBreedImageApiTask.execute();
+//
+//            } catch (JSONException e) {
+//
+//                e.printStackTrace();
+//
+//            }
+//            Log.d("log this", subBreedName);
+//
+//        }
+    }
+
+
+//I think this is ignoring the subBreed images....
+
+    @Override
+    public void breedImageApiTaskCompleted(Breed currentBreed, Breed subBreed) {
+        //need to give the images to the adapter
+
+
+
+            breedRecyclerViewAdapter.breedImagesReadyForBreed(currentBreed);
+
+
+            Timber.tag("log this").d(parentBreed + " has images.");
         }
     }
 
 
-            @Override
-            public void breedImageApiTaskCompleted (Breed breed, Breed subBreed){
-            //need to give the images to the adapter
-
-            breedRecyclerViewAdapter.breedImagesReadyForBreed(breed);
-
-
-            Timber.tag("log this").d(breed + " has images.");
-        }
-        }
 
 
 

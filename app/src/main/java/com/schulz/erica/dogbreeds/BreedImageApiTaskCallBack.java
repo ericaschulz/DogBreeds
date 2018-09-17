@@ -3,5 +3,5 @@ package com.schulz.erica.dogbreeds;
 public interface BreedImageApiTaskCallBack {
 
 
-    void breedImageApiTaskCompleted(Breed breed, Breed subBreed);
+    void breedImageApiTaskCompleted(Breed parentBreed, Breed subBreed);
 }

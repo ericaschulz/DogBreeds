@@ -13,16 +13,17 @@ import org.json.JSONObject;
 
 public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
-    private Breed breed;
+
+    private Breed parentBreed;
     private Breed subBreed;
 
 
     private BreedImageApiTaskCallBack breedImageApiTaskCallBack;
 
-    public BreedImageApiTask(Breed breed, Breed subBreed, BreedImageApiTaskCallBack breedImageApiTaskCallBack) throws JSONException {
+    public BreedImageApiTask(Breed parentBreed, Breed subBreed, BreedImageApiTaskCallBack breedImageApiTaskCallBack) throws JSONException {
 
         super();
-        this.breed = breed;
+        this.parentBreed = parentBreed;
         this.subBreed = subBreed;
         this.breedImageApiTaskCallBack = breedImageApiTaskCallBack;
 
@@ -35,11 +36,11 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
         if (subBreed != null) {
 
-            return DogApiRetriever.getSubBreedImages(breed.getBreedName(), subBreed.getBreedName());
+            return DogApiRetriever.getSubBreedImages(parentBreed.getBreedName(), subBreed.getBreedName());
 
         } else {
 
-            return DogApiRetriever.getBreedImage(breed.getBreedName());
+            return DogApiRetriever.getBreedImage(parentBreed.getBreedName());
         }
     }
     
@@ -79,7 +80,7 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
                       } else {
 
-                          this.breed.addImageForLink(imageLink);
+                          this.parentBreed.addImageForLink(imageLink);
                       }
 
                           }
@@ -95,7 +96,7 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
             }
 
         }
-        breedImageApiTaskCallBack.breedImageApiTaskCompleted(breed, subBreed);
+        breedImageApiTaskCallBack.breedImageApiTaskCompleted(parentBreed, subBreed);
     }
 
 

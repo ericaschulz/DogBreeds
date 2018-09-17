@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import timber.log.Timber;
 
 
@@ -73,9 +76,18 @@ public class BreedDetailActivity extends AppCompatActivity {
         }
 
 
-
         final Intent subBreedIntent = new Intent(this, BreedListActivity.class);
         subBreedIntent.putExtra("breedName", breedName);
+
+        List<Breed.BreedImage> localBreedImages = breed.getBreedImages();
+        List<String> imageLinks = new ArrayList<>();
+
+        for (Breed.BreedImage breedImage : localBreedImages) {
+            String imageLink = breedImage.getImageLink();
+            imageLinks.add(imageLink);
+        }
+        String[] imageLinkArray = imageLinks.toArray(new String[0]);
+        subBreedIntent.putExtra("imageLinks", imageLinkArray);
 
         subBreedButton.setOnClickListener(new View.OnClickListener() {
 
@@ -89,7 +101,7 @@ public class BreedDetailActivity extends AppCompatActivity {
             }
         });
 
-        breedNameText.setText(breedName + " has " + imageLinks.length + " images.");
+        breedNameText.setText(String.format("%s has %s images.", breedName, imageLinks.size()));
 
         gridLayoutManager = (new GridLayoutManager(this, 2));
         breedDetailRecyclerView.setLayoutManager(gridLayoutManager);
@@ -113,8 +125,6 @@ public class BreedDetailActivity extends AppCompatActivity {
 
 
                  startActivity(singleImageIntent);
-
-
 
 
                  Timber.tag("singleImage activity").d("clicked!");
