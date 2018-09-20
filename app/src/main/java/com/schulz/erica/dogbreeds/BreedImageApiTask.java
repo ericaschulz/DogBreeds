@@ -1,7 +1,6 @@
 package com.schulz.erica.dogbreeds;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,6 +57,13 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
             e.printStackTrace();
         }
 
+        Breed breed = null;
+        if (subBreed != null) {
+            breed = this.subBreed;
+        } else {
+            breed = this.parentBreed;
+        }
+
         if (breedImageArray != null) {
 
             int length = breedImageArray.length();
@@ -66,37 +72,20 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
                 for (int i = 0; i < length; i++) {
                     try {
-
-
                         String imageLink = breedImageArray.getString(i);
-
-                      if (subBreed != null) {
-
-
-                          this.subBreed.addImageForLink(imageLink);
-
-
-                          Log.d("", "here");
-
-                      } else {
-
-                          this.parentBreed.addImageForLink(imageLink);
-                      }
-
-                          }
-
-                     catch (Exception e) {
+                        breed.addImageForLink(imageLink);
+                    } catch (JSONException e) {
                         e.printStackTrace();
-
-
                     }
+
+
 
                 }
 
             }
 
         }
-        breedImageApiTaskCallBack.breedImageApiTaskCompleted(parentBreed, subBreed);
+        breedImageApiTaskCallBack.breedImageApiTaskCompleted(breed);
     }
 
 

@@ -155,39 +155,18 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
         }
 
-//this iterates over the subBreedList and returns THOSE images. I DON'T KNOW HOW/WHERE TO INSERT THIS!!
-
-//
-//        for (Breed subBreed : subBreedList) {
-//            String subBreedName = subBreed.getBreedName();
-//
-//
-//            try {
-//
-//                BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(parentBreed, subBreed, this);
-//
-//                subBreedImageApiTask.execute();
-//
-//            } catch (JSONException e) {
-//
-//                e.printStackTrace();
-//
-//            }
-//            Log.d("log this", subBreedName);
-//
-//        }
     }
 
 
-//I think this is ignoring the subBreed images....
+
 
     @Override
-    public void breedImageApiTaskCompleted(Breed currentBreed, Breed subBreed) {
+    public void breedImageApiTaskCompleted(Breed breed) {
         //need to give the images to the adapter
 
 
 
-            breedRecyclerViewAdapter.breedImagesReadyForBreed(currentBreed);
+            breedRecyclerViewAdapter.breedImagesReadyForBreed(breed);
 
 
             Timber.tag("log this").d(parentBreed + " has images.");
