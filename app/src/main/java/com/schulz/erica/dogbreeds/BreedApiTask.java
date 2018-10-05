@@ -19,17 +19,17 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
     private List<Breed> breedList = new ArrayList<>();
     private String breedName;
 
-    private BreedApiTaskCallBack breedApiTaskCallBack;
+    private BreedListCallBack breedListCallBack;
 
-    public BreedApiTask(String breedName,BreedApiTaskCallBack breedApiTaskCallBack){
+    public BreedApiTask(String breedName,BreedListCallBack breedListCallBack){
         super();
-        this.breedApiTaskCallBack = breedApiTaskCallBack;
+        this.breedListCallBack = breedListCallBack;
         this.breedName = breedName;
 
     }
 
-    public BreedApiTask(BreedApiTaskCallBack breedApiTaskCallBack) {
-        this(null, breedApiTaskCallBack);
+    public BreedApiTask(BreedListCallBack breedListCallBack) {
+        this(null, breedListCallBack);
     }
 
 
@@ -98,7 +98,7 @@ public class BreedApiTask extends AsyncTask<Void, Void, JSONObject> {
             }
 
         }
-        breedApiTaskCallBack.breedApiTaskCompleted(breedList);
+        breedListCallBack.breedListAvailable(breedList);
     }
 
     public void setBreedList(List<Breed> breedList) {

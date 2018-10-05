@@ -17,7 +17,7 @@ import java.util.List;
 
 import timber.log.Timber;
 
-public class BreedListActivity extends AppCompatActivity implements BreedApiTaskCallBack, BreedImageApiTaskCallBack {
+public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageApiTaskCallBack {
 
 
     BreedApiTask breedApiTask;
@@ -60,8 +60,6 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
             }
 
 
-
-
         }
 
         this.startBreedAsyncRequest();
@@ -86,7 +84,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedApiTask
 
 
     @Override
-    public void breedApiTaskCompleted(List<Breed> breedList) {
+    public void breedListAvailable(List<Breed> breedList) {
 
 
         Log.d("yo", "here");
