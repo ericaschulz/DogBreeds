@@ -33,10 +33,13 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     LinearLayout linearLayout;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_breed_list);
+
+
 
 
         constraintLayout = findViewById(R.id.constraint_layout);
@@ -62,6 +65,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
         }
 
+
         this.startBreedAsyncRequest();
 
     }
@@ -70,15 +74,28 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     public void startBreedAsyncRequest() {
 
 
-        if (this.parentBreed != null) {
 
-            this.breedApiTask = new BreedApiTask(this.parentBreed.getBreedName(), this);
+
+
+
+
+
+        DogBreedManager dogBreedManager = new DogBreedManager();
+
+        if (parentBreed != null) {
+
+            dogBreedManager.getSubBreedList(breedName, this);
+
+
 
         } else {
 
-            this.breedApiTask = new BreedApiTask(this);
+            dogBreedManager.getBreedList(this);
         }
-        this.breedApiTask.execute();
+
+
+
+
 
     }
 

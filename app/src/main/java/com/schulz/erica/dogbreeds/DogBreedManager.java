@@ -1,9 +1,22 @@
 package com.schulz.erica.dogbreeds;
 
 //DogBreedManager will replace the ApiTasks and the apiTasks will be removed from all activities &&
-//DogBreedManager will eventually be injected using Dagger
+//DogBreedManager will eventually be injected using Dagger 2
 
+
+import dagger.Module;
+
+
+@Module
 public class DogBreedManager {
+
+//    private DogBreedManager dogBreedManager;
+//
+//
+//    public DogBreedManager(DogBreedManager dogBreedManager) {
+//        this.dogBreedManager = dogBreedManager;
+//    }
+
 
     public void getBreedList(BreedListCallBack breedListCallBack) {
 
@@ -21,6 +34,7 @@ public class DogBreedManager {
 
 
     }
+
 
     public void getSubBreedList(String breedName, BreedListCallBack breedListCallBack) {
 
