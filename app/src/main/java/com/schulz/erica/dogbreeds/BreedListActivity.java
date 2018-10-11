@@ -15,9 +15,13 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import timber.log.Timber;
 
 public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageApiTaskCallBack {
+
+    @Inject DogBreedManagerComponent dogBreedManagerComponent;
 
 
     BreedApiTask breedApiTask;
@@ -38,7 +42,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_breed_list);
-
+        dogBreedManagerComponent.inject(this);
 
 
 
@@ -80,18 +84,20 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
 
 
-        DogBreedManager dogBreedManager = new DogBreedManager();
-
-        if (parentBreed != null) {
-
-            dogBreedManager.getSubBreedList(breedName, this);
 
 
+//                   DogBreedManager dogBreedManager = new DogBreedManager();
+//
+//            if (parentBreed != null) {
+//
+//                dogBreedManager.getSubBreedList(breedName, this);
 
-        } else {
 
-            dogBreedManager.getBreedList(this);
-        }
+
+//        } else {
+//
+//            dogBreedManager.getBreedList(this);
+//        }
 
 
 

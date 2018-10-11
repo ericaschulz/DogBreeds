@@ -1,25 +1,19 @@
 package com.schulz.erica.dogbreeds;
 
-import android.app.Application;
+import javax.inject.Singleton;
 
+import dagger.Component;
 
-public class DogBreedManagerComponent extends Application {
+@Singleton
+@Component(modules = {DogBreedManager.class})
 
-    public DogBreedManagerComponent dogBreedManagerComponent;
+    public interface DogBreedManagerComponent {
 
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-//        dogBreedManagerComponent =
-
-
+    void inject(BreedListActivity activity);
 
 
     }
 
-    public DogBreedManagerComponent getDogBreedManagerComponent() {
-        return dogBreedManagerComponent;
-    }
-}
+
+
+
