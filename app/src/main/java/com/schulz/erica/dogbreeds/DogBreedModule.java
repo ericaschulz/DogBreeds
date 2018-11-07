@@ -13,11 +13,11 @@ public class DogBreedModule {
 
     @Provides
     @Singleton
-    DogBreedModule provideDogBreedModule() {
+    DogBreedManager provideDogBreedManager() {
 
-        DogBreedModule dogBreedModule = new DogBreedModule();
+        DogBreedManager dogBreedManager = new DogBreedManager();
 
-        return dogBreedModule;
+        return dogBreedManager;
     }
 
 

@@ -21,8 +21,8 @@ import timber.log.Timber;
 
 public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageApiTaskCallBack {
 
-    @Inject DogBreedModule dogBreedModule;
-//    @Inject DogBreedManager dogBreedManager;
+    @Inject DogBreedManager dogBreedManager;
+
 
 
 
@@ -72,6 +72,8 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
 
         this.startBreedAsyncRequest();
+
+
 
     }
 
