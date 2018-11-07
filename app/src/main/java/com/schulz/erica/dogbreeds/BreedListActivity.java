@@ -21,7 +21,9 @@ import timber.log.Timber;
 
 public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageApiTaskCallBack {
 
-    @Inject DogBreedManagerComponent dogBreedManagerComponent;
+    @Inject DogBreedModule dogBreedModule;
+//    @Inject DogBreedManager dogBreedManager;
+
 
 
     BreedApiTask breedApiTask;
@@ -42,8 +44,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_breed_list);
-        dogBreedManagerComponent.inject(this);
-
+        ((DogBreedApplication) getApplication()).getDogBreedComponent().inject(this);
 
 
         constraintLayout = findViewById(R.id.constraint_layout);
@@ -79,25 +80,18 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
 
 
+                   DogBreedManager dogBreedManager = new DogBreedManager();
+
+            if (parentBreed != null) {
+
+                dogBreedManager.getSubBreedList(breedName, this);
 
 
 
+        } else {
 
-
-
-
-//                   DogBreedManager dogBreedManager = new DogBreedManager();
-//
-//            if (parentBreed != null) {
-//
-//                dogBreedManager.getSubBreedList(breedName, this);
-
-
-
-//        } else {
-//
-//            dogBreedManager.getBreedList(this);
-//        }
+            dogBreedManager.getBreedList(this);
+        }
 
 
 
@@ -177,7 +171,6 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
         }
 
     }
-
 
 
 

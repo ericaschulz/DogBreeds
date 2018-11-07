@@ -4,17 +4,26 @@ import android.app.Application;
 
 public class DogBreedApplication extends Application {
 
-    private DogBreedManagerComponent dogBreedManagerComponent;
+    private DogBreedComponent dogBreedComponent;
 
     @Override
     public void onCreate(){
         super.onCreate();
 
-
-        dogBreedManagerComponent = DaggerDogBreedManagerComponent.builder()
+        dogBreedComponent = DaggerDogBreedComponent.builder()
+                .dogBreedModule(new DogBreedModule())
                 .build();
 
 
+        }
 
+    public DogBreedComponent getDogBreedComponent() {
+        return dogBreedComponent;
     }
 }
+
+
+
+
+
+

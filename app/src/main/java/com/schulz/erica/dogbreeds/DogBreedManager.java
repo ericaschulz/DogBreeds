@@ -4,27 +4,7 @@ package com.schulz.erica.dogbreeds;
 //DogBreedManager will eventually be injected using Dagger 2
 
 
-import android.app.Application;
-
-import javax.inject.Singleton;
-
-import dagger.Module;
-import dagger.Provides;
-
-
-@Module
 public class DogBreedManager {
-
-    Application dogBreedManager;
-
-    public DogBreedManager(Application application) {
-        dogBreedManager = application;
-    }
-    @Provides
-    @Singleton
-    Application providesApplication(){
-        return dogBreedManager;
-    }
 
 
 
