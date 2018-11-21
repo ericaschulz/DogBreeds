@@ -23,13 +23,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
     @Inject DogBreedManager dogBreedManager;
 
-
-
-
-    BreedApiTask breedApiTask;
     String[] imageLinks;
-    String imageLink;
-    Breed subBreed;
     Breed parentBreed;
     String breedName;
     RecyclerView breedRecyclerView;
@@ -42,9 +36,11 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        getDogBreedComponent().inject(this);
+
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_breed_list);
-        ((DogBreedApplication) getApplication()).getDogBreedComponent().inject(this);
 
 
         constraintLayout = findViewById(R.id.constraint_layout);
@@ -67,40 +63,35 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
                 imageLinks = bundle.getStringArray("imageLinks");
             }
 
-
         }
 
 
-        this.startBreedAsyncRequest();
+            this.startLoadingBreeds();
+        }
 
 
+
+
+    private DogBreedComponent getDogBreedComponent() {
+        return ((DogBreedApplication) getApplication()).getDogBreedComponent();
 
     }
 
-
-    public void startBreedAsyncRequest() {
-
+    public void startLoadingBreeds() {
 
 
-                   DogBreedManager dogBreedManager = new DogBreedManager();
+        if (this.parentBreed != null) {
 
-            if (parentBreed != null) {
-
-                dogBreedManager.getSubBreedList(breedName, this);
-
-
+            dogBreedManager.getSubBreedList(breedName, this);
 
         } else {
 
             dogBreedManager.getBreedList(this);
+
         }
 
 
-
-
-
     }
-
 
     @Override
     public void breedListAvailable(List<Breed> breedList) {
@@ -147,32 +138,51 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
             String breedName = currentBreed.getBreedName();
             Timber.tag("log this").d(breedName);
 
-
             try {
 
-                if (this.parentBreed != null) {
+//
+//                if (this.parentBreed != null) {
+//
+//                    dogBreedManager.getSubBreedImages(this);
+//
+//                } else {
 
-                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
-
-                    subBreedImageApiTask.execute();
-
-
-                } else {
-
-                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(currentBreed, null, this);
-
-                    breedImageApiTask.execute();
-
-                }
+                    dogBreedManager.getBreedImages(this);
 
 
-            } catch (JSONException e) {
+            } catch(JSONException e){
                 e.printStackTrace();
+
+
             }
-
         }
-
     }
+
+//
+//                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
+//
+//                    subBreedImageApiTask.execute();
+//
+//
+//                } else {
+//
+//                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(currentBreed, null, this);
+//
+//                    breedImageApiTask.execute();
+//
+//                }
+//
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+
+//
+
+
+
 
 
 

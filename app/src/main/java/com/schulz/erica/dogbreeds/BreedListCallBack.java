@@ -6,6 +6,4 @@ interface BreedListCallBack {
 
     void breedListAvailable(List<Breed> breedList);
 
-
-
 }

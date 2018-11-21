@@ -13,8 +13,8 @@ import org.json.JSONObject;
 public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
 
-    private Breed parentBreed;
-    private Breed subBreed;
+     Breed parentBreed;
+     Breed subBreed;
 
 
     private BreedImageApiTaskCallBack breedImageApiTaskCallBack;
@@ -77,7 +77,6 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
 
 
                 }
