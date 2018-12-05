@@ -1,4 +1,4 @@
-package com.schulz.erica.dogbreeds;
+package com.schulz.erica.dogbreeds.DI;
 
 import android.app.Application;
 

@@ -10,18 +10,19 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.json.JSONException;
+import com.schulz.erica.dogbreeds.DI.DogBreedApplication;
+import com.schulz.erica.dogbreeds.DI.DogBreedComponent;
+import com.schulz.erica.dogbreeds.DI.DogBreedManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import timber.log.Timber;
+public class BreedListActivity extends AppCompatActivity implements BreedListCallBack {
 
-public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageApiTaskCallBack {
-
-    @Inject DogBreedManager dogBreedManager;
+    @Inject
+    DogBreedManager dogBreedManager;
 
     String[] imageLinks;
     Breed parentBreed;
@@ -38,6 +39,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     protected void onCreate(Bundle savedInstanceState) {
 
         getDogBreedComponent().inject(this);
+
 
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_breed_list);
@@ -134,31 +136,37 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
 //this iterates over the main breedList and returns those images
 
-        for (Breed currentBreed : breedList) {
-            String breedName = currentBreed.getBreedName();
-            Timber.tag("log this").d(breedName);
-
-            try {
-
+//        for (Breed currentBreed : breedList) {
+//            String breedName = currentBreed.getBreedName();
+//            Timber.tag("log this").d(breedName);
+//
+//            try {
+//
 //
 //                if (this.parentBreed != null) {
 //
 //                    dogBreedManager.getSubBreedImages(this);
 //
 //                } else {
-
-                    dogBreedManager.getBreedImages(this);
-
-
-            } catch(JSONException e){
-                e.printStackTrace();
-
-
-            }
-        }
-    }
-
 //
+//                    dogBreedManager.getBreedImages(this);
+//                }
+//
+//
+//                } catch(JSONException e){
+//                    e.printStackTrace();
+//                }
+//            }
+
+//        }
+//    }
+
+
+
+
+
+
+
 //                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
 //
 //                    subBreedImageApiTask.execute();
@@ -180,23 +188,25 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 //        }
 
 //
+            }
+//        }
 
 
 
 
 
 
-    @Override
-    public void breedImageApiTaskCompleted(Breed breed) {
-        //need to give the images to the adapter
+//    @Override
+//    public void breedImageApiTaskCompleted(Breed breed) {
+//        //need to give the images to the adapter
 
 
 
-            breedRecyclerViewAdapter.breedImagesReadyForBreed(breed);
-
-
-            Timber.tag("log this").d(parentBreed + " has images.");
-        }
+//            breedRecyclerViewAdapter.breedImagesReadyForBreed(breed);
+//
+//
+//            Timber.tag("log this").d(parentBreed + " has images.");
+//        }
     }
 
 

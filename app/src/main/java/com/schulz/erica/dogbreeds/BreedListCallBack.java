@@ -2,7 +2,7 @@ package com.schulz.erica.dogbreeds;
 
 import java.util.List;
 
-interface BreedListCallBack {
+public interface BreedListCallBack {
 
     void breedListAvailable(List<Breed> breedList);
 

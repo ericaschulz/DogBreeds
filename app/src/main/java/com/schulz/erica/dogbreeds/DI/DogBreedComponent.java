@@ -1,4 +1,6 @@
-package com.schulz.erica.dogbreeds;
+package com.schulz.erica.dogbreeds.DI;
+
+import com.schulz.erica.dogbreeds.BreedListActivity;
 
 import javax.inject.Singleton;
 
@@ -10,6 +12,8 @@ import dagger.Component;
 public interface DogBreedComponent {
 
      void inject(BreedListActivity activity);
+
+
 }
 
 
