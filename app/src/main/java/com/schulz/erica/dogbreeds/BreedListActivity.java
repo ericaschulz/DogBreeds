@@ -14,12 +14,16 @@ import com.schulz.erica.dogbreeds.DI.DogBreedApplication;
 import com.schulz.erica.dogbreeds.DI.DogBreedComponent;
 import com.schulz.erica.dogbreeds.DI.DogBreedManager;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class BreedListActivity extends AppCompatActivity implements BreedListCallBack {
+import timber.log.Timber;
+
+public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageApiTaskCallBack {
 
     @Inject
     DogBreedManager dogBreedManager;
@@ -32,7 +36,6 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     TextView subBreedsText;
     ConstraintLayout constraintLayout;
     LinearLayout linearLayout;
-
 
 
     @Override
@@ -68,10 +71,8 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
         }
 
 
-            this.startLoadingBreeds();
-        }
-
-
+        this.startLoadingBreeds();
+    }
 
 
     private DogBreedComponent getDogBreedComponent() {
@@ -136,78 +137,52 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
 //this iterates over the main breedList and returns those images
 
-//        for (Breed currentBreed : breedList) {
-//            String breedName = currentBreed.getBreedName();
-//            Timber.tag("log this").d(breedName);
-//
-//            try {
-//
-//
-//                if (this.parentBreed != null) {
-//
-//                    dogBreedManager.getSubBreedImages(this);
-//
-//                } else {
-//
-//                    dogBreedManager.getBreedImages(this);
-//                }
-//
-//
-//                } catch(JSONException e){
-//                    e.printStackTrace();
-//                }
-//            }
+        for (Breed currentBreed : breedList) {
+            String breedName = currentBreed.getBreedName();
+            Timber.tag("log this").d(breedName);
 
-//        }
-//    }
+            try {
 
 
+                if (this.parentBreed != null) {
+
+                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
+
+                    subBreedImageApiTask.execute();
 
 
+                } else {
+
+                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(currentBreed, null, this);
+
+                    breedImageApiTask.execute();
+
+                }
 
 
-
-//                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
-//
-//                    subBreedImageApiTask.execute();
-//
-//
-//                } else {
-//
-//                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(currentBreed, null, this);
-//
-//                    breedImageApiTask.execute();
-//
-//                }
-//
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
-
-//
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-//        }
 
-
-
-
-
-
-//    @Override
-//    public void breedImageApiTaskCompleted(Breed breed) {
-//        //need to give the images to the adapter
-
-
-
-//            breedRecyclerViewAdapter.breedImagesReadyForBreed(breed);
-//
-//
-//            Timber.tag("log this").d(parentBreed + " has images.");
-//        }
+        }
     }
+
+
+
+
+    @Override
+    public void breedImageApiTaskCompleted(Breed breed) {
+        //need to give the images to the adapter
+
+
+        breedRecyclerViewAdapter.breedImagesReadyForBreed(breed);
+
+
+        Timber.tag("log this").d(parentBreed + " has images.");
+    }
+}
+
+
 
 
 
