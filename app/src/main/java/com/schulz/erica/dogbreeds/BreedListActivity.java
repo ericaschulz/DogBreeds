@@ -10,9 +10,9 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.schulz.erica.dogbreeds.DI.DogBreedApplication;
-import com.schulz.erica.dogbreeds.DI.DogBreedComponent;
-import com.schulz.erica.dogbreeds.DI.DogBreedManager;
+import com.schulz.erica.dogbreeds.di.DogBreedApplication;
+import com.schulz.erica.dogbreeds.di.DogBreedComponent;
+import com.schulz.erica.dogbreeds.di.DogBreedManager;
 
 import org.json.JSONException;
 
@@ -46,7 +46,6 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_breed_list);
-
 
         constraintLayout = findViewById(R.id.constraint_layout);
         linearLayout = findViewById(R.id.linear_layout);

@@ -13,11 +13,11 @@ import org.json.JSONObject;
 public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
 
 
-     Breed parentBreed;
-     Breed subBreed;
+     private Breed parentBreed;
+     private Breed subBreed;
 
 
-    private BreedImageApiTaskCallBack breedImageApiTaskCallBack;
+    public BreedImageApiTaskCallBack breedImageApiTaskCallBack;
 
     public BreedImageApiTask(Breed parentBreed, Breed subBreed, BreedImageApiTaskCallBack breedImageApiTaskCallBack) throws JSONException {
 

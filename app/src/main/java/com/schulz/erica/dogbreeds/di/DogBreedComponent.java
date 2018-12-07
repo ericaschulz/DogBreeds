@@ -1,4 +1,4 @@
-package com.schulz.erica.dogbreeds.DI;
+package com.schulz.erica.dogbreeds.di;
 
 import com.schulz.erica.dogbreeds.BreedListActivity;
 
