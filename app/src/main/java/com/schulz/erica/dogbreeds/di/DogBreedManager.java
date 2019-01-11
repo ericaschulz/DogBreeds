@@ -1,7 +1,5 @@
 package com.schulz.erica.dogbreeds.di;
 
-//Need to encapsulate the image retrieving within this class, but it needs to happen after we've had the callback for the list of breeds
-
 
 import com.schulz.erica.dogbreeds.BreedApiTask;
 import com.schulz.erica.dogbreeds.BreedListCallBack;
