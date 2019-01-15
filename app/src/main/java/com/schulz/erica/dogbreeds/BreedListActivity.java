@@ -9,10 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.schulz.erica.dogbreeds.di.DogBreedApplication;
 import com.schulz.erica.dogbreeds.di.DogBreedComponent;
-import com.schulz.erica.dogbreeds.di.DogBreedManager;
 
 import org.json.JSONException;
 
@@ -21,12 +21,16 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import timber.log.Timber;
 
 public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageApiTaskCallBack {
 
     @Inject
-    DogBreedManager dogBreedManager;
+    Retrofit retrofit;
 
     String[] imageLinks;
     Breed parentBreed;
@@ -42,6 +46,26 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     protected void onCreate(Bundle savedInstanceState) {
 
         getDogBreedComponent().inject(this);
+
+        RetrofitInterface service = RetrofitInstance.getRetrofitInstance().create(RetrofitInterface.class);
+
+        Call<List<Breed>> call = service.getBreedList();
+        call.enqueue(new Callback<List<Breed>>() {
+
+            @Override
+
+            public void onResponse(Call<List<Breed>> call, Response<List<Breed>> response) {
+                loadBreedList(response.body());
+            }
+
+            @Override
+
+            public void onFailure(Call<List<Breed>> call, Throwable throwable) {
+
+                Toast.makeText(BreedListActivity.this, "Unable to load users", Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
 
         super.onCreate(savedInstanceState);
@@ -70,8 +94,20 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
         }
 
 
-        this.startLoadingBreeds();
+//        this.loadBreedList(breedList);
     }
+
+    private void loadBreedList(List<Breed> breedList) {
+
+//        myRecyclerView = findViewById(R.id.myRecyclerView);
+//        myAdapter = new MyAdapter(usersList);
+//
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+//        myRecyclerView.setLayoutManager(layoutManager);
+//
+//        myRecyclerView.setAdapter(myAdapter);
+    }
+
 
 
 
@@ -81,21 +117,21 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
     }
 
-    public void startLoadingBreeds() {
+//    public void startLoadingBreeds() {
+//
+//
+//        if (this.parentBreed != null) {
+//
+//            dogBreedManager.getSubBreedList(breedName, this);
+//
+//        } else {
+//
+//            dogBreedManager.getBreedList(this);
+//
+//        }
 
 
-        if (this.parentBreed != null) {
-
-            dogBreedManager.getSubBreedList(breedName, this);
-
-        } else {
-
-            dogBreedManager.getBreedList(this);
-
-        }
-
-
-    }
+    
 
     @Override
     public void breedListAvailable(List<Breed> breedList) {
