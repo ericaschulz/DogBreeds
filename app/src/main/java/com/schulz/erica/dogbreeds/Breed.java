@@ -1,5 +1,8 @@
 package com.schulz.erica.dogbreeds;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,62 +12,29 @@ import java.util.List;
 
 public class Breed {
 
-//public class Post {
-//    @SerializedName("userId")
-//    @Expose
-//    private int userId;
-//    @SerializedName("id")
-//    @Expose
-//    private int id;
-//    @SerializedName("title")
-//    @Expose
-//    private String title;
-//    @SerializedName("body")
-//    @Expose
-//    private String body;
-//
-//    public int getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(int userId) {
-//        this.userId = userId;
-//    }
-//
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//    public String getTitle() {
-//        return title;
-//    }
-//
-//    public void setTitle(String title) {
-//        this.title = title;
-//    }
-//
-//    public String getBody() {
-//        return body;
-//    }
-//
-//    public void setBody(String body) {
-//        this.body = body;
-//    }
-//}
 
-
-
+    @SerializedName("message")
+    @Expose
     private String message;
+
+    @SerializedName("breedName")
+    @Expose
     private String breedName;
+
+    @SerializedName("subBreedName")
+    @Expose
     private String subBreedName;
+
+    @SerializedName("breedImages")
+    @Expose
     private List<BreedImage> breedImages;
 
-
+    @SerializedName("breedList")
+    @Expose
     private List<Breed> breedList;
+
+    @SerializedName("subBreeds")
+    @Expose
     private List<Breed> subBreeds;
 
 
@@ -93,10 +63,12 @@ public class Breed {
 
         return breedName;
     }
-//    public String getSubBreedName {
-//
-//        return subBreedName;}
 
+    public String getSubBreedName(){
+
+        return subBreedName;
+
+    }
 
     public void setBreedName(String breedName) {
         this.breedName = breedName;

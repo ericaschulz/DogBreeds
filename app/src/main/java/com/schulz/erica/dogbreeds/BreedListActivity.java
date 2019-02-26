@@ -95,12 +95,16 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
                     public void onResponse(@NonNull Call<List<Breed>> call, @NonNull Response<List<Breed>> response) {
 
                         List<Breed> breedList = response.body();
+
                         breedListAvailable(breedList);
 
                     }
 
                     @Override
                     public void onFailure(Call<List<Breed>> call, Throwable t) {
+
+
+                        t.printStackTrace();
 
 
 
