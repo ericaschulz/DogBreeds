@@ -30,7 +30,7 @@ import timber.log.Timber;
 public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageApiTaskCallBack {
 
     @Inject
-    DogBreedManager dogBreedManager = new DogBreedManager();
+    DogBreedManager dogBreedManager;
 
     List<Breed> breedList;
     String[] imageLinks;
@@ -39,6 +39,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     RecyclerView breedRecyclerView;
     BreedRecyclerViewAdapter breedRecyclerViewAdapter;
     TextView subBreedsText;
+
     ConstraintLayout constraintLayout;
     LinearLayout linearLayout;
 
@@ -59,6 +60,35 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
         breedRecyclerView = findViewById(R.id.breed_recycler_view);
         breedRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+
+
+        DogBreedManager.getInstance()
+                .getDogBreedInterface()
+                .getBreedList()
+                .enqueue(new Callback<List<Breed>>() {
+
+                    @Override
+                    public void onResponse(@NonNull Call<List<Breed>> call, @NonNull Response<List<Breed>> response) {
+
+                        List<Breed> breedList = response.body();
+
+                        subBreedsText.append(breedList.toString());
+
+                        breedListAvailable(breedList);
+
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<List<Breed>> call, @NonNull Throwable t) {
+
+
+                        t.printStackTrace();
+
+
+
+                    }
+                });
+
 
 
         Bundle bundle = getIntent().getExtras();
@@ -87,29 +117,6 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
     public void startLoadingBreeds() {
 
-        DogBreedManager.getInstance()
-                .getDogBreedInterface()
-                .getBreedList()
-                .enqueue(new Callback<List<Breed>>() {
-                    @Override
-                    public void onResponse(@NonNull Call<List<Breed>> call, @NonNull Response<List<Breed>> response) {
-
-                        List<Breed> breedList = response.body();
-
-                        breedListAvailable(breedList);
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Breed>> call, Throwable t) {
-
-
-                        t.printStackTrace();
-
-
-
-                    }
-                });
 
         }
 

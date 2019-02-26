@@ -21,17 +21,17 @@ public class Breed {
     @Expose
     private String breedName;
 
-    @SerializedName("subBreedName")
-    @Expose
-    private String subBreedName;
+//    @SerializedName("subBreedName")
+//    @Expose
+//    private String subBreedName;
 
     @SerializedName("breedImages")
     @Expose
     private List<BreedImage> breedImages;
 
-    @SerializedName("breedList")
-    @Expose
-    private List<Breed> breedList;
+//    @SerializedName("breedList")
+//    @Expose
+//    private List<Breed> breedList;
 
     @SerializedName("subBreeds")
     @Expose
