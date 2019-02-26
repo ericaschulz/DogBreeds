@@ -9,43 +9,52 @@ import java.util.List;
 
 public class Breed {
 
-//    public class QuestionSchema {
+//public class Post {
+//    @SerializedName("userId")
+//    @Expose
+//    private int userId;
+//    @SerializedName("id")
+//    @Expose
+//    private int id;
+//    @SerializedName("title")
+//    @Expose
+//    private String title;
+//    @SerializedName("body")
+//    @Expose
+//    private String body;
 //
-//        @SerializedName("title")
-//        private final String mTitle;
-//
-//        @SerializedName("question_id")
-//        private final String mId;
-//
-//        @SerializedName("body")
-//        private final String mBody;
-//
-//        @SerializedName("owner")
-//        private final UserSchema mOwner;
-//
-//        public QuestionSchema(String title, String id, String body, UserSchema owner) {
-//            mTitle = title;
-//            mId = id;
-//            mBody = body;
-//            mOwner = owner;
-//        }
-//
-//        public String getTitle() {
-//            return mTitle;
-//        }
-//
-//        public String getId() {
-//            return mId;
-//        }
-//
-//        public String getBody() {
-//            return mBody;
-//        }
-//
-//        public UserSchema getOwner() {
-//            return mOwner;
-//        }
+//    public int getUserId() {
+//        return userId;
 //    }
+//
+//    public void setUserId(int userId) {
+//        this.userId = userId;
+//    }
+//
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public String getTitle() {
+//        return title;
+//    }
+//
+//    public void setTitle(String title) {
+//        this.title = title;
+//    }
+//
+//    public String getBody() {
+//        return body;
+//    }
+//
+//    public void setBody(String body) {
+//        this.body = body;
+//    }
+//}
 
 
 
@@ -55,6 +64,7 @@ public class Breed {
     private List<BreedImage> breedImages;
 
 
+    private List<Breed> breedList;
     private List<Breed> subBreeds;
 
 

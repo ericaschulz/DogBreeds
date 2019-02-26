@@ -2,6 +2,7 @@ package com.schulz.erica.dogbreeds;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,10 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.schulz.erica.dogbreeds.di.DogBreedApplication;
 import com.schulz.erica.dogbreeds.di.DogBreedComponent;
+import com.schulz.erica.dogbreeds.di.DogBreedManager;
 
 import org.json.JSONException;
 
@@ -24,14 +25,14 @@ import javax.inject.Inject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import timber.log.Timber;
 
 public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageApiTaskCallBack {
 
     @Inject
-    Retrofit retrofit;
+    DogBreedManager dogBreedManager = new DogBreedManager();
 
+    List<Breed> breedList;
     String[] imageLinks;
     Breed parentBreed;
     String breedName;
@@ -42,31 +43,11 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     LinearLayout linearLayout;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         getDogBreedComponent().inject(this);
-
-        RetrofitInterface service = RetrofitInstance.getRetrofitInstance().create(RetrofitInterface.class);
-
-        Call<List<Breed>> call = service.getBreedList();
-        call.enqueue(new Callback<List<Breed>>() {
-
-            @Override
-
-            public void onResponse(Call<List<Breed>> call, Response<List<Breed>> response) {
-                loadBreedList(response.body());
-            }
-
-            @Override
-
-            public void onFailure(Call<List<Breed>> call, Throwable throwable) {
-
-                Toast.makeText(BreedListActivity.this, "Unable to load users", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
 
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_breed_list);
@@ -75,8 +56,10 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
         linearLayout = findViewById(R.id.linear_layout);
         subBreedsText = findViewById(R.id.sub_breeds_text);
 
+
         breedRecyclerView = findViewById(R.id.breed_recycler_view);
         breedRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+
 
         Bundle bundle = getIntent().getExtras();
 
@@ -92,46 +75,40 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
             }
 
         }
+        this.startLoadingBreeds();
 
 
-//        this.loadBreedList(breedList);
     }
-
-    private void loadBreedList(List<Breed> breedList) {
-
-//        myRecyclerView = findViewById(R.id.myRecyclerView);
-//        myAdapter = new MyAdapter(usersList);
-//
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-//        myRecyclerView.setLayoutManager(layoutManager);
-//
-//        myRecyclerView.setAdapter(myAdapter);
-    }
-
-
-
-
 
     private DogBreedComponent getDogBreedComponent() {
         return ((DogBreedApplication) getApplication()).getDogBreedComponent();
 
     }
 
-//    public void startLoadingBreeds() {
-//
-//
-//        if (this.parentBreed != null) {
-//
-//            dogBreedManager.getSubBreedList(breedName, this);
-//
-//        } else {
-//
-//            dogBreedManager.getBreedList(this);
-//
-//        }
+    public void startLoadingBreeds() {
+
+        DogBreedManager.getInstance()
+                .getDogBreedInterface()
+                .getBreedList()
+                .enqueue(new Callback<List<Breed>>() {
+                    @Override
+                    public void onResponse(@NonNull Call<List<Breed>> call, @NonNull Response<List<Breed>> response) {
+
+                        List<Breed> breedList = response.body();
+                        breedListAvailable(breedList);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Breed>> call, Throwable t) {
 
 
-    
+
+                    }
+                });
+
+        }
+
 
     @Override
     public void breedListAvailable(List<Breed> breedList) {
@@ -204,9 +181,6 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
         }
     }
 
-
-
-
     @Override
     public void breedImageApiTaskCompleted(Breed breed) {
         //need to give the images to the adapter
@@ -217,6 +191,8 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
         Timber.tag("log this").d(parentBreed + " has images.");
     }
+
+
 }
 
 
