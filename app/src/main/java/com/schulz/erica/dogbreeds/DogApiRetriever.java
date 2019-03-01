@@ -57,6 +57,30 @@ public class DogApiRetriever {
     }
 }
 
+//Example of JSON response for all breeds:
+//{
+//    "status": "success",
+//    "message": {
+//        "affenpinscher": [],
+//        "african": [],
+//        "airedale": [],
+//        "akita": [],
+//        "appenzeller": [],
+//        "basenji": [],
+//        "beagle": [],
+//        "bluetick": [],
+//        "borzoi": [],
+//        "bouvier": [],
+//        "boxer": [],
+//        "brabancon": [],
+//        "briard": [],
+//        "bulldog": [
+//            "boston",
+//            "french"
+//        ]}
+// }
+
+
 
 
 
