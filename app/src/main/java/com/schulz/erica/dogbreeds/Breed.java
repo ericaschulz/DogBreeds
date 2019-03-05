@@ -10,6 +10,9 @@ import java.util.List;
 public class Breed {
 
 
+
+
+    private String status;
     private String message;
     private String breedName;
     private String subBreedName;

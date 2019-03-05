@@ -2,6 +2,7 @@ package com.schulz.erica.dogbreeds;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import timber.log.Timber;
 
 public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageApiTaskCallBack {
@@ -84,18 +88,39 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     public void startLoadingBreeds() {
 
 
-        if (this.parentBreed != null) {
 
-            dogBreedManager.getSubBreedList(breedName, this);
+            dogBreedManager.getDogBreedInterface().getBreedList().enqueue(new Callback<List<Breed>>() {
 
-        } else {
+                @Override
+                public void onResponse(@NonNull Call<List<Breed>> call, @NonNull Response<List<Breed>> response) {
 
-            dogBreedManager.getBreedList(this);
+                    List<Breed> breedList = response.body();
+
+                    breedListAvailable(breedList);
+
+
+                }
+
+                @Override
+                public void onFailure(Call<List<Breed>> call, Throwable t) {
+
+                    t.printStackTrace();
+
+                }
+            });
+
+//        if (this.parentBreed != null) {
+
+//            dogBreedManager.getSubBreedList(breedName, this);
+//
+//        } else {
+//
+//            dogBreedManager.getBreedList(this);
 
         }
 
 
-    }
+
 
     @Override
     public void breedListAvailable(List<Breed> breedList) {

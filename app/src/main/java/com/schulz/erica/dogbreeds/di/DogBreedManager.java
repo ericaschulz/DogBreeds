@@ -4,7 +4,32 @@ package com.schulz.erica.dogbreeds.di;
 import com.schulz.erica.dogbreeds.BreedApiTask;
 import com.schulz.erica.dogbreeds.BreedListCallBack;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class DogBreedManager {
+
+    private Retrofit retrofit;
+    private static final String BASE_URL = "https://dog.ceo/api/";
+
+
+
+    public DogBreedManager(){
+
+        if (retrofit ==null) {
+            retrofit = new retrofit2.Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+
+
+    }
+
+    public DogBreedInterface getDogBreedInterface() {
+
+        return retrofit.create(DogBreedInterface.class);
+    }
 
 
     public void getBreedList(BreedListCallBack breedListCallBack) {
