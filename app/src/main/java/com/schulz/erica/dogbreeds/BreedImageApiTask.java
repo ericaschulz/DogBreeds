@@ -17,14 +17,14 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
      private Breed subBreed;
 
 
-    public BreedImageApiTaskCallBack breedImageApiTaskCallBack;
+    public BreedImageCallBack breedImageCallBack;
 
-    public BreedImageApiTask(Breed parentBreed, Breed subBreed, BreedImageApiTaskCallBack breedImageApiTaskCallBack) throws JSONException {
+    public BreedImageApiTask(Breed parentBreed, Breed subBreed, BreedImageCallBack breedImageCallBack) throws JSONException {
 
         super();
         this.parentBreed = parentBreed;
         this.subBreed = subBreed;
-        this.breedImageApiTaskCallBack = breedImageApiTaskCallBack;
+        this.breedImageCallBack = breedImageCallBack;
 
     }
 
@@ -84,7 +84,7 @@ public class BreedImageApiTask extends AsyncTask<Void, Void, JSONObject> {
             }
 
         }
-        breedImageApiTaskCallBack.breedImageApiTaskCompleted(breed);
+        breedImageCallBack.breedImagesCompleted(breed);
     }
 
 

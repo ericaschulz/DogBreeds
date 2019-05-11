@@ -2,7 +2,6 @@ package com.schulz.erica.dogbreeds;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,19 +14,16 @@ import com.schulz.erica.dogbreeds.di.DogBreedApplication;
 import com.schulz.erica.dogbreeds.di.DogBreedComponent;
 import com.schulz.erica.dogbreeds.di.DogBreedManager;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import timber.log.Timber;
 
-public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageApiTaskCallBack {
+import static com.schulz.erica.dogbreeds.R.layout.activity_breed_list;
+
+public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageCallBack {
 
     @Inject
     DogBreedManager dogBreedManager;
@@ -40,6 +36,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     TextView subBreedsText;
     ConstraintLayout constraintLayout;
     LinearLayout linearLayout;
+    
 
 
     @Override
@@ -49,7 +46,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
 
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_breed_list);
+        setContentView(activity_breed_list);
 
         constraintLayout = findViewById(R.id.constraint_layout);
         linearLayout = findViewById(R.id.linear_layout);
@@ -87,37 +84,16 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
     public void startLoadingBreeds() {
 
+        if (this.parentBreed != null) {
 
+            dogBreedManager.getSubBreedList(breedName, this);
 
-            dogBreedManager.getDogBreedInterface().getBreedList().enqueue(new Callback<List<Breed>>() {
+        } else {
 
-                @Override
-                public void onResponse(@NonNull Call<List<Breed>> call, @NonNull Response<List<Breed>> response) {
-
-                    List<Breed> breedList = response.body();
-
-                    breedListAvailable(breedList);
-
-
-                }
-
-                @Override
-                public void onFailure(Call<List<Breed>> call, Throwable t) {
-
-                    t.printStackTrace();
-
-                }
-            });
-
-//        if (this.parentBreed != null) {
-
-//            dogBreedManager.getSubBreedList(breedName, this);
-//
-//        } else {
-//
-//            dogBreedManager.getBreedList(this);
+            dogBreedManager.getBreedList(this);
 
         }
+    }
 
 
 
@@ -167,28 +143,39 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
             String breedName = currentBreed.getBreedName();
             Timber.tag("log this").d(breedName);
 
-            try {
+
+//            if (this.parentBreed != null) {
+//
+//                dogBreedManager.getSubBreedImageList(parentBreed, currentBreed,this);
+//
+//            } else {
+//
+//                dogBreedManager.getBreedImageList(currentBreed, this);
+//
+//            }
+
+//            try {
 
 
-                if (this.parentBreed != null) {
-
-                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
-
-                    subBreedImageApiTask.execute();
-
-
-                } else {
-
-                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(currentBreed, null, this);
-
-                    breedImageApiTask.execute();
-
-                }
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//                if (this.parentBreed != null) {
+//
+//                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
+//
+//                    subBreedImageApiTask.execute();
+//
+//
+//                } else {
+//
+//                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(currentBreed, null, this);
+//
+//                    breedImageApiTask.execute();
+//
+//                }
+//
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
 
         }
     }
@@ -197,7 +184,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
 
     @Override
-    public void breedImageApiTaskCompleted(Breed breed) {
+    public void breedImagesCompleted(Breed breed) {
         //need to give the images to the adapter
 
 
