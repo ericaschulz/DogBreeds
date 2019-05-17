@@ -15,17 +15,6 @@ import okhttp3.Response;
 
 public class DogApiRetriever {
 
-//    public static JSONObject getBreeds() {
-//
-//        return DogApiRetriever.getEverything("breeds","list");
-//
-//    }
-//    public static JSONObject getSubBreeds(String breedName) {
-//
-//        return DogApiRetriever.getEverything("breed", breedName, "list");
-//
-//    }
-
 
     public static JSONObject getBreedImage(String breedName) {
 

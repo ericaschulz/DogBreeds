@@ -14,6 +14,8 @@ import com.schulz.erica.dogbreeds.di.DogBreedApplication;
 import com.schulz.erica.dogbreeds.di.DogBreedComponent;
 import com.schulz.erica.dogbreeds.di.DogBreedManager;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     DogBreedManager dogBreedManager;
 
     String[] imageLinks;
+    String subBreedName;
     Breed parentBreed;
     String breedName;
     RecyclerView breedRecyclerView;
@@ -146,36 +149,36 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
 //            if (this.parentBreed != null) {
 //
-//                dogBreedManager.getSubBreedImageList(parentBreed, currentBreed,this);
+//                dogBreedManager.getSubBreedImageList(breedName, parentBreed, breedImageCallback);
 //
 //            } else {
 //
-//                dogBreedManager.getBreedImageList(currentBreed, this);
+//                dogBreedManager.getBreedImageList(breedName, parentBreed, );
 //
 //            }
 
-//            try {
+            try {
 
 
-//                if (this.parentBreed != null) {
-//
-//                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
-//
-//                    subBreedImageApiTask.execute();
-//
-//
-//                } else {
-//
-//                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(currentBreed, null, this);
-//
-//                    breedImageApiTask.execute();
-//
-//                }
-//
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+                if (this.parentBreed != null) {
+
+                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
+
+                    subBreedImageApiTask.execute();
+
+
+                } else {
+
+                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(currentBreed, null, this);
+
+                    breedImageApiTask.execute();
+
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
     }

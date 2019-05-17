@@ -23,6 +23,7 @@ public class DogBreedManager {
     private DogBreedEnvelope dogBreedEnvelope;
 
 
+
     public DogBreedManager() {
 
         if (retrofit == null) {
@@ -113,45 +114,62 @@ public class DogBreedManager {
 
     }
 
+    public void getBreedImageList(final String breedName, final List<Breed> parentBreedList, final BreedImageCallBack breedImageCallBack) {
+
+
+
+        Call<List<Breed>> call = getDogBreedInterface().getBreedImageList(breedName);
+        call.enqueue(new Callback<List<Breed>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Breed>> call, @NonNull Response<List<Breed>> response) {
+
+
+
+                List<Breed> parentBreedList = response.body();
+                breedImageCallBack.breedImagesCompleted((Breed) parentBreedList);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Breed>> call, Throwable t) {
+                Log.d("", "");
+            }
+        });
+
+
+
+
+
+    }
+
+    public void getSubBreedImageList(String breedName, String subBreedName, Breed parentBreed, final Breed subBreed, final BreedImageCallBack breedImageCallBack){
+
+        Call<List<Breed>> call = getDogBreedInterface().getSubBreedImageList(breedName, subBreedName);
+        call.enqueue(new Callback<List<Breed>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Breed>> call, @NonNull Response<List<Breed>> response) {
+
+                List<Breed> subBreed = response.body();
+                breedImageCallBack.breedImagesCompleted((Breed) subBreed);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Breed>> call, Throwable t) {
+                Log.d("", "");
+            }
+        });
+
+
+    }
+
+
+
     private boolean hasLocalBreedList() {
 
         return false;
     }
 
 
-    public void getBreedImageList(final String breedName, final Breed breed, final BreedImageCallBack breedImageCallBack) {
 
-
-//        Call<List<String>> call = getDogBreedInterface().getBreedImageList(breedName);
-//        call.enqueue(new Callback<List<String>>() {
-//
-//
-//                         @Override
-//                         public void onResponse(@NonNull Call<List<String>> call, @NonNull Response<List<String>> response) {
-//
-//                              List<String>>  = response.body();
-//
-//                             breedImageCallBack.breedImagesCompleted(breed);
-//
-//
-//                         }
-//
-//                         @Override
-//                         public void onFailure(@NonNull Call<List<String>> call, Throwable t) {
-//                             Log.d("", "");
-//                         }
-//                     }
-//
-//
-//        );
-
-
-    }
-
-    public void getSubBreedImageList(final String breedName, final String subBreedName, final BreedImageCallBack breedImageCallBack) {
-
-
-    }
 }
 
 
