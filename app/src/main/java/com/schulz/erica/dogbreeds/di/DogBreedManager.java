@@ -21,6 +21,7 @@ public class DogBreedManager {
     private Retrofit retrofit;
     private static final String BASE_URL = "https://dog.ceo/api/";
     private DogBreedEnvelope dogBreedEnvelope;
+    private DogBreedImageEnvelope dogBreedImageEnvelope;
 
 
 
@@ -30,6 +31,7 @@ public class DogBreedManager {
             retrofit = new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(new DogBreedEnvelopeFactory())
+                    .addConverterFactory(new DogBreedImageEnvelopeFactory())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
@@ -114,49 +116,56 @@ public class DogBreedManager {
 
     }
 
-    public void getBreedImageList(final String breedName, final List<Breed> parentBreedList, final BreedImageCallBack breedImageCallBack) {
+    public void getBreedImageList(final Breed parentBreed, final BreedImageCallBack breedImageCallBack) {
 
 
 
-        Call<List<Breed>> call = getDogBreedInterface().getBreedImageList(breedName);
-        call.enqueue(new Callback<List<Breed>>() {
+        Call<List<String>> call = getDogBreedInterface().getBreedImageList(parentBreed.getBreedName());
+        call.enqueue(new Callback<List<String>>() {
             @Override
-            public void onResponse(@NonNull Call<List<Breed>> call, @NonNull Response<List<Breed>> response) {
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+
+                List<String> breedImageList = response.body();
+
+                breedImageCallBack.breedImagesCompleted(parentBreed);
 
 
 
-                List<Breed> parentBreedList = response.body();
-                breedImageCallBack.breedImagesCompleted((Breed) parentBreedList);
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<Breed>> call, Throwable t) {
-                Log.d("", "");
+            public void onFailure(Call<List<String>> call, Throwable throwable) {
+
             }
         });
-
-
-
 
 
     }
 
-    public void getSubBreedImageList(String breedName, String subBreedName, Breed parentBreed, final Breed subBreed, final BreedImageCallBack breedImageCallBack){
+    public void getSubBreedImageList(final Breed parentBreed, final Breed subBreed, final BreedImageCallBack breedImageCallBack){
 
-        Call<List<Breed>> call = getDogBreedInterface().getSubBreedImageList(breedName, subBreedName);
-        call.enqueue(new Callback<List<Breed>>() {
+        Call<List<String>> call = getDogBreedInterface().getSubBreedImageList(parentBreed.getBreedName(),subBreed.getBreedName());
+        call.enqueue(new Callback<List<String>>() {
             @Override
-            public void onResponse(@NonNull Call<List<Breed>> call, @NonNull Response<List<Breed>> response) {
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
 
-                List<Breed> subBreed = response.body();
-                breedImageCallBack.breedImagesCompleted((Breed) subBreed);
-            }
+
+
+                List<String> breedImageList = response.body();
+
+
+                breedImageCallBack.breedImagesCompleted(subBreed);
+
+
+                }
+
 
             @Override
-            public void onFailure(@NonNull Call<List<Breed>> call, Throwable t) {
-                Log.d("", "");
+            public void onFailure(Call<List<String>> call, Throwable throwable) {
+
             }
         });
+
 
 
     }
