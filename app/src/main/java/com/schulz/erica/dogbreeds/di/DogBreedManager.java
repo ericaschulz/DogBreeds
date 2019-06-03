@@ -21,7 +21,7 @@ public class DogBreedManager {
     private Retrofit retrofit;
     private static final String BASE_URL = "https://dog.ceo/api/";
     private DogBreedEnvelope dogBreedEnvelope;
-    private DogBreedImageEnvelope dogBreedImageEnvelope;
+
 
 
 
@@ -31,7 +31,6 @@ public class DogBreedManager {
             retrofit = new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(new DogBreedEnvelopeFactory())
-                    .addConverterFactory(new DogBreedImageEnvelopeFactory())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
@@ -116,19 +115,24 @@ public class DogBreedManager {
 
     }
 
-    public void getBreedImageList(final Breed parentBreed, final BreedImageCallBack breedImageCallBack) {
+    public void getBreedImageList(final String breedName, final Breed parentBreed, final BreedImageCallBack breedImageCallBack) {
 
 
-
-        Call<List<String>> call = getDogBreedInterface().getBreedImageList(parentBreed.getBreedName());
+        Call<List<String>> call = getDogBreedInterface().getBreedImageList(breedName);
         call.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
 
-                List<String> breedImageList = response.body();
+
+
+
+                List<String> imageLinks = response.body();
+                for (String imageLink: imageLinks) {
+                    parentBreed.addImageForLink(imageLink);
+
+                }
 
                 breedImageCallBack.breedImagesCompleted(parentBreed);
-
 
 
             }
@@ -142,20 +146,21 @@ public class DogBreedManager {
 
     }
 
-    public void getSubBreedImageList(final Breed parentBreed, final Breed subBreed, final BreedImageCallBack breedImageCallBack){
+    public void getSubBreedImageList(final String breedName, final String subBreedName, final Breed parentBreed, final Breed currentBreed, final BreedImageCallBack breedImageCallBack){
 
-        Call<List<String>> call = getDogBreedInterface().getSubBreedImageList(parentBreed.getBreedName(),subBreed.getBreedName());
+        Call<List<String>> call = getDogBreedInterface().getSubBreedImageList(breedName, subBreedName);
         call.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
 
+                if (parentBreed != null); {
+
+                    List<String> imageLinks = response.body();
 
 
-                List<String> breedImageList = response.body();
+                }
 
-
-                breedImageCallBack.breedImagesCompleted(subBreed);
-
+                breedImageCallBack.breedImagesCompleted(currentBreed);
 
                 }
 
@@ -167,10 +172,7 @@ public class DogBreedManager {
         });
 
 
-
     }
-
-
 
     private boolean hasLocalBreedList() {
 

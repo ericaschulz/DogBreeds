@@ -17,10 +17,13 @@ public interface DogBreedInterface {
     Call<List<Breed>> getSubBreedList (@Path("breedName") String breedName);
 
     @GET("breed/{breedName}/images")
+
     Call<List<String>> getBreedImageList (@Path ("breedName") String breedName);
+
 
     @GET("breed/{breedName}/{subBreedName}/images")
     Call<List<String>> getSubBreedImageList (@Path("breedName") String breedName, @Path ("subBreedName") String subBreedName);
+
 
     @GET("breeds/list/all")
     Call<List<Breed>>getBreedsAndSubBreeds();

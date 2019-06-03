@@ -14,8 +14,6 @@ import com.schulz.erica.dogbreeds.di.DogBreedApplication;
 import com.schulz.erica.dogbreeds.di.DogBreedComponent;
 import com.schulz.erica.dogbreeds.di.DogBreedManager;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -147,38 +145,41 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
             Timber.tag("log this").d(breedName);
 
 
-//            if (this.parentBreed != null) {
-//
-//                dogBreedManager.getSubBreedImageList(breedName, parentBreed, breedImageCallback);
-//
-//            } else {
-//
-//                dogBreedManager.getBreedImageList(breedName, parentBreed, );
-//
-//            }
+            if (this.parentBreed != null) {
 
-            try {
+                dogBreedManager.getSubBreedImageList(breedName, subBreedName, parentBreed, currentBreed,this);
 
+            } else {
 
-                if (this.parentBreed != null) {
+                dogBreedManager.getBreedImageList(breedName, currentBreed, this);
 
-                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
-
-                    subBreedImageApiTask.execute();
-
-
-                } else {
-
-                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(currentBreed, null, this);
-
-                    breedImageApiTask.execute();
-
-                }
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
+
+
+
+
+//            try {
+//
+//
+//                if (this.parentBreed != null) {
+//
+//                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
+//
+//                    subBreedImageApiTask.execute();
+//
+//
+//                } else {
+//
+//                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(currentBreed, null, this);
+//
+//                    breedImageApiTask.execute();
+//
+//                }
+//
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
 
         }
     }
