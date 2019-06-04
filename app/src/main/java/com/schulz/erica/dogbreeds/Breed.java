@@ -19,7 +19,7 @@ public class Breed {
     private List<BreedImage> breedImages;
 
 
-    private List<Breed> subBreeds;
+    public List<Breed> subBreeds;
 
 
     public Breed() {

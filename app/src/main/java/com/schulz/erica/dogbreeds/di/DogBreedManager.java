@@ -124,17 +124,29 @@ public class DogBreedManager {
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
 
 
-
-
                 List<String> imageLinks = response.body();
-                for (String imageLink: imageLinks) {
-                    parentBreed.addImageForLink(imageLink);
 
+
+                if (imageLinks != null) {
+                    parentBreed.setBreedName(breedName);
+
+                    int size = imageLinks.size();
+
+
+                    for (int i = 0; i < size; i++) {
+
+                        try {
+                            String imageLink = imageLinks.get(i);
+                            parentBreed.addImageForLink(imageLink);
+                            breedImageCallBack.breedImagesCompleted(parentBreed);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
                 }
-
-                breedImageCallBack.breedImagesCompleted(parentBreed);
-
-
             }
 
             @Override
@@ -146,33 +158,40 @@ public class DogBreedManager {
 
     }
 
-    public void getSubBreedImageList(final String breedName, final String subBreedName, final Breed parentBreed, final Breed currentBreed, final BreedImageCallBack breedImageCallBack){
+    public void getSubBreedImageList(final String breedName, final String subBreedName, final Breed parentBreed, final Breed currentBreed, final BreedImageCallBack breedImageCallBack) {
 
         Call<List<String>> call = getDogBreedInterface().getSubBreedImageList(breedName, subBreedName);
         call.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
 
-                if (parentBreed != null); {
 
                     List<String> imageLinks = response.body();
+                    assert imageLinks != null;
+                    for (String imageLink : imageLinks) {
 
+
+                        currentBreed.addImageForLink(imageLink);
+                    }
+
+                    breedImageCallBack.breedImagesCompleted(currentBreed);
 
                 }
 
-                breedImageCallBack.breedImagesCompleted(currentBreed);
 
-                }
 
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable throwable) {
 
             }
+
         });
-
-
     }
+
+
+
+
 
     private boolean hasLocalBreedList() {
 

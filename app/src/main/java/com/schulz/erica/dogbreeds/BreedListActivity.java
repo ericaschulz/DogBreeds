@@ -149,6 +149,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
                 dogBreedManager.getSubBreedImageList(breedName, subBreedName, parentBreed, currentBreed,this);
 
+
             } else {
 
                 dogBreedManager.getBreedImageList(breedName, currentBreed, this);
