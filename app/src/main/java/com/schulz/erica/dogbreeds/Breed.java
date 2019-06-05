@@ -19,6 +19,7 @@ public class Breed {
     private List<BreedImage> breedImages;
 
 
+
     public List<Breed> subBreeds;
 
 
@@ -79,7 +80,7 @@ public class Breed {
     }
 
 
-    public class BreedImage {
+    public static class BreedImage {
 
 
         String imageMessage;

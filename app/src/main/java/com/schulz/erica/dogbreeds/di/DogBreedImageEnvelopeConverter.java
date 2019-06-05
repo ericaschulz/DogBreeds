@@ -1,6 +1,9 @@
 package com.schulz.erica.dogbreeds.di;
 
+import com.schulz.erica.dogbreeds.Breed.BreedImage;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -22,8 +25,20 @@ public class DogBreedImageEnvelopeConverter implements Converter<ResponseBody, L
         DogBreedImageEnvelope dogBreedImageEnvelope = delegateConverter.convert(responseBody);
 
 
+        assert dogBreedImageEnvelope != null;
         List<String> imageLinks = dogBreedImageEnvelope.getMessage();
 
+        List<BreedImage> breedImages = new ArrayList<>();
+
+        for (String imageLink : imageLinks) {
+
+
+            BreedImage breedImage = new BreedImage(imageLink);
+            breedImage.setImageLink(imageLink);
+            breedImages.add(breedImage);
+
+
+        }
 
         return imageLinks;
     }

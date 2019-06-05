@@ -21,6 +21,7 @@ public class DogBreedManager {
     private Retrofit retrofit;
     private static final String BASE_URL = "https://dog.ceo/api/";
     private DogBreedEnvelope dogBreedEnvelope;
+    private DogBreedImageEnvelope dogBreedImageEnvelope;
 
 
 
@@ -31,6 +32,7 @@ public class DogBreedManager {
             retrofit = new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(new DogBreedEnvelopeFactory())
+//                    .addConverterFactory(new DogBreedImageEnvelopeFactory())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
@@ -45,9 +47,17 @@ public class DogBreedManager {
     public void setDogBreedEnvelope(DogBreedEnvelope dogBreedEnvelope) {
         this.dogBreedEnvelope = dogBreedEnvelope;
     }
+    public void setDogBreedImageEnvelope(DogBreedImageEnvelope dogBreedImageEnvelope) {
+        this.dogBreedImageEnvelope = dogBreedImageEnvelope;
+    }
+
 
     public DogBreedEnvelope getDogBreedEnvelope() {
         return dogBreedEnvelope;
+    }
+
+    public DogBreedImageEnvelope getDogBreedImageEnvelope() {
+        return dogBreedImageEnvelope;
     }
 
 

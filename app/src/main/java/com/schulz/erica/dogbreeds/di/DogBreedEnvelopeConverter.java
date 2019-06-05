@@ -1,5 +1,7 @@
 package com.schulz.erica.dogbreeds.di;
 
+import android.support.annotation.NonNull;
+
 import com.schulz.erica.dogbreeds.Breed;
 
 import java.io.IOException;
@@ -21,10 +23,11 @@ public class DogBreedEnvelopeConverter implements Converter<ResponseBody, List<B
 
     @Nullable
     @Override
-    public List<Breed> convert(ResponseBody responseBody) throws IOException {
+    public List<Breed> convert(@NonNull ResponseBody responseBody) throws IOException {
         DogBreedEnvelope dogBreedEnvelope = delegateConverter.convert(responseBody);
 
         List<Breed> breedList = new ArrayList<>();
+        assert dogBreedEnvelope != null;
         List<String> breedNames = dogBreedEnvelope.getMessage();
 
 
