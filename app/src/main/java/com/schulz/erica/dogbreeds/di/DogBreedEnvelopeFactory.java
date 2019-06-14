@@ -21,9 +21,9 @@ class DogBreedEnvelopeFactory extends Converter.Factory {
 
 
         java.lang.reflect.Type envelopeType = new TypeToken<DogBreedEnvelope>(){}.getType();
-    // then get the next available converter to do the actual conversion (e.g., \ 21 Gson)
+
         final Converter < ResponseBody, DogBreedEnvelope > delegateConverter = retrofit.nextResponseBodyConverter( this, envelopeType, annotations);
-        // let the converter do the work
+
 
         return new DogBreedEnvelopeConverter( delegateConverter);
 

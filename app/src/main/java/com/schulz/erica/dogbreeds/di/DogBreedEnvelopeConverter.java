@@ -27,6 +27,7 @@ public class DogBreedEnvelopeConverter implements Converter<ResponseBody, List<B
         DogBreedEnvelope dogBreedEnvelope = delegateConverter.convert(responseBody);
 
         List<Breed> breedList = new ArrayList<>();
+
         assert dogBreedEnvelope != null;
         List<String> breedNames = dogBreedEnvelope.getMessage();
 

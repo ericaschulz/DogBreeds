@@ -1,5 +1,7 @@
 package com.schulz.erica.dogbreeds.di;
 
+import android.support.annotation.NonNull;
+
 import com.schulz.erica.dogbreeds.Breed.BreedImage;
 
 import java.io.IOException;
@@ -21,21 +23,21 @@ public class DogBreedImageEnvelopeConverter implements Converter<ResponseBody, L
 
     @Nullable
     @Override
-    public List<String> convert(ResponseBody responseBody) throws IOException {
+    public List<String> convert(@NonNull ResponseBody responseBody) throws IOException {
         DogBreedImageEnvelope dogBreedImageEnvelope = delegateConverter.convert(responseBody);
 
 
         assert dogBreedImageEnvelope != null;
         List<String> imageLinks = dogBreedImageEnvelope.getMessage();
 
-        List<BreedImage> breedImages = new ArrayList<>();
+        List<BreedImage> breedImageList = new ArrayList<>();
 
         for (String imageLink : imageLinks) {
 
 
             BreedImage breedImage = new BreedImage(imageLink);
             breedImage.setImageLink(imageLink);
-            breedImages.add(breedImage);
+            breedImageList.add(breedImage);
 
 
         }
