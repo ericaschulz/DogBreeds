@@ -156,32 +156,6 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
             }
 
-
-
-
-//            try {
-//
-//
-//                if (this.parentBreed != null) {
-//
-//                    BreedImageApiTask subBreedImageApiTask = new BreedImageApiTask(this.parentBreed, currentBreed, this);
-//
-//                    subBreedImageApiTask.execute();
-//
-//
-//                } else {
-//
-//                    BreedImageApiTask breedImageApiTask = new BreedImageApiTask(currentBreed, null, this);
-//
-//                    breedImageApiTask.execute();
-//
-//                }
-//
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-
         }
     }
 
