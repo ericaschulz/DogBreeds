@@ -1,5 +1,11 @@
 package com.schulz.erica.dogbreeds;
 
+import android.support.annotation.NonNull;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +13,15 @@ import java.util.List;
  * Created by ericaschulz on 2/4/18.
  */
 
+
+@Entity (tableName = "breed_table")
+
+
 public class Breed {
+
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "breed")
 
 
 
