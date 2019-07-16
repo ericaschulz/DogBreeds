@@ -1,9 +1,9 @@
 package com.schulz.erica.dogbreeds;
 
-import android.support.annotation.NonNull;
-
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
@@ -21,20 +21,50 @@ public class Breed {
 
     @PrimaryKey
     @NonNull
+
+
+
     @ColumnInfo(name = "breed")
+    private String breed;
 
-
-
-
+    @ColumnInfo(name= "status")
     private String status;
+
+    @ColumnInfo(name= "message")
     private String message;
+
+    @ColumnInfo(name = "breedName")
     private String breedName;
+
+    @ColumnInfo(name = "subBreedName")
     private String subBreedName;
+
+
+
+//    @ColumnInfo(name = "breedImages")
+    @Ignore
     private List<BreedImage> breedImages;
 
-
-
+//    @ColumnInfo(name = "subBreeds")
+    @Ignore
     public List<Breed> subBreeds;
+
+
+    public Breed(@NonNull String breed) {
+        this.breed = breed;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getBreed() {
+        return this.breed;
+    }
 
 
     public Breed() {
@@ -57,16 +87,26 @@ public class Breed {
     }
 
 
+    public void setBreed(@NonNull String breed) {
+        this.breed = breed;
+    }
 
+    public void setBreedImages(List<BreedImage> breedImages) {
+        this.breedImages = breedImages;
+    }
 
+    public void setSubBreeds(List<Breed> subBreeds) {
+        this.subBreeds = subBreeds;
+    }
 
     public String getBreedName() {
 
         return breedName;
     }
-//    public String getSubBreedName {
-//
-//        return subBreedName;}
+
+    public String getSubBreedName() {
+
+        return subBreedName;}
 
 
     public void setBreedName(String breedName) {

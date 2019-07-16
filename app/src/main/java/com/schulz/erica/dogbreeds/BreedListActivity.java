@@ -1,14 +1,16 @@
 package com.schulz.erica.dogbreeds;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.schulz.erica.dogbreeds.di.DogBreedApplication;
 import com.schulz.erica.dogbreeds.di.DogBreedComponent;
@@ -21,6 +23,7 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
+import static androidx.recyclerview.widget.LinearLayoutManager.*;
 import static com.schulz.erica.dogbreeds.R.layout.activity_breed_list;
 
 public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageCallBack {
@@ -40,6 +43,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     
 
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -54,7 +58,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
         subBreedsText = findViewById(R.id.sub_breeds_text);
 
         breedRecyclerView = findViewById(R.id.breed_recycler_view);
-        breedRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        breedRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), VERTICAL, false));
 
         Bundle bundle = getIntent().getExtras();
 
@@ -135,7 +139,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
         });
 
 
-        this.breedRecyclerView.setAdapter(breedRecyclerViewAdapter);
+        this.breedRecyclerView.setAdapter( breedRecyclerViewAdapter);
 
 
 //this iterates over the main breedList and returns those images

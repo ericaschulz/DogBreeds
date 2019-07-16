@@ -1,8 +1,9 @@
 package com.schulz.erica.dogbreeds.di;
 
 
-import android.support.annotation.NonNull;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.schulz.erica.dogbreeds.Breed;
 import com.schulz.erica.dogbreeds.BreedImageCallBack;
