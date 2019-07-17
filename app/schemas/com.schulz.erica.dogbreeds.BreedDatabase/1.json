@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "6981508258995cfb7302083fbf707475",
+    "identityHash": "78424325b875d5b559338030e4642a12",
     "entities": [
       {
         "tableName": "breed_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`breed` TEXT NOT NULL, `status` TEXT, `message` TEXT, `breedName` TEXT, `subBreedName` TEXT, PRIMARY KEY(`breed`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`breed` TEXT NOT NULL, `status` TEXT, `message` TEXT, `breedName` TEXT, `subBreedName` TEXT, `breedImages` TEXT, `subBreeds` TEXT, PRIMARY KEY(`breed`))",
         "fields": [
           {
             "fieldPath": "breed",
@@ -37,6 +37,18 @@
             "columnName": "subBreedName",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "breedImages",
+            "columnName": "breedImages",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "subBreeds",
+            "columnName": "subBreeds",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -52,7 +64,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6981508258995cfb7302083fbf707475')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '78424325b875d5b559338030e4642a12')"
     ]
   }
 }

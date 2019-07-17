@@ -3,8 +3,8 @@ package com.schulz.erica.dogbreeds;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,6 @@ public class Breed {
 
     @PrimaryKey
     @NonNull
-
-
 
     @ColumnInfo(name = "breed")
     private String breed;
@@ -41,13 +39,19 @@ public class Breed {
 
 
 
-//    @ColumnInfo(name = "breedImages")
-    @Ignore
+
+
+
+    @ColumnInfo(name = "breedImages")
+    @TypeConverters(com.schulz.erica.dogbreeds.TypeConverters.class)
     private List<BreedImage> breedImages;
 
-//    @ColumnInfo(name = "subBreeds")
-    @Ignore
-    public List<Breed> subBreeds;
+    @ColumnInfo(name = "subBreeds")
+    @TypeConverters(com.schulz.erica.dogbreeds.TypeConverters.class)
+    private List<Breed> subBreeds;
+
+
+
 
 
     public Breed(@NonNull String breed) {
