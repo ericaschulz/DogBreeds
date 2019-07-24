@@ -7,8 +7,11 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +26,7 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-import static androidx.recyclerview.widget.LinearLayoutManager.*;
+import static androidx.recyclerview.widget.LinearLayoutManager.VERTICAL;
 import static com.schulz.erica.dogbreeds.R.layout.activity_breed_list;
 
 public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageCallBack {
@@ -40,7 +43,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
     TextView subBreedsText;
     ConstraintLayout constraintLayout;
     LinearLayout linearLayout;
-    
+    BreedViewModel breedViewModel;
 
 
     @SuppressLint("WrongConstant")
@@ -52,6 +55,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
         super.onCreate(savedInstanceState);
         setContentView(activity_breed_list);
+        breedViewModel = ViewModelProviders.of(this).get(BreedViewModel.class);
 
         constraintLayout = findViewById(R.id.constraint_layout);
         linearLayout = findViewById(R.id.linear_layout);
@@ -74,6 +78,14 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
             }
 
         }
+
+        breedViewModel.getAllBreeds().observe(this, new Observer<List<Breed>>() {
+            @Override
+            public void onChanged(@Nullable final List<Breed> breedList) {
+
+                breedListAvailable(breedList);
+            }
+        });
 
 
         this.startLoadingBreeds();
