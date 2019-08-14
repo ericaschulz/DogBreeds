@@ -17,7 +17,7 @@ public interface BreedDao {
     @Query("DELETE FROM breed_table")
     void deleteAll();
 
-    @Query("SELECT * from breed_table ORDER BY breed ASC")
+    @Query("SELECT * from breed_table")
     LiveData<List<Breed>> getAllBreeds();
 }
 

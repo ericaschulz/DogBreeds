@@ -9,7 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = Breed.class, version = 1)
+@Database(entities = Breed.class, version = 3)
 
 abstract class BreedDatabase extends RoomDatabase {
 
@@ -24,6 +24,7 @@ abstract class BreedDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             BreedDatabase.class, "breed_database")
                             .addCallback(breedDatabaseCallback)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
@@ -44,7 +45,7 @@ abstract class BreedDatabase extends RoomDatabase {
             };
 
 
-    private static class PopulateDbAsync<breed> extends AsyncTask<Void, Void, Void> {
+    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final BreedDao breedDao;
 

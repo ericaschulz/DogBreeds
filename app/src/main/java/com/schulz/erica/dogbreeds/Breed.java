@@ -1,12 +1,12 @@
 package com.schulz.erica.dogbreeds;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,73 +19,87 @@ import java.util.List;
 
 public class Breed {
 
-    @PrimaryKey
-    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private int id;
 
+
+    @Nullable
     @ColumnInfo(name = "breed")
     private String breed;
 
-    @ColumnInfo(name= "status")
+    @Nullable
+    @ColumnInfo(name = "status")
     private String status;
 
-    @ColumnInfo(name= "message")
-    private String message;
 
+    @Nullable
     @ColumnInfo(name = "breedName")
     private String breedName;
 
+
+    @Nullable
     @ColumnInfo(name = "subBreedName")
     private String subBreedName;
 
-
-
-
-
-
+    @Nullable
     @ColumnInfo(name = "breedImages")
     @TypeConverters(com.schulz.erica.dogbreeds.TypeConverters.class)
     private List<BreedImage> breedImages;
 
+
+    @Nullable
     @ColumnInfo(name = "subBreeds")
     @TypeConverters(com.schulz.erica.dogbreeds.TypeConverters.class)
     private List<Breed> subBreeds;
 
+    public Breed() {
+
+    }
 
 
+    public int getId(){return this.id;}
 
-    public Breed(@NonNull String breed) {
+    public void setId(int id){
+        this.id = id;
+    }
+
+
+    public Breed ( String breed) {
         this.breed = breed;
     }
 
-    public String getStatus() {
+    @Nullable
+    String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+
+    void setStatus(String status) {
         this.status = status;
     }
 
+
+    @NonNull
     public String getBreed() {
         return this.breed;
     }
 
-
-    public Breed() {
-        this.breedImages = new ArrayList<>();
-    }
-
+    @Nullable
     public String addImageForLink(String imageLink) {
 
-        BreedImage breedImage = new BreedImage(imageLink);
-        breedImages.add(breedImage);
+        BreedImage breedImage = new BreedImage( imageLink );
+        breedImages.add( breedImage );
         return imageLink;
     }
 
-    public List<BreedImage> getBreedImages() {
+    @Nullable
+    List<BreedImage> getBreedImages() {
         return breedImages;
     }
 
-    public  List<Breed> getSubBreeds() {
+    @Nullable
+    List<Breed> getSubBreeds() {
         return subBreeds;
     }
 
@@ -94,56 +108,46 @@ public class Breed {
         this.breed = breed;
     }
 
-    public void setBreedImages(List<BreedImage> breedImages) {
+
+    void setBreedImages(@Nullable List<BreedImage> breedImages) {
         this.breedImages = breedImages;
     }
 
-    public void setSubBreeds(List<Breed> subBreeds) {
+
+    void setSubBreeds(@Nullable List<Breed> subBreeds) {
         this.subBreeds = subBreeds;
     }
 
-    public String getBreedName() {
+
+    @Nullable
+    String getBreedName() {
 
         return breedName;
     }
 
-    public String getSubBreedName() {
+    @Nullable
+    String getSubBreedName() {
 
-        return subBreedName;}
+        return subBreedName;
+    }
 
 
-    public void setBreedName(String breedName) {
+
+    public void setBreedName(@Nullable String breedName) {
         this.breedName = breedName;
     }
 
-    public void setSubBreedName(String subBreedName) {
+
+    void setSubBreedName(@Nullable String subBreedName) {
 
         this.subBreedName = subBreedName;
     }
 
-    public String getMessage() {
-
-        return message;
-    }
-
-    public void setMessage(String message) {
-
-        this.message = message;
-    }
-
-    public String toString() {
-
-        return breedName;
-    }
 
 
     public static class BreedImage {
 
-
-        String imageMessage;
         String imageLink;
-        String breedImageName;
-
 
 
         public BreedImage(String imageLink) {
@@ -153,24 +157,7 @@ public class Breed {
         }
 
 
-        public String getBreedImageName() {
-            return breedImageName;
-        }
-
-        public void setBreedImageName(String breedImageName) {
-            
-            this.breedImageName = breedImageName;
-        }
-
-        public String getImageMessage() {
-            return imageMessage;
-        }
-
-        public void setImageMessage(String message) {
-            this.imageMessage = message;
-        }
-
-        public String getImageLink() {
+        String getImageLink() {
             return imageLink;
         }
 
@@ -179,11 +166,6 @@ public class Breed {
             this.imageLink = imageLink;
         }
 
-
-        @Override
-        public String toString() {
-            return imageLink;
-        }
     }
 }
 
