@@ -98,6 +98,17 @@ public class DogBreedManager {
                 public void onResponse(@NonNull Call<List<Breed>> call, @NonNull Response<List<Breed>> response) {
 
                     List<Breed> breedList = response.body();
+                    for (Breed breed: breedList) {
+
+//                       breed = breedDao.insertBreed();
+//                        Timber.tag("log this").d(breed);
+
+                        //iterate to match dao method, also we need to instantiate the dao in order to use the methods
+
+
+                    }
+
+                    //save to database here
 
                     breedListCallBack.breedListAvailable(breedList);
 
