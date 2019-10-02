@@ -196,23 +196,35 @@ public class DogBreedManager {
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
 
 
-                    List<String> imageLinks = response.body();
-                    assert imageLinks != null;
-                    for (String imageLink : imageLinks) {
+                List<String> imageLinks = response.body();
+
+                if (imageLinks != null) {
 
 
-                        currentBreed.addImageForLink(imageLink);
+                    currentBreed.setBreedName(subBreedName );
+
+                    int size = imageLinks.size();
+
+                    for (int i = 0; i < size; i++) {
+
+                        try {
+                            String imageLink = imageLinks.get( i );
+                            currentBreed.addImageForLink( imageLink );
+                            breedImageCallBack.breedImagesCompleted( currentBreed );
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                     }
-
-                    breedImageCallBack.breedImagesCompleted(currentBreed);
-
                 }
-
-
+            }
 
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable throwable) {
+
+                Log.d("no subBreedImages", "here");
 
             }
 

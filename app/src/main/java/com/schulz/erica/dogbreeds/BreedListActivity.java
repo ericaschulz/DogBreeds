@@ -23,6 +23,10 @@ import timber.log.Timber;
 
 import static com.schulz.erica.dogbreeds.R.layout.activity_breed_list;
 
+
+
+//issues: subBreed pictures aren't being returned with the subBreed list.
+
 public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageCallBack {
 
     @Inject
@@ -147,7 +151,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
             if (this.parentBreed != null) {
 
-                dogBreedManager.getSubBreedImageList(breedName, subBreedName, parentBreed, currentBreed,this);
+                dogBreedManager.getSubBreedImageList( this.parentBreed.getBreedName(), currentBreed.getBreedName(), this.parentBreed, currentBreed, this );
 
 
             } else {
