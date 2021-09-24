@@ -1,8 +1,8 @@
 package com.schulz.erica.dogbreeds.di;
 
 
-import android.support.annotation.NonNull;
 import android.util.Log;
+import androidx.annotation.NonNull;
 
 import com.schulz.erica.dogbreeds.Breed;
 import com.schulz.erica.dogbreeds.BreedImageCallBack;
@@ -23,8 +23,6 @@ public class DogBreedManager {
     private static final String BASE_URL = "https://dog.ceo/api/";
     private DogBreedEnvelope dogBreedEnvelope;
     private DogBreedImageEnvelope dogBreedImageEnvelope;
-
-
 
 
     public DogBreedManager() {

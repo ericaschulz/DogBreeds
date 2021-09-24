@@ -2,13 +2,14 @@ package com.schulz.erica.dogbreeds;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.schulz.erica.dogbreeds.di.DogBreedApplication;
 import com.schulz.erica.dogbreeds.di.DogBreedComponent;
@@ -22,6 +23,10 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 import static com.schulz.erica.dogbreeds.R.layout.activity_breed_list;
+
+
+
+
 
 public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageCallBack {
 
@@ -105,7 +110,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
         Log.d("yo", "here");
 
-        subBreedsText.setText("The " + parentBreed + " breed includes " + breedList.size() + " subbreed(s).");
+        subBreedsText.setText("The " + parentBreed + " breed includes " + breedList.size() + " subBreed(s).");
 
         breedRecyclerView = findViewById(R.id.breed_recycler_view);
         breedRecyclerViewAdapter = new BreedRecyclerViewAdapter(this, breedList, new BreedRecyclerViewAdapter.BreedOnClickListener() {
