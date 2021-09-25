@@ -7,8 +7,10 @@ import android.util.Log;
 import com.schulz.erica.dogbreeds.Breed;
 import com.schulz.erica.dogbreeds.BreedImageCallBack;
 import com.schulz.erica.dogbreeds.BreedListCallBack;
+import com.schulz.erica.dogbreeds.BreedSubBreedListCallback;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,9 +22,11 @@ public class DogBreedManager {
 
     private Retrofit dogBreedListRetrofit;
     private Retrofit dogBreedImageListRetrofit;
+    private Retrofit dogBreedsAndSubBreedsRetrofit;
     private static final String BASE_URL = "https://dog.ceo/api/";
     private DogBreedEnvelope dogBreedEnvelope;
     private DogBreedImageEnvelope dogBreedImageEnvelope;
+    private BreedAndSubBreedEnvelope breedAndSubBreedEnvelope;
 
 
 
@@ -36,10 +40,16 @@ public class DogBreedManager {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
-
-
         }
 
+//        if (dogBreedsAndSubBreedsRetrofit == null) {
+//            dogBreedsAndSubBreedsRetrofit = new retrofit2.Retrofit.Builder()
+//                    .baseUrl(BASE_URL)
+//                    .addConverterFactory(new BreedAndSubBreedEnvelopeFactory())
+//                    .addConverterFactory(GsonConverterFactory.create())
+//                    .build();
+//
+//        }
 
 
         if (dogBreedImageListRetrofit == null) {
@@ -59,26 +69,39 @@ public class DogBreedManager {
 
     }
 
+    public DogBreedInterface getBreedsAndSubBreeds() {
+
+        return dogBreedsAndSubBreedsRetrofit.create(DogBreedInterface.class);
+
+
+    }
+
     public DogBreedInterface getDogBreedImagesInterface() {
 
         return dogBreedImageListRetrofit.create(DogBreedInterface.class);
     }
 
-    public void setDogBreedEnvelope(DogBreedEnvelope dogBreedEnvelope) {
-        this.dogBreedEnvelope = dogBreedEnvelope;
-    }
-    public void setDogBreedImageEnvelope(DogBreedImageEnvelope dogBreedImageEnvelope) {
-        this.dogBreedImageEnvelope = dogBreedImageEnvelope;
-    }
 
 
-    public DogBreedEnvelope getDogBreedEnvelope() {
-        return dogBreedEnvelope;
-    }
+    public void getBreedsAndSubBreedsAtOnce(final BreedSubBreedListCallback breedSubBreedListCallback) {
 
-    public DogBreedImageEnvelope getDogBreedImageEnvelope() {
-        return dogBreedImageEnvelope;
-    }
+        Call<Map<String, List<String>>> call = getDogBreedInterface().getBreedsAndSubBreeds();
+        call.enqueue( new Callback<Map<String, List<String>>>() {
+
+            @Override
+            public void onResponse(@NonNull Call<Map<String, List<String>>> call, @NonNull Response<Map<String, List<String>>> response) {
+                Map<String, List<String>> allBreedList = response.body();
+                breedSubBreedListCallback.breedAndSubBreeds(allBreedList );
+            }
+            @Override
+            public void onFailure(@NonNull Call<Map<String, List<String>>> call, Throwable t) {
+                Log.d("", "");
+            }
+        });
+        }
+
+
+
 
 
     public void getBreedList(final BreedListCallBack breedListCallBack) {

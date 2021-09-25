@@ -16,6 +16,7 @@ import com.schulz.erica.dogbreeds.di.DogBreedManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -25,15 +26,14 @@ import static com.schulz.erica.dogbreeds.R.layout.activity_breed_list;
 
 
 
-//issues: subBreed pictures aren't being returned with the subBreed list.
 
-public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageCallBack {
+
+public class BreedListActivity extends AppCompatActivity implements BreedListCallBack, BreedImageCallBack, BreedSubBreedListCallback {
 
     @Inject
     DogBreedManager dogBreedManager;
 
     String[] imageLinks;
-    String subBreedName;
     Breed parentBreed;
     String breedName;
     RecyclerView breedRecyclerView;
@@ -87,21 +87,27 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
     }
 
+
+
     public void startLoadingBreeds() {
 
+//
+// how do we find the subBreed in our Breedlist? How do we keep breedlist around to have available to search for subbreeds?
         if (this.parentBreed != null) {
-
-            dogBreedManager.getSubBreedList(breedName, this);
+            dogBreedManager.getSubBreedList( breedName, this );
 
         } else {
 
-            dogBreedManager.getBreedList(this);
+            dogBreedManager.getBreedList( this );
 
         }
+
+
+//        dogBreedManager.getBreedsAndSubBreedsAtOnce(this);
+//    }
+
+
     }
-
-
-
 
     @Override
     public void breedListAvailable(List<Breed> breedList) {
@@ -166,6 +172,7 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
 
 
+
     @Override
     public void breedImagesCompleted(Breed breed) {
         //need to give the images to the adapter
@@ -175,6 +182,11 @@ public class BreedListActivity extends AppCompatActivity implements BreedListCal
 
 
         Timber.tag("log this").d(parentBreed + " has images.");
+    }
+
+    @Override
+    public void breedAndSubBreeds(Map<String, List<String>> allBreedList) {
+
     }
 }
 

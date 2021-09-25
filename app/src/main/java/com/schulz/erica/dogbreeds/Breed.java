@@ -2,6 +2,7 @@ package com.schulz.erica.dogbreeds;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ericaschulz on 2/4/18.
@@ -14,6 +15,7 @@ public class Breed {
     private String breedName;
     private String subBreedName;
     private List<BreedImage> breedImages;
+    private Map<String, List<String>> breedsAndSubBreeds;
 
 
 
@@ -33,6 +35,11 @@ public class Breed {
 
     public List<BreedImage> getBreedImages() {
         return breedImages;
+    }
+
+
+    public Map<String, List<String>> getBreedsAndSubBreedsMap() {
+        return breedsAndSubBreeds;
     }
 
     public  List<Breed> getSubBreeds() {
